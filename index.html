@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -90,12 +90,15 @@
 
 
 
+<meta name="description" content="Keep doing. (不要停。)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Maixy&#39;s Notes">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Maixy&#39;s Notes">
+<meta property="og:description" content="Keep doing. (不要停。)">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Maixy&#39;s Notes">
+<meta name="twitter:description" content="Keep doing. (不要停。)">
 
 
 
@@ -109,7 +112,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -129,10 +132,10 @@
 
 
 
-  <title>Hexo</title>
+  <title>Maixy's Notes</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -141,6 +144,15 @@
 
 
 
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62164824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -168,7 +180,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">Maixy's Notes</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -198,7 +210,17 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -208,7 +230,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -218,7 +240,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -254,13 +276,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/14/year-month-day-Ubuntu-and-VMtools-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="maixy">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Maixy's Notes">
     </span>
 
     
@@ -280,9 +302,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-14T21:22:29+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-14T21:22:29+08:00">
                 2017-05-14
               </time>
             
@@ -301,7 +323,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -341,8 +363,10 @@
       
         
           
-            <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>在虚拟机 Ubuntu 系统界面，点击选项安装 VMTools 工具时，出现如下对话框：<br>正在进行简易安装时，无法手动启动 VMware Tools 安装。</p>
-<p>因此，在虚拟机设置选项中选择“软盘选项”，将原来的“使用软盘映像文件”改为“使用物理驱动器”，并加载 VMWare 安装根目录下的 linux.iso 镜像文件，发现软盘里的内容并不能直接出现在桌面，而是在 floppy0 disk 中。<br>然而，即便以 root 管理者身份登录系统也无法将 floppy0 disk 的压缩包文件到桌面，出现错误提示为：<br>Error splicing file: Input/output error</p>
+            <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>在虚拟机 Ubuntu 系统界面，点击选项安装 VMTools 工具时，出现如下对话框：<br><blockquote class="blockquote-center"><p>正在进行简易安装时，无法手动启动 VMware Tools 安装。</p>
+</blockquote></p>
+<p>因此，在虚拟机设置选项中选择“软盘选项”，将原来的“使用软盘映像文件”改为“使用物理驱动器”，并加载 VMWare 安装根目录下的 linux.iso 镜像文件，发现软盘里的内容并不能直接出现在桌面，而是在 floppy0 disk 中。<br>然而，即便以 root 管理者身份登录系统也无法将 floppy0 disk 的压缩包文件到桌面，出现错误提示为：<br><blockquote class="blockquote-center"><p>Error splicing file: Input/output error</p>
+</blockquote></p>
 <h1 id="软硬件信息"><a href="#软硬件信息" class="headerlink" title="软硬件信息"></a>软硬件信息</h1><p>操作系统：i386 32bit 处理器，win7 32bit<br>使用软件:VMWare Workstation10<br>虚拟机镜像:Ubuntu 16.04</p>
 <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>不从软盘上加载镜像，转为直接从一个光盘中“使用物理驱动器”加载，而把剩余的光盘与软盘设置为自动检测。</p>
 <p>结果是系统能直接将镜像的内容读取到 Ubuntu 的桌面，不需要从外设中复制。使得剩余的步骤快捷方便。</p>
@@ -417,11 +441,11 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="John Doe" />
-          <p class="site-author-name" itemprop="name">John Doe</p>
+               src="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png"
+               alt="maixy" />
+          <p class="site-author-name" itemprop="name">maixy</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">Keep doing. (不要停。)</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -430,7 +454,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
@@ -441,7 +465,7 @@
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
@@ -452,7 +476,7 @@
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
           
@@ -497,16 +521,16 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">maixy</span>
 </div>
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
