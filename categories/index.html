@@ -91,11 +91,12 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:updated_time" content="2017-05-15T11:37:39.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="categories">
 
 
 
@@ -123,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/categories/"/>
 
 
 
 
 
-  <title>Hexo</title>
+  <title>categories | Hexo</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -155,9 +156,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -240,153 +239,28 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
-      
 
-  
+  <div id="posts" class="posts-expand">
+  <header class="post-header">
 
-  
-  
-  
+	<h1 class="post-title" itemprop="name headline">categories</h1>
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/14/year-month-day-Ubuntu-and-VMtools-md/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
+</header>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/14/year-month-day-Ubuntu-and-VMtools-md/" itemprop="url">虚拟机中 Ubuntu16.04 系统 VMTools 的安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-14T21:22:29+08:00">
-                2017-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+    
+      <div class="category-all-page">
+        <div class="category-all-title">
+            Insgesamt eine Kategorie
         </div>
-      </header>
+        <div class="category-all">
+          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li></ul>
+        </div>
+      </div>
     
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>在虚拟机 Ubuntu 系统界面，点击选项安装 VMTools 工具时，出现如下对话框：<br>正在进行简易安装时，无法手动启动 VMware Tools 安装。</p>
-<p>因此，在虚拟机设置选项中选择“软盘选项”，将原来的“使用软盘映像文件”改为“使用物理驱动器”，并加载 VMWare 安装根目录下的 linux.iso 镜像文件，发现软盘里的内容并不能直接出现在桌面，而是在 floppy0 disk 中。<br>然而，即便以 root 管理者身份登录系统也无法将 floppy0 disk 的压缩包文件到桌面，出现错误提示为：<br>Error splicing file: Input/output error</p>
-<h1 id="软硬件信息"><a href="#软硬件信息" class="headerlink" title="软硬件信息"></a>软硬件信息</h1><p>操作系统：i386 32bit 处理器，win7 32bit<br>使用软件:VMWare Workstation10<br>虚拟机镜像:Ubuntu 16.04</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>不从软盘上加载镜像，转为直接从一个光盘中“使用物理驱动器”加载，而把剩余的光盘与软盘设置为自动检测。</p>
-<p>结果是系统能直接将镜像的内容读取到 Ubuntu 的桌面，不需要从外设中复制。使得剩余的步骤快捷方便。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li><a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2041399" target="_blank" rel="external">https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2041399</a></li>
-<li><a href="http://bcoder.com/operatingsystem/solution-of-can-not-install-vmware-tools-in-ubuntu-virtual-machine" target="_blank" rel="external">http://bcoder.com/operatingsystem/solution-of-can-not-install-vmware-tools-in-ubuntu-virtual-machine</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -394,6 +268,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
