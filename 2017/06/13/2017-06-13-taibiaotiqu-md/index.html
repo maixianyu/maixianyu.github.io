@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="OpenCV,台标提取," />
 
 
 
@@ -88,15 +88,25 @@
 
 
 
-<meta name="description" content="Keep doing. (不要停。)">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Maixy&#39;s Notes">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="背景介绍电视台台标在中国出现在电视界面的左上角，标志着电视节目的版权信息。数据统计与监管部门可以通过电视台标统计收视率，监管电视节目的内容。过去的监管需要大量的人力，现在深度学习的出现可以通过台标的识别，减少人力成本。而台标提取是台标识别的前提条件。根据台标本身是否存在动画，可以分为动态台标与静态台标，本文主要针对静态台标进行提取。而静态台标又可以分为不透明台标与半透明台标。静态台标具有时空不变性">
+<meta name="keywords" content="OpenCV,台标提取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV 实现视频静态台标的提取">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/2017-06-13-taibiaotiqu-md/index.html">
 <meta property="og:site_name" content="Maixy&#39;s Notes">
-<meta property="og:description" content="Keep doing. (不要停。)">
+<meta property="og:description" content="背景介绍电视台台标在中国出现在电视界面的左上角，标志着电视节目的版权信息。数据统计与监管部门可以通过电视台标统计收视率，监管电视节目的内容。过去的监管需要大量的人力，现在深度学习的出现可以通过台标的识别，减少人力成本。而台标提取是台标识别的前提条件。根据台标本身是否存在动画，可以分为动态台标与静态台标，本文主要针对静态台标进行提取。而静态台标又可以分为不透明台标与半透明台标。静态台标具有时空不变性">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/frame_ROI.jpg">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/frame_ROI_canny.jpg">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/frame_fg.jpg">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/frame_bg.jpg">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/markers1.jpg">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/frame_maskimage.jpg">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/frame_final.jpg">
+<meta property="og:updated_time" content="2017-06-13T07:51:36.559Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Maixy&#39;s Notes">
-<meta name="twitter:description" content="Keep doing. (不要停。)">
+<meta name="twitter:title" content="OpenCV 实现视频静态台标的提取">
+<meta name="twitter:description" content="背景介绍电视台台标在中国出现在电视界面的左上角，标志着电视节目的版权信息。数据统计与监管部门可以通过电视台标统计收视率，监管电视节目的内容。过去的监管需要大量的人力，现在深度学习的出现可以通过台标的识别，减少人力成本。而台标提取是台标识别的前提条件。根据台标本身是否存在动画，可以分为动态台标与静态台标，本文主要针对静态台标进行提取。而静态台标又可以分为不透明台标与半透明台标。静态台标具有时空不变性">
+<meta name="twitter:image" content="http://opy1bzb13.bkt.clouddn.com/frame_ROI.jpg">
 
 
 
@@ -124,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/13/2017-06-13-taibiaotiqu-md/"/>
 
 
 
 
 
-  <title>Maixy's Notes</title>
+  <title>OpenCV 实现视频静态台标的提取 | Maixy's Notes</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -165,9 +175,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -260,9 +268,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -288,9 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/13/2017-06-13-taibiaotiqu-md/" itemprop="url">OpenCV 实现视频静态台标的提取</a></h1>
+          <h1 class="post-title" itemprop="name headline">OpenCV 实现视频静态台标的提取</h1>
         
 
         <div class="post-meta">
@@ -359,9 +365,7 @@
       
 
       
-        
-          
-            <h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><p>电视台台标在中国出现在电视界面的左上角，标志着电视节目的版权信息。数据统计与监管部门可以通过电视台标统计收视率，监管电视节目的内容。过去的监管需要大量的人力，现在深度学习的出现可以通过台标的识别，减少人力成本。而台标提取是台标识别的前提条件。<br>根据台标本身是否存在动画，可以分为动态台标与静态台标，本文主要针对静态台标进行提取。而静态台标又可以分为不透明台标与半透明台标。静态台标具有时空不变性，包括位置不变，轮廓不变，颜色不变。利用这种特性，不透明台标可以用基于帧间像素差分的检测方法提取。但是对于透明台标，台标颜色随背景颜色变化，帧间像素差分法不适用。<br>本文采用了基于边缘检测的提取方法。透明台标虽然颜色会随着背景而变化，但是边缘轮廓会保持不变。另外，台标的识别不仅需要边缘信息，还需要颜色信息等。因此，本文的目标是在边缘算法的基础上提取出完整的台标原图。</p>
+        <h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><p>电视台台标在中国出现在电视界面的左上角，标志着电视节目的版权信息。数据统计与监管部门可以通过电视台标统计收视率，监管电视节目的内容。过去的监管需要大量的人力，现在深度学习的出现可以通过台标的识别，减少人力成本。而台标提取是台标识别的前提条件。<br>根据台标本身是否存在动画，可以分为动态台标与静态台标，本文主要针对静态台标进行提取。而静态台标又可以分为不透明台标与半透明台标。静态台标具有时空不变性，包括位置不变，轮廓不变，颜色不变。利用这种特性，不透明台标可以用基于帧间像素差分的检测方法提取。但是对于透明台标，台标颜色随背景颜色变化，帧间像素差分法不适用。<br>本文采用了基于边缘检测的提取方法。透明台标虽然颜色会随着背景而变化，但是边缘轮廓会保持不变。另外，台标的识别不仅需要边缘信息，还需要颜色信息等。因此，本文的目标是在边缘算法的基础上提取出完整的台标原图。</p>
 <p>操作系统 <em>Win10 64bit</em>，IDE 软件采用 <em>VS 2012</em>，视觉库版本是 <em>OpenCV 2.4.12</em>。 </p>
 <h1 id="本文采用的方法及流程"><a href="#本文采用的方法及流程" class="headerlink" title="本文采用的方法及流程"></a>本文采用的方法及流程</h1><ol>
 <li><em>Canny</em> 边缘检测并进行时间加权<br><em>Canny</em> 边缘检测算法内置于 <em>OpenCV</em> 中，使用 <em>Canny</em> 边缘检测产生图像的轮廓，白线代表边缘，黑色代表背景。<br>为了在视频的多个边缘中筛选出台标的边缘，本文利用台标的时空不变性对 <em>5</em> 帧（每秒取一帧）图像做加权，变动的边缘灰度被减弱，固定的台标边缘灰度保持不变。<br>最后经过阈值操作分离出相对干净的台标边缘。</li>
@@ -382,333 +386,74 @@
 <h1 id="参考页面"><a href="#参考页面" class="headerlink" title="参考页面"></a>参考页面</h1><p><a href="http://opy1bzb13.bkt.clouddn.com/frame_ROI.jpg" target="_blank" rel="external">1</a> OpenCV 教程 <a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/tutorials.html" target="_blank" rel="external">http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/tutorials.html</a><br>[2] OpenCV—图像分割中的分水岭算法原理与应用 <a href="http://blog.csdn.net/iracer/article/details/49225823" target="_blank" rel="external">http://blog.csdn.net/iracer/article/details/49225823</a><br>[3] 基于边缘和颜色信息的台标识别方法研究. 李艳梅<br>[4] OpenCV3 编程入门. 毛星云 </p>
 <h1 id="附录（完整代码）"><a href="#附录（完整代码）" class="headerlink" title="附录（完整代码）"></a>附录（完整代码）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div></pre></td><td class="code"><pre><div class="line">#include &lt;opencv2/opencv.hpp&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace cv;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">// 形态学膨胀部分</div><div class="line">Mat frame_dilation;</div><div class="line">int dilation_elem = 0;</div><div class="line">int dilation_size = 1;</div><div class="line"></div><div class="line">int morph_elem = 0;</div><div class="line">int morph_size = 1;</div><div class="line">int morph_operator = MORPH_CLOSE;</div><div class="line">int const max_operator = 4;</div><div class="line">int const max_elem = 2;</div><div class="line">int const max_kernel_size = 21;</div><div class="line"></div><div class="line">// 膨胀函数</div><div class="line">void Dilation(InputArray src, OutputArray dst, int dilation_elem, int dilation_size)&#123;</div><div class="line">	int dilation_type;</div><div class="line">	if(dilation_elem == 0)</div><div class="line">		dilation_type = MORPH_RECT;</div><div class="line">	else if(dilation_elem == 1)</div><div class="line">		dilation_type = MORPH_CROSS;</div><div class="line">	else if(dilation_elem == 2)</div><div class="line">		dilation_type = MORPH_ELLIPSE;</div><div class="line"></div><div class="line">	Mat element = getStructuringElement(dilation_type,</div><div class="line">										Size(2*dilation_size + 1, 2*dilation_size + 1),</div><div class="line">										Point(dilation_size, dilation_size));</div><div class="line"></div><div class="line">	dilate(src, dst, element);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 更多形态学操作</div><div class="line">void Morphology(InputArray src, OutputArray dst, int morph_operator, int morph_size)&#123;</div><div class="line">	//Opening: MORPH_OPEN : 2</div><div class="line">	//Closing: MORPH_CLOSE: 3</div><div class="line">	//Gradient: MORPH_GRADIENT: 4</div><div class="line">	//Top Hat: MORPH_TOPHAT: 5</div><div class="line">	//Black Hat: MORPH_BLACKHAT: 6</div><div class="line"></div><div class="line">	Mat element = getStructuringElement(morph_elem, Size(2*morph_size + 1, 2*morph_size + 1), </div><div class="line">										Point(morph_size, morph_size));</div><div class="line">	morphologyEx(src, dst, morph_operator, element);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 分水岭函数封装</div><div class="line">class WatershedSegmenter&#123;</div><div class="line">    private:</div><div class="line">        Mat markers;</div><div class="line">    </div><div class="line">    // convert to image of ints</div><div class="line">    public:</div><div class="line">        void setMarkers(Mat &amp;markerImage)&#123;</div><div class="line">            markerImage.convertTo(markers, CV_32S);</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">    // apply watershed</div><div class="line">    Mat process(InputArray image)&#123;</div><div class="line">        watershed(image, markers);</div><div class="line">        return markers;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // return result in the form of am image</div><div class="line">    Mat getSegmentation() &#123;</div><div class="line">        Mat tmp;</div><div class="line">        markers.convertTo(tmp, CV_8U);</div><div class="line">        return tmp;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // return watershed in the form of an image</div><div class="line">    Mat getWatersheds() &#123;</div><div class="line">        Mat tmp;</div><div class="line">        markers.convertTo(tmp, CV_8U, 255, 255);</div><div class="line">        return tmp;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	VideoCapture capture(&quot;../VideoSample.mp4&quot;);</div><div class="line">	if(!capture.isOpened())</div><div class="line">		return 2;</div><div class="line"></div><div class="line">	double rate = capture.get(CV_CAP_PROP_FPS);</div><div class="line">	int size[2] = &#123; int(capture.get(CV_CAP_PROP_FRAME_WIDTH)), int(capture.get(CV_CAP_PROP_FRAME_HEIGHT)) &#125;;</div><div class="line">	</div><div class="line">	std::cout&lt;&lt;rate&lt;&lt;std::endl;</div><div class="line">	std::cout&lt;&lt;&quot;capture.width=&quot;&lt;&lt;size[0]&lt;&lt;std::endl; //640</div><div class="line">	std::cout&lt;&lt;&quot;capture.height=&quot;&lt;&lt;size[1]&lt;&lt;std::endl;//360</div><div class="line"></div><div class="line">	Mat frame;</div><div class="line">	Mat frame_ROI;</div><div class="line">	Mat frame_ROI_canny;</div><div class="line">	Mat frame_result;  // frame_ROI_canny -&gt; frame_result</div><div class="line">	Mat frame_dila;    </div><div class="line">	Mat frame_morph;   // frame_result -&gt; frame_morph -&gt; frame_dila</div><div class="line"></div><div class="line">	float count = 0;</div><div class="line">	float alpha, beta;</div><div class="line"></div><div class="line">	// 获取 t = 0s 的图像帧</div><div class="line">	capture.set(CV_CAP_PROP_POS_MSEC, count*1000);</div><div class="line">	capture.read(frame);</div><div class="line">	imshow(&quot;0 sec&quot;, frame);</div><div class="line">	frame_ROI = frame(Rect(0, 0, 150, 100));</div><div class="line">	Canny(frame_ROI, frame_ROI_canny, 100, 200);</div><div class="line">	threshold(frame_ROI_canny, frame_result, 128, 255, THRESH_BINARY);</div><div class="line">	imshow(&quot;first&quot;, frame_result);</div><div class="line">	count++;</div><div class="line"></div><div class="line">	imwrite(&quot;../frame_ROI.jpg&quot;, frame_ROI);</div><div class="line"></div><div class="line">	// 时间加权</div><div class="line">	while(count &lt;= 4)&#123;</div><div class="line">		if(capture.set(CV_CAP_PROP_POS_MSEC, count*1000))</div><div class="line">			printf(&quot;set successful!\n&quot;);</div><div class="line">		if(!capture.read(frame))&#123;</div><div class="line">			printf(&quot;frame reading fail !&quot;);</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		frame_ROI = frame(Rect(0, 0, 150, 100));</div><div class="line">		Canny(frame_ROI, frame_ROI_canny, 100, 200);</div><div class="line">		threshold(frame_ROI_canny, frame_ROI_canny, 128, 255, THRESH_BINARY);</div><div class="line"></div><div class="line">		alpha = count / (count + 1);</div><div class="line">		beta = 1 - alpha;</div><div class="line">		addWeighted(frame_result, alpha, frame_ROI_canny, beta, 0.0, frame_result);</div><div class="line"></div><div class="line">		//std::cout&lt;&lt;&quot;count=&quot;&lt;&lt;count&lt;&lt;std::endl;</div><div class="line">		//std::cout&lt;&lt;&quot;  alpha=&quot;&lt;&lt;alpha&lt;&lt;std::endl;</div><div class="line">		//std::cout&lt;&lt;&quot;  beta=&quot;&lt;&lt;beta&lt;&lt;std::endl;</div><div class="line"></div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">	capture.release();</div><div class="line"></div><div class="line">	threshold(frame_result, frame_result, 128, 255, THRESH_BINARY);</div><div class="line">	imwrite(&quot;../frame_ROI_canny.jpg&quot;, frame_ROI_canny);</div><div class="line"></div><div class="line">	Morphology(frame_result, frame_morph, morph_operator, morph_size);</div><div class="line">//	imshow(&quot;frame_morph&quot;, frame_morph);</div><div class="line">	Dilation(frame_morph, frame_dila, dilation_elem, dilation_size);</div><div class="line">//	imshow(&quot;frame_dila&quot;, frame_dila);</div><div class="line">	imwrite(&quot;../frame_fg.jpg&quot;, frame_dila);</div><div class="line">	// frame_dila 就是前景</div><div class="line"></div><div class="line">	Mat frame_bg;</div><div class="line">	Dilation(frame_dila, frame_bg, dilation_elem, dilation_size + 10);</div><div class="line">	imshow(&quot;frame_bg&quot;, frame_bg);</div><div class="line">	threshold(frame_bg, frame_bg, 1, 128, THRESH_BINARY_INV);</div><div class="line">	imshow(&quot;frame_bg threshold&quot;, frame_bg);</div><div class="line">	imwrite(&quot;../frame_bg.jpg&quot;, frame_bg);</div><div class="line">	// frame_bg 就是背景</div><div class="line"></div><div class="line">	// 获取标志图像</div><div class="line">	Mat markers1 = frame_dila + frame_bg;</div><div class="line">//	imshow(&quot;markers Image&quot;,markers1); </div><div class="line">	imwrite(&quot;../markers1.jpg&quot;, markers1);</div><div class="line"></div><div class="line">	// 分水岭分割</div><div class="line">	WatershedSegmenter segmenter1;</div><div class="line">	segmenter1.setMarkers(markers1);</div><div class="line">	segmenter1.process(frame_ROI);</div><div class="line"></div><div class="line">	Mat frame_maskimage = segmenter1.getSegmentation();</div><div class="line">	imwrite(&quot;../frame_maskimage.jpg&quot;, frame_maskimage);</div><div class="line">	imshow(&quot;Segmentation1&quot;, segmenter1.getSegmentation());</div><div class="line"></div><div class="line">	// 将大于 240 的值都变为 1</div><div class="line">	threshold(frame_maskimage, frame_maskimage, 240, 1, THRESH_BINARY);</div><div class="line">	//imshow(&quot;frame_maskimage threshold&quot;, frame_maskimage);</div><div class="line"></div><div class="line">	// 为进行矩阵相乘，将灰度图转换为 BGR 格式</div><div class="line">	cvtColor(frame_maskimage, frame_maskimage, COLOR_GRAY2BGR);</div><div class="line">	//imshow(&quot;frame_maskimage cvtColor&quot;, frame_maskimage);</div><div class="line"></div><div class="line">	frame_maskimage = frame_ROI.mul(frame_maskimage);</div><div class="line">	imshow(&quot;frame_maskimage final&quot;, frame_maskimage);</div><div class="line"></div><div class="line">	// 图形输出</div><div class="line">	imwrite(&quot;../frame_final.jpg&quot;, frame_maskimage);</div><div class="line"></div><div class="line">	waitKey(0);</div><div class="line">	return 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/17/20170517-Word的分节符与页眉页脚使用-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="maixy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maixy's Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/17/20170517-Word的分节符与页眉页脚使用-md/" itemprop="url">Word 的分节符与页眉页脚使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-17T21:46:41+08:00">
-                2017-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
           
-
+            <a href="/tags/台标提取/" rel="tag"># 台标提取</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
         
-          
-            <h1 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h1><p>Office Word 2016</p>
-<h1 id="分节符的分类"><a href="#分节符的分类" class="headerlink" title="分节符的分类"></a>分节符的分类</h1><p>分隔符分为分页符与分节符。页是节的组成单元，所以在调整章节之间的关系时，更多的是留意分节符。<br>分节符分为：</p>
-<ul>
-<li><strong>下一页</strong><br>在当前页插入分节符，则从下一页开始就是新的一节。</li>
-<li><strong>连续</strong><br>当前页的分节符后面就是新的一节。使用这种类型的分节符的最常见的原因之一是，如果您正在使用的列。使用此分节符可以更改列的数，而不开始一个新页。</li>
-<li><strong>奇数页</strong><br>在当前页插入分节符，则从下一个奇数页开始就是新的一节。<br>如果当前页是偶数页，则该“奇数页”分节符效果与“下一页”相同；<br>如果当前页是奇数页，则下一页在打印成 PDF 时成为空白页（无页眉页脚），但在 Word 软件界面空白页不会显示。从下一个奇数页（也就是“下下页”）开始新的一节。</li>
-<li><strong>偶数页</strong><br>与奇数页同理，只不过奇数变成了偶数。</li>
-</ul>
-<h1 id="不同节的页眉页脚的耦合与去耦合"><a href="#不同节的页眉页脚的耦合与去耦合" class="headerlink" title="不同节的页眉页脚的耦合与去耦合"></a>不同节的页眉页脚的耦合与去耦合</h1><p>典型的去耦合场景有，每一节都需要从新的页码“1”开始，首页不显示页码，或者每一节的页眉文字内容不相同。<br>“耦合/去耦合”的选项出现在双击页眉或页脚的编辑模式下，选项名称为“链接到上一条页眉”。如果选项被选中，则意味着页眉页脚为常量时内容与上一节的一致，为变量时内容默认延续上一节的变量（如页码）。如果选项没有被选中，则页眉页脚在新的一节里重新自定义。</p>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>不管什么分节场合，强烈不建议在页眉页脚编辑模式下点击“首页不同”。“首页不同”是分节逻辑的快捷按钮，容易造成不分青红皂白地统一或清除页眉页脚格式。因此，即便是需要达成“首页不同”的效果，也从去耦合选项中实现，分节的逻辑更清晰些。<br>其次，Word 的默认设置是“链接到上一条页眉”，因此每次在新的节中设置页眉页脚，都需要提前注意是否需要去耦合，否则造成后续的编辑混乱。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://support.office.com/zh-cn/article/%E5%9C%A8%E6%96%87%E6%A1%A3%E7%9A%84%E5%90%8E%E9%9D%A2%E5%BC%80%E5%A7%8B%E9%A1%B5%E7%A0%81%E7%BC%96%E5%8F%B7-c73e3d55-d722-4bd0-886e-0b0bd0eb3f02" target="_blank" rel="external">https://support.office.com/zh-cn/article/%E5%9C%A8%E6%96%87%E6%A1%A3%E7%9A%84%E5%90%8E%E9%9D%A2%E5%BC%80%E5%A7%8B%E9%A1%B5%E7%A0%81%E7%BC%96%E5%8F%B7-c73e3d55-d722-4bd0-886e-0b0bd0eb3f02</a></li>
-<li><a href="https://support.office.com/zh-cn/article/%E6%8F%92%E5%85%A5%E5%88%86%E8%8A%82%E7%AC%A6-eef20fd8-e38c-4ba6-a027-e503bdf8375c" target="_blank" rel="external">https://support.office.com/zh-cn/article/%E6%8F%92%E5%85%A5%E5%88%86%E8%8A%82%E7%AC%A6-eef20fd8-e38c-4ba6-a027-e503bdf8375c</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/14/20170515-Ubuntu-and-VMtools-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="maixy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Maixy's Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/14/20170515-Ubuntu-and-VMtools-md/" itemprop="url">虚拟机中 Ubuntu16.04 系统 VMTools 的安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-14T21:22:29+08:00">
-                2017-05-14
-              </time>
+              <a href="/2017/05/17/20170517-Word的分节符与页眉页脚使用-md/" rel="next" title="Word 的分节符与页眉页脚使用">
+                <i class="fa fa-chevron-left"></i> Word 的分节符与页眉页脚使用
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>在虚拟机 Ubuntu 系统界面，点击选项安装 VMTools 工具时，出现如下对话框：<br><blockquote class="blockquote-center"><p>正在进行简易安装时，无法手动启动 VMware Tools 安装。</p>
-</blockquote></p>
-<p>因此，在虚拟机设置选项中选择“软盘选项”，将原来的“使用软盘映像文件”改为“使用物理驱动器”，并加载 VMWare 安装根目录下的 linux.iso 镜像文件，发现软盘里的内容并不能直接出现在桌面，而是在 floppy0 disk 中。<br>然而，即便以 root 管理者身份登录系统也无法将 floppy0 disk 的压缩包文件到桌面，出现错误提示为：<br><blockquote class="blockquote-center"><p>Error splicing file: Input/output error</p>
-</blockquote></p>
-<h1 id="软硬件信息"><a href="#软硬件信息" class="headerlink" title="软硬件信息"></a>软硬件信息</h1><p>操作系统：i386 32bit 处理器，win7 32bit<br>使用软件:VMWare Workstation10<br>虚拟机镜像:Ubuntu 16.04</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>不从软盘上加载镜像，转为直接从一个光盘中“使用物理驱动器”加载，而把剩余的光盘与软盘设置为自动检测。</p>
-<p>结果是系统能直接将镜像的内容读取到 Ubuntu 的桌面，不需要从外设中复制。使得剩余的步骤快捷方便。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li><a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2041399" target="_blank" rel="external">https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2041399</a></li>
-<li><a href="http://bcoder.com/operatingsystem/solution-of-can-not-install-vmware-tools-in-ubuntu-virtual-machine" target="_blank" rel="external">http://bcoder.com/operatingsystem/solution-of-can-not-install-vmware-tools-in-ubuntu-virtual-machine</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -716,6 +461,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -735,8 +484,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png"
@@ -798,6 +556,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景介绍"><span class="nav-number">1.</span> <span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本文采用的方法及流程"><span class="nav-number">2.</span> <span class="nav-text">本文采用的方法及流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Canny-边缘检测并进行时间加权"><span class="nav-number">3.</span> <span class="nav-text">1. Canny 边缘检测并进行时间加权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-分水岭操作提取边缘内的台标原图"><span class="nav-number">4.</span> <span class="nav-text">2. 分水岭操作提取边缘内的台标原图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考页面"><span class="nav-number">5.</span> <span class="nav-text">参考页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录（完整代码）"><span class="nav-number">6.</span> <span class="nav-text">附录（完整代码）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -918,6 +692,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
