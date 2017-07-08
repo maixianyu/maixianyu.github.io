@@ -1,0 +1,775 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vector,视频,统计," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="背景介绍目前的视频样本总共有 12.3GB 大小，包含 6 种后缀名不同的视频文件，而每一种后缀名视频类型又可以按照分辨率进一步划分为多种类型。因此，为了梳理适合进行分类训练的样本，在此根据不同的指标将现有视频进行分类。  分辨率（比特率）“分辨率”被表示成每一个方向上的像素数量，常见的有 640×480，1024×768，1280×1024 等几种。 码率码流(Data Rate)是指视频文件在">
+<meta name="keywords" content="vector,视频,统计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vector 应用于视频信息的统计">
+<meta property="og:url" content="http://yoursite.com/2017/06/25/2017-06-25-video-stat-md/index.html">
+<meta property="og:site_name" content="Maixy&#39;s Notes">
+<meta property="og:description" content="背景介绍目前的视频样本总共有 12.3GB 大小，包含 6 种后缀名不同的视频文件，而每一种后缀名视频类型又可以按照分辨率进一步划分为多种类型。因此，为了梳理适合进行分类训练的样本，在此根据不同的指标将现有视频进行分类。  分辨率（比特率）“分辨率”被表示成每一个方向上的像素数量，常见的有 640×480，1024×768，1280×1024 等几种。 码率码流(Data Rate)是指视频文件在">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/2017-06-25-video-stat-md_1.PNG">
+<meta property="og:updated_time" content="2017-07-08T03:22:50.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vector 应用于视频信息的统计">
+<meta name="twitter:description" content="背景介绍目前的视频样本总共有 12.3GB 大小，包含 6 种后缀名不同的视频文件，而每一种后缀名视频类型又可以按照分辨率进一步划分为多种类型。因此，为了梳理适合进行分类训练的样本，在此根据不同的指标将现有视频进行分类。  分辨率（比特率）“分辨率”被表示成每一个方向上的像素数量，常见的有 640×480，1024×768，1280×1024 等几种。 码率码流(Data Rate)是指视频文件在">
+<meta name="twitter:image" content="http://opy1bzb13.bkt.clouddn.com/2017-06-25-video-stat-md_1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/25/2017-06-25-video-stat-md/"/>
+
+
+
+
+
+  <title>vector 应用于视频信息的统计 | Maixy's Notes</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62164824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Maixy's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/25/2017-06-25-video-stat-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maixy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maixy's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vector 应用于视频信息的统计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T16:00:27+08:00">
+                2017-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频处理/" itemprop="url" rel="index">
+                    <span itemprop="name">视频处理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频处理/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h3><p>目前的视频样本总共有 12.3GB 大小，包含 6 种后缀名不同的视频文件，而每一种后缀名视频类型又可以按照分辨率进一步划分为多种类型。因此，为了梳理适合进行分类训练的样本，在此根据不同的指标将现有视频进行分类。</p>
+<ol>
+<li><strong>分辨率（比特率）</strong><br>“分辨率”被表示成每一个方向上的像素数量，常见的有 640×480，1024×768，1280×1024 等几种。</li>
+<li><strong>码率</strong><br>码流(Data Rate)是指视频文件在单位时间内使用的数据流量，也叫码率或码流率，通俗一点的理解就是取样率，是视频编码中画面质量控制中最重要的部分，一般我们用的单位是kb/s或者Mb/s。</li>
+<li><strong>帧速率</strong><br>帧速率也称为FPS(Frames Per Second)的缩写——帧/秒。是指每秒钟刷新的图片的帧数，也可以理解为图形处理器每秒钟能够刷新几次。</li>
+<li><strong>画面宽长比</strong><br>4:3(1.33:1) 是历史最久的比例，它在电视机发明之初就已经存在，到现今仍在使用，并且用于许多电脑显示器上。16:9(1.78:1)是高清晰度电视的国际标准，用于澳洲、日本、加拿大和美国，还有欧洲的卫星电视和一些非高清的宽屏幕电视（EDTV）PAL-plus。</li>
+<li><strong>时长</strong><br>时长是指一个视频的时间长度。一个好的样本光是满足前 4 条还不够，必须有较长的时长才能提供丰富的台标样本。</li>
+</ol>
+<h3 id="目标与实现"><a href="#目标与实现" class="headerlink" title="目标与实现"></a>目标与实现</h3><p>目标是写一个脚本以快速地统计大量视频的信息，得到类似于下表的结果。</p>
+<p>表1. .ts 视频样本统计结果<br><img src="http://opy1bzb13.bkt.clouddn.com/2017-06-25-video-stat-md_1.PNG" title="frame_ROI.jpg"></p>
+<a id="more"></a>
+<p>脚本主要统计数量与某个属性的平均值。为了保持脚本的灵活性，不能限定特定属性的类型，比如必须允许视频中有多种不同的分辨率，不同的码率，不同的帧率等。因此，选取一个灵活的数据结构很有必要。</p>
+<p>在以上的考虑下，选取了 vector 作为统计数据的数据结构。<br>Vector 是 C++ 标准程式库中的一个类，可视为会自动扩展容量的阵列，是 C++ 标准程式库中的众多容器（container）之一，以循序（sequential）的方式维护变数集合。vector 的特色是：</p>
+<ul>
+<li>支持随机存取</li>
+<li>支持尾端增删元素很快：O(1)</li>
+<li>集合中间增删元素比较费时：O(n)</li>
+<li>以模板（泛型）方式实现，可以储存任意类型的变数，包括使用者自定义的资料形态。</li>
+<li>有一些容器提供 stable iterator 保证，很不幸的 vector 不保证。因此存在一些可能造成 vector iterator 失效的操作。</li>
+</ul>
+<p>vector 和 built-in 数组类似，它拥有一段连续的内存空间，并且起始地址不变，因此它能非常好的支持随机存取，即 [ ] 操作符，但由于它的内存空间是连续的，所以在中间进行插入和删除会造成内存块的拷贝，另外，当该数组后的内存空间不够时，需要重新申请一块足够大的内存并进行内存的拷贝。这些都大大影响了 vector 的效率。（中间插入和删除效率低）</p>
+<p>以统计分辨率属性的函数为例，复盘实现过程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line">int nLine = 0;</div><div class="line">string buf;</div><div class="line">vector&lt;string&gt; ts_path;</div><div class="line">vector&lt;string&gt; resol_ratio;</div><div class="line">vector&lt;double&gt; wh_ratio;</div><div class="line"></div><div class="line">vector&lt;int&gt; resol_ratio_count;</div><div class="line">vector&lt;int&gt; wh_ratio_count;</div><div class="line"></div><div class="line">ofstream video_txt(&quot;./video_info.txt&quot;); //输出文件</div><div class="line">char line_txt[512]; //写入到输出文件</div><div class="line"></div><div class="line">void resol_ratio_output()</div><div class="line">&#123;</div><div class="line">	string size_video;</div><div class="line">	stringstream size_w;</div><div class="line">	stringstream size_h;</div><div class="line">	double wh_ratio_current;</div><div class="line">	const int jj = 1;</div><div class="line">	</div><div class="line">	for(unsigned int i = 0; i &lt; ts_path.size(); i++)</div><div class="line">	&#123;</div><div class="line">		VideoCapture capture(ts_path[i].c_str());</div><div class="line">		cout&lt;&lt;ts_path[i].c_str()&lt;&lt;endl;</div><div class="line">		size_w&lt;&lt;capture.get(CV_CAP_PROP_FRAME_WIDTH);</div><div class="line">		size_h&lt;&lt;capture.get(CV_CAP_PROP_FRAME_HEIGHT);</div><div class="line">		wh_ratio_current = capture.get(CV_CAP_PROP_FRAME_WIDTH) / capture.get(CV_CAP_PROP_FRAME_HEIGHT);</div><div class="line"></div><div class="line">		size_video = size_w.str() + &quot;x&quot; + size_h.str();</div><div class="line">		</div><div class="line">		if(resol_ratio.size() == 0)</div><div class="line">		&#123;</div><div class="line">			resol_ratio.push_back(size_video);</div><div class="line">			resol_ratio_count.push_back(1);</div><div class="line">		&#125;</div><div class="line">		else</div><div class="line">		&#123;</div><div class="line">			//统计分辨率</div><div class="line">			for(unsigned int j = 0; j &lt; resol_ratio.size(); j++)</div><div class="line">			&#123;</div><div class="line">				if(size_video == resol_ratio[j].c_str())</div><div class="line">				&#123;</div><div class="line">					resol_ratio_count[j]++;</div><div class="line">					break;</div><div class="line">				&#125;</div><div class="line">				else</div><div class="line">				&#123;</div><div class="line">					if(j &lt; (resol_ratio.size() - 1))</div><div class="line">					&#123;</div><div class="line">					    continue;					</div><div class="line">					&#125;</div><div class="line">					else</div><div class="line">					&#123;</div><div class="line">						resol_ratio.push_back(size_video);</div><div class="line">						resol_ratio_count.push_back(1);</div><div class="line">						break;// 非常重要，break 不能漏，否则 size 自增一，加多一次循环</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		capture.release();</div><div class="line">		size_w.str(&quot;&quot;);</div><div class="line">		size_h.str(&quot;&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	sprintf_s(line_txt, &quot;总的分辨率类别:%d \n&quot;, resol_ratio.size());</div><div class="line">	video_txt&lt;&lt;line_txt;</div><div class="line"></div><div class="line">	for(unsigned int j = 0; j &lt; resol_ratio.size(); j++)</div><div class="line">	&#123;</div><div class="line">		const char* resol_char = resol_ratio[j].c_str();</div><div class="line">		sprintf_s(line_txt, &quot;第 %d 组分辨率 = %s; 数量 = %d \n&quot;, j, resol_char, resol_ratio_count[j]);</div><div class="line">		video_txt&lt;&lt;line_txt;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	resol_ratio.clear();</div><div class="line">	resol_ratio_count.clear();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>ts_path.size() 是 .ts 视频路径的行数，每一行代表一个具体的视频文件路径。resol_ratio 代表不同分辨率的 vector，存储形式类似于{“1280x720”, “720x480”}，初始值为空。resol_ration_count 代表不同分辨率的计数，存储形式类似于{2, 3}，表示 1280x720 的视频有 2 个，720x480 的视频有 3 个。</p>
+<p>对于第一条从 ts_path 取得的视频文件，因为 resol_ratio 数据为空，所以不需要进行比较，直接把分辨率写入 resol_ratio，并且计数为 1.</p>
+<p>假设已经存储了 n 种分辨率，对于当前第 i 个从 ts_path 中取得的视频分辨率 size_video，逐条与 resol_ratio 中存储的分辨率比较。如果与第 j 个分辨率大小相同，那么对应的分辨率计数 resol_ratio_count 加 1，然后 break 跳出循环读取下一个视频；如果不相同，看看当前的 j 是否是 vector 最后一个，如果不是则进行下一条比较，如果是则当前的 video_size 属于新的分辨率类型，resol_ratio 添加新的一项，同时计数为 1，跳出循环（<strong>必要</strong>）。</p>
+<p>在处理 vector 的循环里要小心 vector 的 size 是变动的，循环的次数会在数据处理过程中发生变化，因此要确认有没有添加 break 的必要。比如在上面的脚本中，如果没有在“必要”处添加 break，则因为循环次数的增加循环不会得到终止，分辨率计数会在下一个循环中多加 1 次。</p>
+<p>以上。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>C/C++ - Vector (STL) 用法與心得完全攻略<br><a href="http://mropengate.blogspot.ca/2015/07/cc-vector-stl.html" target="_blank" rel="external">http://mropengate.blogspot.ca/2015/07/cc-vector-stl.html</a></li>
+<li>STL中list,vector,deque,map,set区别、联系和使用场景原理<br><a href="http://blog.csdn.net/caojunhao123/article/details/11907857" target="_blank" rel="external">http://blog.csdn.net/caojunhao123/article/details/11907857</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vector/" rel="tag"># vector</a>
+          
+            <a href="/tags/视频/" rel="tag"># 视频</a>
+          
+            <a href="/tags/统计/" rel="tag"># 统计</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/25/get-logo-from-list-md/" rel="next" title="从视频文件中提取台标样本">
+                <i class="fa fa-chevron-left"></i> 从视频文件中提取台标样本
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png"
+               alt="maixy" />
+          <p class="site-author-name" itemprop="name">maixy</p>
+           
+              <p class="site-description motion-element" itemprop="description">Keep doing. (不要停。)</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景介绍"><span class="nav-number">1.</span> <span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目标与实现"><span class="nav-number">2.</span> <span class="nav-text">目标与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maixy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

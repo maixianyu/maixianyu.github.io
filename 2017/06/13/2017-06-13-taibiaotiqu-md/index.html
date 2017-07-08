@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/markers1.jpg">
 <meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/frame_maskimage.jpg">
 <meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/frame_final.jpg">
-<meta property="og:updated_time" content="2017-06-13T07:51:36.559Z">
+<meta property="og:updated_time" content="2017-07-08T03:23:12.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 实现视频静态台标的提取">
 <meta name="twitter:description" content="背景介绍电视台台标在中国出现在电视界面的左上角，标志着电视节目的版权信息。数据统计与监管部门可以通过电视台标统计收视率，监管电视节目的内容。过去的监管需要大量的人力，现在深度学习的出现可以通过台标的识别，减少人力成本。而台标提取是台标识别的前提条件。根据台标本身是否存在动画，可以分为动态台标与静态台标，本文主要针对静态台标进行提取。而静态台标又可以分为不透明台标与半透明台标。静态台标具有时空不变性">
@@ -371,6 +371,7 @@
 <li><em>Canny</em> 边缘检测并进行时间加权<br><em>Canny</em> 边缘检测算法内置于 <em>OpenCV</em> 中，使用 <em>Canny</em> 边缘检测产生图像的轮廓，白线代表边缘，黑色代表背景。<br>为了在视频的多个边缘中筛选出台标的边缘，本文利用台标的时空不变性对 <em>5</em> 帧（每秒取一帧）图像做加权，变动的边缘灰度被减弱，固定的台标边缘灰度保持不变。<br>最后经过阈值操作分离出相对干净的台标边缘。</li>
 <li>分水岭操作提取边缘内的台标原图<br>分水岭操作的目的是利用边缘图像，生成覆盖台标的 <em>mask</em>，利用 <em>mask</em> 提取原图像帧中的台标。<br>分水岭函数需要原图与标识图，而标识图可以由前景与背景合成。因此，本文通过闭运算与膨胀操作生成前景，通过对前景的再膨胀与阈值反色生成背景。<br>最后将原图与 <em>mask</em> 做乘法，提取出视频中的台标原图。</li>
 </ol>
+<a id="more"></a>
 <h1 id="1-Canny-边缘检测并进行时间加权"><a href="#1-Canny-边缘检测并进行时间加权" class="headerlink" title="1. Canny 边缘检测并进行时间加权"></a>1. <em>Canny</em> 边缘检测并进行时间加权</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="string">"../VideoSample.mp4"</span>)</span></span>;</div><div class="line">	<span class="keyword">if</span>(!capture.isOpened())</div><div class="line">		<span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">	<span class="keyword">double</span> rate = capture.get(CV_CAP_PROP_FPS);</div><div class="line">	<span class="keyword">int</span> size[<span class="number">2</span>] = &#123; <span class="keyword">int</span>(capture.get(CV_CAP_PROP_FRAME_WIDTH)), <span class="keyword">int</span>(capture.get(CV_CAP_PROP_FRAME_HEIGHT)) &#125;;</div></pre></td></tr></table></figure>
 <p>首先获取同目录下的视频文件，实例化 <em>VideoCapture</em>。实例化的参数写成 <em>“VideoSample.mp4”</em> 会出现报错，在这里要加上 “../“。<br><em>get</em> 方法可以获取视频每秒的帧数与画面大小信息。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 t = 0s 的图像帧</span></div><div class="line">capture.<span class="built_in">set</span>(CV_CAP_PROP_POS_MSEC, count*<span class="number">1000</span>);</div><div class="line">capture.read(frame);</div><div class="line">imshow(<span class="string">"0 sec"</span>, frame);</div><div class="line">frame_ROI = frame(Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">100</span>));</div><div class="line">Canny(frame_ROI, frame_ROI_canny, <span class="number">100</span>, <span class="number">200</span>);</div><div class="line">threshold(frame_ROI_canny, frame_result, <span class="number">128</span>, <span class="number">255</span>, THRESH_BINARY);</div><div class="line">imshow(<span class="string">"first"</span>, frame_result);</div><div class="line">count++;</div></pre></td></tr></table></figure>
@@ -438,6 +439,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/25/get-logo-from-list-md/" rel="prev" title="从视频文件中提取台标样本">
+                从视频文件中提取台标样本 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -509,7 +514,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -520,7 +525,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -531,7 +536,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -271,6 +271,318 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/25/2017-06-25-video-stat-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maixy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maixy's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/25/2017-06-25-video-stat-md/" itemprop="url">vector 应用于视频信息的统计</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T16:00:27+08:00">
+                2017-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频处理/" itemprop="url" rel="index">
+                    <span itemprop="name">视频处理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频处理/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h3><p>目前的视频样本总共有 12.3GB 大小，包含 6 种后缀名不同的视频文件，而每一种后缀名视频类型又可以按照分辨率进一步划分为多种类型。因此，为了梳理适合进行分类训练的样本，在此根据不同的指标将现有视频进行分类。</p>
+<ol>
+<li><strong>分辨率（比特率）</strong><br>“分辨率”被表示成每一个方向上的像素数量，常见的有 640×480，1024×768，1280×1024 等几种。</li>
+<li><strong>码率</strong><br>码流(Data Rate)是指视频文件在单位时间内使用的数据流量，也叫码率或码流率，通俗一点的理解就是取样率，是视频编码中画面质量控制中最重要的部分，一般我们用的单位是kb/s或者Mb/s。</li>
+<li><strong>帧速率</strong><br>帧速率也称为FPS(Frames Per Second)的缩写——帧/秒。是指每秒钟刷新的图片的帧数，也可以理解为图形处理器每秒钟能够刷新几次。</li>
+<li><strong>画面宽长比</strong><br>4:3(1.33:1) 是历史最久的比例，它在电视机发明之初就已经存在，到现今仍在使用，并且用于许多电脑显示器上。16:9(1.78:1)是高清晰度电视的国际标准，用于澳洲、日本、加拿大和美国，还有欧洲的卫星电视和一些非高清的宽屏幕电视（EDTV）PAL-plus。</li>
+<li><strong>时长</strong><br>时长是指一个视频的时间长度。一个好的样本光是满足前 4 条还不够，必须有较长的时长才能提供丰富的台标样本。</li>
+</ol>
+<h3 id="目标与实现"><a href="#目标与实现" class="headerlink" title="目标与实现"></a>目标与实现</h3><p>目标是写一个脚本以快速地统计大量视频的信息，得到类似于下表的结果。</p>
+<p>表1. .ts 视频样本统计结果<br><img src="http://opy1bzb13.bkt.clouddn.com/2017-06-25-video-stat-md_1.PNG" title="frame_ROI.jpg"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/25/2017-06-25-video-stat-md/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/25/get-logo-from-list-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maixy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maixy's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/25/get-logo-from-list-md/" itemprop="url">从视频文件中提取台标样本</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T14:36:46+08:00">
+                2017-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频处理/" itemprop="url" rel="index">
+                    <span itemprop="name">视频处理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频处理/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="台标提取方法与结果对比"><a href="#台标提取方法与结果对比" class="headerlink" title="台标提取方法与结果对比"></a>台标提取方法与结果对比</h3><p>台标样本由视频样本中挑选有限数量的帧产生，为了在单个的视频中尽可能产生互不相同的样本，需要对视频流中相邻前后两个样本做最大相似度限定，使得取后一个样本时，大于相似度限定值的帧被过滤，符合条件的帧成为新的样本。</p>
+<p>对于两个帧图像的相似度有不同的量化标准，现有直方图量化法与逐像素取差量化法。前者的计算方法为，计算所有图像的 H-S 直方图，并归一化以便对比。后者的为，统计两张图相似像素的占比。</p>
+<p>为了对比两种方法的差异进行了实验。直方图量化法采用 compareHist 函数（参数为 <em>CV_COMP_CORREL</em>），相似度阈值设置为0.05，当为1时表示完全相同。逐像素量化法的占比阈值设置为 70%，当 100% 时几乎完全相同。实验结果如图下图 1 图 2 所示。</p>
+<p><img src="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_1.png" title="图1 直方图Correlation相似度取样"></p>
+<p><img src="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_2.png" title="图2 逐像素取差值相似度取样"></p>
+<p>Note：取样对象为两个透明图标.ts视频与两个非透明图标.ts视频：<em>CCTV1hd1，CCTV2_1，hntv_1，hntv_2</em></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/25/get-logo-from-list-md/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/2017-06-13-taibiaotiqu-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -360,29 +672,19 @@
 
       
         
-          
-            <h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><p>电视台台标在中国出现在电视界面的左上角，标志着电视节目的版权信息。数据统计与监管部门可以通过电视台标统计收视率，监管电视节目的内容。过去的监管需要大量的人力，现在深度学习的出现可以通过台标的识别，减少人力成本。而台标提取是台标识别的前提条件。<br>根据台标本身是否存在动画，可以分为动态台标与静态台标，本文主要针对静态台标进行提取。而静态台标又可以分为不透明台标与半透明台标。静态台标具有时空不变性，包括位置不变，轮廓不变，颜色不变。利用这种特性，不透明台标可以用基于帧间像素差分的检测方法提取。但是对于透明台标，台标颜色随背景颜色变化，帧间像素差分法不适用。<br>本文采用了基于边缘检测的提取方法。透明台标虽然颜色会随着背景而变化，但是边缘轮廓会保持不变。另外，台标的识别不仅需要边缘信息，还需要颜色信息等。因此，本文的目标是在边缘算法的基础上提取出完整的台标原图。</p>
+          <h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><p>电视台台标在中国出现在电视界面的左上角，标志着电视节目的版权信息。数据统计与监管部门可以通过电视台标统计收视率，监管电视节目的内容。过去的监管需要大量的人力，现在深度学习的出现可以通过台标的识别，减少人力成本。而台标提取是台标识别的前提条件。<br>根据台标本身是否存在动画，可以分为动态台标与静态台标，本文主要针对静态台标进行提取。而静态台标又可以分为不透明台标与半透明台标。静态台标具有时空不变性，包括位置不变，轮廓不变，颜色不变。利用这种特性，不透明台标可以用基于帧间像素差分的检测方法提取。但是对于透明台标，台标颜色随背景颜色变化，帧间像素差分法不适用。<br>本文采用了基于边缘检测的提取方法。透明台标虽然颜色会随着背景而变化，但是边缘轮廓会保持不变。另外，台标的识别不仅需要边缘信息，还需要颜色信息等。因此，本文的目标是在边缘算法的基础上提取出完整的台标原图。</p>
 <p>操作系统 <em>Win10 64bit</em>，IDE 软件采用 <em>VS 2012</em>，视觉库版本是 <em>OpenCV 2.4.12</em>。 </p>
 <h1 id="本文采用的方法及流程"><a href="#本文采用的方法及流程" class="headerlink" title="本文采用的方法及流程"></a>本文采用的方法及流程</h1><ol>
 <li><em>Canny</em> 边缘检测并进行时间加权<br><em>Canny</em> 边缘检测算法内置于 <em>OpenCV</em> 中，使用 <em>Canny</em> 边缘检测产生图像的轮廓，白线代表边缘，黑色代表背景。<br>为了在视频的多个边缘中筛选出台标的边缘，本文利用台标的时空不变性对 <em>5</em> 帧（每秒取一帧）图像做加权，变动的边缘灰度被减弱，固定的台标边缘灰度保持不变。<br>最后经过阈值操作分离出相对干净的台标边缘。</li>
 <li>分水岭操作提取边缘内的台标原图<br>分水岭操作的目的是利用边缘图像，生成覆盖台标的 <em>mask</em>，利用 <em>mask</em> 提取原图像帧中的台标。<br>分水岭函数需要原图与标识图，而标识图可以由前景与背景合成。因此，本文通过闭运算与膨胀操作生成前景，通过对前景的再膨胀与阈值反色生成背景。<br>最后将原图与 <em>mask</em> 做乘法，提取出视频中的台标原图。</li>
 </ol>
-<h1 id="1-Canny-边缘检测并进行时间加权"><a href="#1-Canny-边缘检测并进行时间加权" class="headerlink" title="1. Canny 边缘检测并进行时间加权"></a>1. <em>Canny</em> 边缘检测并进行时间加权</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="string">"../VideoSample.mp4"</span>)</span></span>;</div><div class="line">	<span class="keyword">if</span>(!capture.isOpened())</div><div class="line">		<span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">	<span class="keyword">double</span> rate = capture.get(CV_CAP_PROP_FPS);</div><div class="line">	<span class="keyword">int</span> size[<span class="number">2</span>] = &#123; <span class="keyword">int</span>(capture.get(CV_CAP_PROP_FRAME_WIDTH)), <span class="keyword">int</span>(capture.get(CV_CAP_PROP_FRAME_HEIGHT)) &#125;;</div></pre></td></tr></table></figure>
-<p>首先获取同目录下的视频文件，实例化 <em>VideoCapture</em>。实例化的参数写成 <em>“VideoSample.mp4”</em> 会出现报错，在这里要加上 “../“。<br><em>get</em> 方法可以获取视频每秒的帧数与画面大小信息。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 t = 0s 的图像帧</span></div><div class="line">capture.<span class="built_in">set</span>(CV_CAP_PROP_POS_MSEC, count*<span class="number">1000</span>);</div><div class="line">capture.read(frame);</div><div class="line">imshow(<span class="string">"0 sec"</span>, frame);</div><div class="line">frame_ROI = frame(Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">100</span>));</div><div class="line">Canny(frame_ROI, frame_ROI_canny, <span class="number">100</span>, <span class="number">200</span>);</div><div class="line">threshold(frame_ROI_canny, frame_result, <span class="number">128</span>, <span class="number">255</span>, THRESH_BINARY);</div><div class="line">imshow(<span class="string">"first"</span>, frame_result);</div><div class="line">count++;</div></pre></td></tr></table></figure>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/frame_ROI.jpg" title="frame_ROI.jpg"></p>
-<p>此处为后续的加权准备一个帧作为初始值。<br><em>set</em> 方法设置读取帧的位置，此处以毫秒(ms)为单位设置。接着截取感兴趣的 ROI 区域。<br><em>canny</em> 函数的高低阈值设为 200 与 100，输出到 <em>frame_ROI</em> 本身。紧接着进行阈值二值化，使图像非黑即白。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 时间加权</span></div><div class="line">	<span class="keyword">while</span>(count &lt;= <span class="number">4</span>)&#123;</div><div class="line">		<span class="keyword">if</span>(capture.<span class="built_in">set</span>(CV_CAP_PROP_POS_MSEC, count*<span class="number">1000</span>))</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"set successful!\n"</span>);</div><div class="line">		<span class="keyword">if</span>(!capture.read(frame))&#123;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"frame reading fail !"</span>);</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		frame_ROI = frame(Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">100</span>));</div><div class="line">		Canny(frame_ROI, frame_ROI_canny, <span class="number">100</span>, <span class="number">200</span>);</div><div class="line">		threshold(frame_ROI_canny, frame_ROI_canny, <span class="number">128</span>, <span class="number">255</span>, THRESH_BINARY);</div><div class="line"></div><div class="line">		alpha = count / (count + <span class="number">1</span>);</div><div class="line">		beta = <span class="number">1</span> - alpha;</div><div class="line">		addWeighted(frame_result, alpha, frame_ROI_canny, beta, <span class="number">0.0</span>, frame_result);</div><div class="line">		count++;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/frame_ROI_canny.jpg" title="frame_ROI_canny.jpg"><br>每一次循环都使 <em>count</em> 增 1，同时调整 <em>alpha</em> 与 <em>beta</em> 的系数，利用 <em>addWeighted</em> 方法对当前帧与累加帧进行加权。<em>count</em> 取值为 5 是考虑到对视频的取样时间不能太长，否则对于换台等界面切换会出现误判。</p>
-<h1 id="2-分水岭操作提取边缘内的台标原图"><a href="#2-分水岭操作提取边缘内的台标原图" class="headerlink" title="2. 分水岭操作提取边缘内的台标原图"></a>2. 分水岭操作提取边缘内的台标原图</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">threshold(frame_result, frame_result, 128, 255, THRESH_BINARY);</div><div class="line">Morphology(frame_result, frame_morph, morph_operator, morph_size);</div><div class="line">Dilation(frame_morph, frame_dila, dilation_elem, dilation_size);</div><div class="line">// frame_dila 就是前景</div><div class="line"></div><div class="line">Mat frame_bg;</div><div class="line">Dilation(frame_dila, frame_bg, dilation_elem, dilation_size + 10);</div><div class="line">threshold(frame_bg, frame_bg, 1, 128, THRESH_BINARY_INV);</div><div class="line">// frame_bg 就是背景</div><div class="line"></div><div class="line">// 获取标识图像</div><div class="line">Mat markers1 = frame_dila + frame_bg;</div></pre></td></tr></table></figure>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/frame_fg.jpg" title="frame_fg.jpg"><br><img src="http://opy1bzb13.bkt.clouddn.com/frame_bg.jpg" title="frame_bg.jpg"><br>此处代码是获取分水岭操作所需要的前景与背景。<em>Morphology</em> 和 <em>Dilation</em> 是对形态学变换中闭运算与膨胀的简单封装。取背景的膨胀操作用了更大的内核尺寸(size)，膨胀效果更强。如果内核尺寸较小，背景的范围无法覆盖图标大小，图形 <em>frame_bg</em> 中间出现的穿孔会导致后续分水岭效果打折扣。因此，取背景的内核大小尽可能大些也不要小。<br><img src="http://opy1bzb13.bkt.clouddn.com/markers1.jpg" title="markers1.jpg"><br>取背景后又一次使用了二值化阈值函数（<em>THRESH_BINARY_INV</em> 而不是 <em>THRESH_BINARY</em>），灰度大于 1 的像素都设置为 0，否则为 128（灰色）。<br>将前景与背景相加获得标识图 <em>markers1</em>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 分水岭分割</span></div><div class="line">WatershedSegmenter segmenter1;</div><div class="line">segmenter1.setMarkers(markers1);</div><div class="line">segmenter1.process(frame_ROI);</div><div class="line"></div><div class="line">Mat frame_maskimage = segmenter1.getSegmentation();</div><div class="line">imshow(<span class="string">"Segmentation1"</span>, segmenter1.getSegmentation());</div><div class="line"></div><div class="line"><span class="comment">// 将大于 240 的值都变为 1</span></div><div class="line">threshold(frame_maskimage, frame_maskimage, <span class="number">240</span>, <span class="number">1</span>, THRESH_BINARY);</div><div class="line"><span class="comment">//imshow("frame_maskimage threshold", frame_maskimage);</span></div><div class="line"></div><div class="line"><span class="comment">// 为进行矩阵相乘，将灰度图转换为 BGR 格式</span></div><div class="line">cvtColor(frame_maskimage, frame_maskimage, COLOR_GRAY2BGR);</div><div class="line"><span class="comment">//imshow("frame_maskimage cvtColor", frame_maskimage);</span></div><div class="line"></div><div class="line">frame_maskimage = frame_ROI.mul(frame_maskimage);</div><div class="line">imshow(<span class="string">"frame_maskimage final"</span>, frame_maskimage);</div></pre></td></tr></table></figure>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/frame_maskimage.jpg" title="frame_maskimage.jpg"></p>
-<p><em>WatershedSegmenter</em> 是对分水岭函数封装的一个类，其中定义了方法：设置标识图 <em>setMarkers</em>，分水岭处理 <em>process</em>，返回分割图像 <em>getSegmentation</em>，返回分割线 <em>getWatersheds</em>。<br><img src="http://opy1bzb13.bkt.clouddn.com/frame_final.jpg" title="frame_maskimage.jpg"><br><em>segmenter1</em> 是这个类的实例化，依次调用方法 <em>setMarkers</em>、<em>process</em>、<em>getSegmentation</em>，则可以获取分割图像 <em>frame_maskimage</em>。为了进行掩码操作，再次调用了阈值函数，使大于 240 的灰度值都为 1，最后与原图做乘法。更加能感受到图像处理就是矩阵的运算。</p>
-<h1 id="参考页面"><a href="#参考页面" class="headerlink" title="参考页面"></a>参考页面</h1><p><a href="http://opy1bzb13.bkt.clouddn.com/frame_ROI.jpg" target="_blank" rel="external">1</a> OpenCV 教程 <a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/tutorials.html" target="_blank" rel="external">http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/tutorials.html</a><br>[2] OpenCV—图像分割中的分水岭算法原理与应用 <a href="http://blog.csdn.net/iracer/article/details/49225823" target="_blank" rel="external">http://blog.csdn.net/iracer/article/details/49225823</a><br>[3] 基于边缘和颜色信息的台标识别方法研究. 李艳梅<br>[4] OpenCV3 编程入门. 毛星云 </p>
-<h1 id="附录（完整代码）"><a href="#附录（完整代码）" class="headerlink" title="附录（完整代码）"></a>附录（完整代码）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div></pre></td><td class="code"><pre><div class="line">#include &lt;opencv2/opencv.hpp&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace cv;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">// 形态学膨胀部分</div><div class="line">Mat frame_dilation;</div><div class="line">int dilation_elem = 0;</div><div class="line">int dilation_size = 1;</div><div class="line"></div><div class="line">int morph_elem = 0;</div><div class="line">int morph_size = 1;</div><div class="line">int morph_operator = MORPH_CLOSE;</div><div class="line">int const max_operator = 4;</div><div class="line">int const max_elem = 2;</div><div class="line">int const max_kernel_size = 21;</div><div class="line"></div><div class="line">// 膨胀函数</div><div class="line">void Dilation(InputArray src, OutputArray dst, int dilation_elem, int dilation_size)&#123;</div><div class="line">	int dilation_type;</div><div class="line">	if(dilation_elem == 0)</div><div class="line">		dilation_type = MORPH_RECT;</div><div class="line">	else if(dilation_elem == 1)</div><div class="line">		dilation_type = MORPH_CROSS;</div><div class="line">	else if(dilation_elem == 2)</div><div class="line">		dilation_type = MORPH_ELLIPSE;</div><div class="line"></div><div class="line">	Mat element = getStructuringElement(dilation_type,</div><div class="line">										Size(2*dilation_size + 1, 2*dilation_size + 1),</div><div class="line">										Point(dilation_size, dilation_size));</div><div class="line"></div><div class="line">	dilate(src, dst, element);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 更多形态学操作</div><div class="line">void Morphology(InputArray src, OutputArray dst, int morph_operator, int morph_size)&#123;</div><div class="line">	//Opening: MORPH_OPEN : 2</div><div class="line">	//Closing: MORPH_CLOSE: 3</div><div class="line">	//Gradient: MORPH_GRADIENT: 4</div><div class="line">	//Top Hat: MORPH_TOPHAT: 5</div><div class="line">	//Black Hat: MORPH_BLACKHAT: 6</div><div class="line"></div><div class="line">	Mat element = getStructuringElement(morph_elem, Size(2*morph_size + 1, 2*morph_size + 1), </div><div class="line">										Point(morph_size, morph_size));</div><div class="line">	morphologyEx(src, dst, morph_operator, element);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 分水岭函数封装</div><div class="line">class WatershedSegmenter&#123;</div><div class="line">    private:</div><div class="line">        Mat markers;</div><div class="line">    </div><div class="line">    // convert to image of ints</div><div class="line">    public:</div><div class="line">        void setMarkers(Mat &amp;markerImage)&#123;</div><div class="line">            markerImage.convertTo(markers, CV_32S);</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">    // apply watershed</div><div class="line">    Mat process(InputArray image)&#123;</div><div class="line">        watershed(image, markers);</div><div class="line">        return markers;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // return result in the form of am image</div><div class="line">    Mat getSegmentation() &#123;</div><div class="line">        Mat tmp;</div><div class="line">        markers.convertTo(tmp, CV_8U);</div><div class="line">        return tmp;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // return watershed in the form of an image</div><div class="line">    Mat getWatersheds() &#123;</div><div class="line">        Mat tmp;</div><div class="line">        markers.convertTo(tmp, CV_8U, 255, 255);</div><div class="line">        return tmp;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	VideoCapture capture(&quot;../VideoSample.mp4&quot;);</div><div class="line">	if(!capture.isOpened())</div><div class="line">		return 2;</div><div class="line"></div><div class="line">	double rate = capture.get(CV_CAP_PROP_FPS);</div><div class="line">	int size[2] = &#123; int(capture.get(CV_CAP_PROP_FRAME_WIDTH)), int(capture.get(CV_CAP_PROP_FRAME_HEIGHT)) &#125;;</div><div class="line">	</div><div class="line">	std::cout&lt;&lt;rate&lt;&lt;std::endl;</div><div class="line">	std::cout&lt;&lt;&quot;capture.width=&quot;&lt;&lt;size[0]&lt;&lt;std::endl; //640</div><div class="line">	std::cout&lt;&lt;&quot;capture.height=&quot;&lt;&lt;size[1]&lt;&lt;std::endl;//360</div><div class="line"></div><div class="line">	Mat frame;</div><div class="line">	Mat frame_ROI;</div><div class="line">	Mat frame_ROI_canny;</div><div class="line">	Mat frame_result;  // frame_ROI_canny -&gt; frame_result</div><div class="line">	Mat frame_dila;    </div><div class="line">	Mat frame_morph;   // frame_result -&gt; frame_morph -&gt; frame_dila</div><div class="line"></div><div class="line">	float count = 0;</div><div class="line">	float alpha, beta;</div><div class="line"></div><div class="line">	// 获取 t = 0s 的图像帧</div><div class="line">	capture.set(CV_CAP_PROP_POS_MSEC, count*1000);</div><div class="line">	capture.read(frame);</div><div class="line">	imshow(&quot;0 sec&quot;, frame);</div><div class="line">	frame_ROI = frame(Rect(0, 0, 150, 100));</div><div class="line">	Canny(frame_ROI, frame_ROI_canny, 100, 200);</div><div class="line">	threshold(frame_ROI_canny, frame_result, 128, 255, THRESH_BINARY);</div><div class="line">	imshow(&quot;first&quot;, frame_result);</div><div class="line">	count++;</div><div class="line"></div><div class="line">	imwrite(&quot;../frame_ROI.jpg&quot;, frame_ROI);</div><div class="line"></div><div class="line">	// 时间加权</div><div class="line">	while(count &lt;= 4)&#123;</div><div class="line">		if(capture.set(CV_CAP_PROP_POS_MSEC, count*1000))</div><div class="line">			printf(&quot;set successful!\n&quot;);</div><div class="line">		if(!capture.read(frame))&#123;</div><div class="line">			printf(&quot;frame reading fail !&quot;);</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		frame_ROI = frame(Rect(0, 0, 150, 100));</div><div class="line">		Canny(frame_ROI, frame_ROI_canny, 100, 200);</div><div class="line">		threshold(frame_ROI_canny, frame_ROI_canny, 128, 255, THRESH_BINARY);</div><div class="line"></div><div class="line">		alpha = count / (count + 1);</div><div class="line">		beta = 1 - alpha;</div><div class="line">		addWeighted(frame_result, alpha, frame_ROI_canny, beta, 0.0, frame_result);</div><div class="line"></div><div class="line">		//std::cout&lt;&lt;&quot;count=&quot;&lt;&lt;count&lt;&lt;std::endl;</div><div class="line">		//std::cout&lt;&lt;&quot;  alpha=&quot;&lt;&lt;alpha&lt;&lt;std::endl;</div><div class="line">		//std::cout&lt;&lt;&quot;  beta=&quot;&lt;&lt;beta&lt;&lt;std::endl;</div><div class="line"></div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">	capture.release();</div><div class="line"></div><div class="line">	threshold(frame_result, frame_result, 128, 255, THRESH_BINARY);</div><div class="line">	imwrite(&quot;../frame_ROI_canny.jpg&quot;, frame_ROI_canny);</div><div class="line"></div><div class="line">	Morphology(frame_result, frame_morph, morph_operator, morph_size);</div><div class="line">//	imshow(&quot;frame_morph&quot;, frame_morph);</div><div class="line">	Dilation(frame_morph, frame_dila, dilation_elem, dilation_size);</div><div class="line">//	imshow(&quot;frame_dila&quot;, frame_dila);</div><div class="line">	imwrite(&quot;../frame_fg.jpg&quot;, frame_dila);</div><div class="line">	// frame_dila 就是前景</div><div class="line"></div><div class="line">	Mat frame_bg;</div><div class="line">	Dilation(frame_dila, frame_bg, dilation_elem, dilation_size + 10);</div><div class="line">	imshow(&quot;frame_bg&quot;, frame_bg);</div><div class="line">	threshold(frame_bg, frame_bg, 1, 128, THRESH_BINARY_INV);</div><div class="line">	imshow(&quot;frame_bg threshold&quot;, frame_bg);</div><div class="line">	imwrite(&quot;../frame_bg.jpg&quot;, frame_bg);</div><div class="line">	// frame_bg 就是背景</div><div class="line"></div><div class="line">	// 获取标志图像</div><div class="line">	Mat markers1 = frame_dila + frame_bg;</div><div class="line">//	imshow(&quot;markers Image&quot;,markers1); </div><div class="line">	imwrite(&quot;../markers1.jpg&quot;, markers1);</div><div class="line"></div><div class="line">	// 分水岭分割</div><div class="line">	WatershedSegmenter segmenter1;</div><div class="line">	segmenter1.setMarkers(markers1);</div><div class="line">	segmenter1.process(frame_ROI);</div><div class="line"></div><div class="line">	Mat frame_maskimage = segmenter1.getSegmentation();</div><div class="line">	imwrite(&quot;../frame_maskimage.jpg&quot;, frame_maskimage);</div><div class="line">	imshow(&quot;Segmentation1&quot;, segmenter1.getSegmentation());</div><div class="line"></div><div class="line">	// 将大于 240 的值都变为 1</div><div class="line">	threshold(frame_maskimage, frame_maskimage, 240, 1, THRESH_BINARY);</div><div class="line">	//imshow(&quot;frame_maskimage threshold&quot;, frame_maskimage);</div><div class="line"></div><div class="line">	// 为进行矩阵相乘，将灰度图转换为 BGR 格式</div><div class="line">	cvtColor(frame_maskimage, frame_maskimage, COLOR_GRAY2BGR);</div><div class="line">	//imshow(&quot;frame_maskimage cvtColor&quot;, frame_maskimage);</div><div class="line"></div><div class="line">	frame_maskimage = frame_ROI.mul(frame_maskimage);</div><div class="line">	imshow(&quot;frame_maskimage final&quot;, frame_maskimage);</div><div class="line"></div><div class="line">	// 图形输出</div><div class="line">	imwrite(&quot;../frame_final.jpg&quot;, frame_maskimage);</div><div class="line"></div><div class="line">	waitKey(0);</div><div class="line">	return 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/13/2017-06-13-taibiaotiqu-md/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -513,8 +815,7 @@
 
       
         
-          
-            <h1 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h1><p>Office Word 2016</p>
+          <h1 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h1><p>Office Word 2016</p>
 <h1 id="分节符的分类"><a href="#分节符的分类" class="headerlink" title="分节符的分类"></a>分节符的分类</h1><p>分隔符分为分页符与分节符。页是节的组成单元，所以在调整章节之间的关系时，更多的是留意分节符。<br>分节符分为：</p>
 <ul>
 <li><strong>下一页</strong><br>在当前页插入分节符，则从下一页开始就是新的一节。</li>
@@ -524,12 +825,13 @@
 </ul>
 <h1 id="不同节的页眉页脚的耦合与去耦合"><a href="#不同节的页眉页脚的耦合与去耦合" class="headerlink" title="不同节的页眉页脚的耦合与去耦合"></a>不同节的页眉页脚的耦合与去耦合</h1><p>典型的去耦合场景有，每一节都需要从新的页码“1”开始，首页不显示页码，或者每一节的页眉文字内容不相同。<br>“耦合/去耦合”的选项出现在双击页眉或页脚的编辑模式下，选项名称为“链接到上一条页眉”。如果选项被选中，则意味着页眉页脚为常量时内容与上一节的一致，为变量时内容默认延续上一节的变量（如页码）。如果选项没有被选中，则页眉页脚在新的一节里重新自定义。</p>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>不管什么分节场合，强烈不建议在页眉页脚编辑模式下点击“首页不同”。“首页不同”是分节逻辑的快捷按钮，容易造成不分青红皂白地统一或清除页眉页脚格式。因此，即便是需要达成“首页不同”的效果，也从去耦合选项中实现，分节的逻辑更清晰些。<br>其次，Word 的默认设置是“链接到上一条页眉”，因此每次在新的节中设置页眉页脚，都需要提前注意是否需要去耦合，否则造成后续的编辑混乱。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://support.office.com/zh-cn/article/%E5%9C%A8%E6%96%87%E6%A1%A3%E7%9A%84%E5%90%8E%E9%9D%A2%E5%BC%80%E5%A7%8B%E9%A1%B5%E7%A0%81%E7%BC%96%E5%8F%B7-c73e3d55-d722-4bd0-886e-0b0bd0eb3f02" target="_blank" rel="external">https://support.office.com/zh-cn/article/%E5%9C%A8%E6%96%87%E6%A1%A3%E7%9A%84%E5%90%8E%E9%9D%A2%E5%BC%80%E5%A7%8B%E9%A1%B5%E7%A0%81%E7%BC%96%E5%8F%B7-c73e3d55-d722-4bd0-886e-0b0bd0eb3f02</a></li>
-<li><a href="https://support.office.com/zh-cn/article/%E6%8F%92%E5%85%A5%E5%88%86%E8%8A%82%E7%AC%A6-eef20fd8-e38c-4ba6-a027-e503bdf8375c" target="_blank" rel="external">https://support.office.com/zh-cn/article/%E6%8F%92%E5%85%A5%E5%88%86%E8%8A%82%E7%AC%A6-eef20fd8-e38c-4ba6-a027-e503bdf8375c</a></li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/17/20170517-Word的分节符与页眉页脚使用-md/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -660,20 +962,20 @@
 
       
         
-          
-            <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>在虚拟机 Ubuntu 系统界面，点击选项安装 VMTools 工具时，出现如下对话框：<br><blockquote class="blockquote-center"><p>正在进行简易安装时，无法手动启动 VMware Tools 安装。</p>
+          <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>在虚拟机 Ubuntu 系统界面，点击选项安装 VMTools 工具时，出现如下对话框：<br><blockquote class="blockquote-center"><p>正在进行简易安装时，无法手动启动 VMware Tools 安装。</p>
 </blockquote></p>
 <p>因此，在虚拟机设置选项中选择“软盘选项”，将原来的“使用软盘映像文件”改为“使用物理驱动器”，并加载 VMWare 安装根目录下的 linux.iso 镜像文件，发现软盘里的内容并不能直接出现在桌面，而是在 floppy0 disk 中。<br>然而，即便以 root 管理者身份登录系统也无法将 floppy0 disk 的压缩包文件到桌面，出现错误提示为：<br><blockquote class="blockquote-center"><p>Error splicing file: Input/output error</p>
 </blockquote></p>
 <h1 id="软硬件信息"><a href="#软硬件信息" class="headerlink" title="软硬件信息"></a>软硬件信息</h1><p>操作系统：i386 32bit 处理器，win7 32bit<br>使用软件:VMWare Workstation10<br>虚拟机镜像:Ubuntu 16.04</p>
 <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>不从软盘上加载镜像，转为直接从一个光盘中“使用物理驱动器”加载，而把剩余的光盘与软盘设置为自动检测。</p>
 <p>结果是系统能直接将镜像的内容读取到 Ubuntu 的桌面，不需要从外设中复制。使得剩余的步骤快捷方便。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li><a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2041399" target="_blank" rel="external">https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2041399</a></li>
-<li><a href="http://bcoder.com/operatingsystem/solution-of-can-not-install-vmware-tools-in-ubuntu-virtual-machine" target="_blank" rel="external">http://bcoder.com/operatingsystem/solution-of-can-not-install-vmware-tools-in-ubuntu-virtual-machine</a></li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/14/20170515-Ubuntu-and-VMtools-md/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -751,7 +1053,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -762,7 +1064,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -773,7 +1075,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

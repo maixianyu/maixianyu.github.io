@@ -1,0 +1,796 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="视频,C++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="台标提取方法与结果对比台标样本由视频样本中挑选有限数量的帧产生，为了在单个的视频中尽可能产生互不相同的样本，需要对视频流中相邻前后两个样本做最大相似度限定，使得取后一个样本时，大于相似度限定值的帧被过滤，符合条件的帧成为新的样本。 对于两个帧图像的相似度有不同的量化标准，现有直方图量化法与逐像素取差量化法。前者的计算方法为，计算所有图像的 H-S 直方图，并归一化以便对比。后者的为，统计两张图相似">
+<meta name="keywords" content="视频,C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从视频文件中提取台标样本">
+<meta property="og:url" content="http://yoursite.com/2017/06/25/get-logo-from-list-md/index.html">
+<meta property="og:site_name" content="Maixy&#39;s Notes">
+<meta property="og:description" content="台标提取方法与结果对比台标样本由视频样本中挑选有限数量的帧产生，为了在单个的视频中尽可能产生互不相同的样本，需要对视频流中相邻前后两个样本做最大相似度限定，使得取后一个样本时，大于相似度限定值的帧被过滤，符合条件的帧成为新的样本。 对于两个帧图像的相似度有不同的量化标准，现有直方图量化法与逐像素取差量化法。前者的计算方法为，计算所有图像的 H-S 直方图，并归一化以便对比。后者的为，统计两张图相似">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_1.png">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_2.png">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_3.png">
+<meta property="og:updated_time" content="2017-07-08T03:21:04.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从视频文件中提取台标样本">
+<meta name="twitter:description" content="台标提取方法与结果对比台标样本由视频样本中挑选有限数量的帧产生，为了在单个的视频中尽可能产生互不相同的样本，需要对视频流中相邻前后两个样本做最大相似度限定，使得取后一个样本时，大于相似度限定值的帧被过滤，符合条件的帧成为新的样本。 对于两个帧图像的相似度有不同的量化标准，现有直方图量化法与逐像素取差量化法。前者的计算方法为，计算所有图像的 H-S 直方图，并归一化以便对比。后者的为，统计两张图相似">
+<meta name="twitter:image" content="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/25/get-logo-from-list-md/"/>
+
+
+
+
+
+  <title>从视频文件中提取台标样本 | Maixy's Notes</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62164824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Maixy's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/25/get-logo-from-list-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maixy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maixy's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从视频文件中提取台标样本</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T14:36:46+08:00">
+                2017-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频处理/" itemprop="url" rel="index">
+                    <span itemprop="name">视频处理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频处理/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="台标提取方法与结果对比"><a href="#台标提取方法与结果对比" class="headerlink" title="台标提取方法与结果对比"></a>台标提取方法与结果对比</h3><p>台标样本由视频样本中挑选有限数量的帧产生，为了在单个的视频中尽可能产生互不相同的样本，需要对视频流中相邻前后两个样本做最大相似度限定，使得取后一个样本时，大于相似度限定值的帧被过滤，符合条件的帧成为新的样本。</p>
+<p>对于两个帧图像的相似度有不同的量化标准，现有直方图量化法与逐像素取差量化法。前者的计算方法为，计算所有图像的 H-S 直方图，并归一化以便对比。后者的为，统计两张图相似像素的占比。</p>
+<p>为了对比两种方法的差异进行了实验。直方图量化法采用 compareHist 函数（参数为 <em>CV_COMP_CORREL</em>），相似度阈值设置为0.05，当为1时表示完全相同。逐像素量化法的占比阈值设置为 70%，当 100% 时几乎完全相同。实验结果如图下图 1 图 2 所示。</p>
+<p><img src="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_1.png" title="图1 直方图Correlation相似度取样"></p>
+<p><img src="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_2.png" title="图2 逐像素取差值相似度取样"></p>
+<p>Note：取样对象为两个透明图标.ts视频与两个非透明图标.ts视频：<em>CCTV1hd1，CCTV2_1，hntv_1，hntv_2</em></p>
+<a id="more"></a>
+<p>从 40 个台标样本来看，两种方法取样效果相近。直方图量化法能捕获更多的光斑与斑点干扰图，逐像素量化法整体差异更明显稳健。</p>
+<p><img src="http://opy1bzb13.bkt.clouddn.com/get-logo-from-list-md_3.png" title="表1 直方图与逐像素方法取样密度对比"></p>
+<p>取样密度对比是指，取样效果相近的情况下，样本视频的取样利用率大小。例如，CCTV1hd1 在直方图量化法下，取 10 帧台标样本占用了视频的前 42 秒；而逐像素法占用了视频的前 38 秒。平均来看，两种方法的样本利用率相近。<br>没有对比两种方法在计算效率上的差异，据观察在少量样本下两方法相差无异。</p>
+<h3 id="逐像素取差量化法"><a href="#逐像素取差量化法" class="headerlink" title="逐像素取差量化法"></a>逐像素取差量化法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//调用方法 CheckFrameHop(Image, Image0, &amp;iscontinue, ROI_height*ROI_width*0.7);//参数需要调试</div><div class="line">inline double CheckFrameHop(Mat Image, Mat Image_pre, bool *isContinue, int nComparisonValue)  //CheckFrameHop(Image, Image0, &amp;iscontinue, ROI_height*ROI_width*0.7);//参数需要调试</div><div class="line">&#123;</div><div class="line">	unsigned char similarParameter = 95; // 阈值</div><div class="line">	int num = 0;</div><div class="line">	for (int y = 0; y&lt;Image.rows; y++)</div><div class="line">		for (int x = 0; x&lt;Image.cols; x++)</div><div class="line">		&#123;</div><div class="line">		if (abs(Image.at&lt;Vec3b&gt;(y, x)[0] - Image_pre.at&lt;Vec3b&gt;(y, x)[0])</div><div class="line">			+ abs(Image.at&lt;Vec3b&gt;(y, x)[1] - Image_pre.at&lt;Vec3b&gt;(y, x)[1])</div><div class="line">			+ abs(Image.at&lt;Vec3b&gt;(y, x)[2] - Image_pre.at&lt;Vec3b&gt;(y, x)[2])</div><div class="line">		&gt; similarParameter)</div><div class="line">		num++;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	if (num&gt;nComparisonValue)</div><div class="line">	&#123;</div><div class="line">		*isContinue = false;</div><div class="line">		return nComparisonValue;</div><div class="line">	&#125;</div><div class="line">	else</div><div class="line">	&#123;</div><div class="line">		*isContinue = true;</div><div class="line">		return nComparisonValue;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>计算过程与原理很好理解。</p>
+<h3 id="直方图相似度比较法"><a href="#直方图相似度比较法" class="headerlink" title="直方图相似度比较法"></a>直方图相似度比较法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">double diff_hist(InputArray Mat1, InputArray Mat2)</div><div class="line">&#123;</div><div class="line">	Mat M1 = Mat1.getMat();</div><div class="line">	Mat M2 = Mat2.getMat();</div><div class="line">	Mat hsv_M1, hsv_M2;</div><div class="line"></div><div class="line">	cvtColor(M1, hsv_M1, CV_BGR2HSV );</div><div class="line">	cvtColor(M2, hsv_M2, CV_BGR2HSV);</div><div class="line"></div><div class="line">	int h_bins = 50; int s_bins = 32;</div><div class="line">	int histSize[] = &#123; h_bins, s_bins &#125;;</div><div class="line">	float h_ranges[] = &#123; 0, 256 &#125;;</div><div class="line">	float s_ranges[] = &#123; 0, 180 &#125;;</div><div class="line">	const float* ranges[] = &#123; h_ranges, s_ranges &#125;;</div><div class="line">	int channels[] = &#123; 0, 1 &#125;;</div><div class="line"></div><div class="line">	MatND hist_M1;</div><div class="line">	MatND hist_M2;</div><div class="line"></div><div class="line">	calcHist( &amp;hsv_M1, 1, channels, Mat(), hist_M1, 2, histSize, ranges, true, false );</div><div class="line">	normalize( hist_M1, hist_M1, 0, 1, NORM_MINMAX, -1, Mat() );</div><div class="line"></div><div class="line">	calcHist( &amp;hsv_M2, 1, channels, Mat(), hist_M2, 2, histSize, ranges, true, false );</div><div class="line">	normalize( hist_M2, hist_M2, 0, 1, NORM_MINMAX, -1, Mat() );</div><div class="line"></div><div class="line">	return compareHist( hist_M1, hist_M2, CV_COMP_CORREL);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上两种方法都需要在函数中调用 Mat 的数据，前者直接通过 Mat 传递参数，而后者则是通过 InputArray 传递参数。InputArray 是专用的接口类，适用的类型可以是 Mat、Mat<em><t>、Mat</t></em><t, m,="" n="">、vector<t>、vector<vector<t>&gt;、vector<mat>。在 OpenCV 的源码中，它的定义是：</mat></vector<t></t></t,></p>
+<blockquote>
+<p>// Proxy datatype for passing Mat’s and vector&lt;&gt;’s as input parameters<br>class _InputArray<br>typedef const _InputArray&amp; InputArray;<br>class CV_EXPORTS _InputArray<br>{<br>……<br>    _InputArray();<br>    _InputArray(const Mat&amp; m);// 看这个构造函数<br>……<br>};<br>……<br>_InputArray::_InputArray(const Mat&amp; m) : flags(MAT), obj((void*)&amp;m) {}</p>
+</blockquote>
+<p>因此，InputArray 来传递 Input 的数据时，实际上是通过 const Mat&amp; 的方式来传递参数。所以前后两者的区别归类成 const Mat&amp; Input 与 Mat Input 传递参数的区别。</p>
+<p>第一步，Mat&amp; Input 与 Mat Input 传递参数的区别。<br>我们传入的 Input 是 Mat 类型，它包含了信息头与数据两个部分。Mat&amp; Input 与 Mat Input 的区别在于信息头的处理。<br>Mat Input 传递的是信息头的拷贝，因此 Input 的信息头能在函数内继续被改变，同时不影响函数外的原来 Input 信息头，例如：</p>
+<blockquote>
+<p>void sillyFunc(cv::Mat Input, cv::Mat&amp; Output){<br>    Input = cv::Mat::ones(4, 4, CV_32F); // OK, but only changed within the function<br>    //…<br>}</p>
+</blockquote>
+<p>而 Mat&amp; Input 传递的是 Input 信息头本身的引用，在函数内继续被改变时，也会影响函数外的原来 Input 信息头，例如：</p>
+<blockquote>
+<p>void sillyFunc(cv::Mat&amp; Input, cv::Mat&amp; Output){<br>    Input = cv::Mat::ones(4, 4, CV_32F); // totally OK and does change<br>    …<br>}</p>
+</blockquote>
+<p>第二步，const 在函数参数传递中的作用。<br>修饰参数的 const，如 </p>
+<blockquote>
+<p>void fun0(const A* a ); void fun1(const A&amp; a);</p>
+</blockquote>
+<p>调用函数的时候，用相应的变量初始化 const 常量，则在函数体中，按照 const 所修饰的部分进行常量化，如形参为 const A* a，则不能对传递进来的指针的内容进行改变，保护了原指针所指向的内容；如形参为 const A&amp; a，则不能对传递进来的引用对象进行改变，保护了原对象的属性。参数 const 通常用于参数为指针或引用的情况。</p>
+<p>直方图相似度的计算原理见参考页面[5]。</p>
+<h3 id="以直方图相似度量化法为例提取样本"><a href="#以直方图相似度量化法为例提取样本" class="headerlink" title="以直方图相似度量化法为例提取样本"></a>以直方图相似度量化法为例提取样本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">//value_diff是阈值，num_frame是总共取多少帧  用直方图检查相似度</div><div class="line">void cut_from_list(double value_diff, int num_frame)</div><div class="line">&#123;</div><div class="line">	Mat frame;</div><div class="line">	Mat frame_resize;</div><div class="line">	Mat frame_ROI;</div><div class="line">	Mat frame_ROI_last;</div><div class="line">	const int jj = 1;</div><div class="line">	double tcut_max;</div><div class="line"></div><div class="line">	for(unsigned int i = 0; i &lt; ts_path.size(); i++)</div><div class="line">	&#123;</div><div class="line">		VideoCapture capture(ts_path[i].c_str());</div><div class="line">		//获取整个帧数</div><div class="line">		double totalFrameNumber = capture.get(CV_CAP_PROP_FRAME_COUNT);</div><div class="line">		////获取帧率</div><div class="line">		double rate = capture.get(CV_CAP_PROP_FPS);</div><div class="line">		double vedio_time= totalFrameNumber/rate;</div><div class="line">		double tcut = 0.1;</div><div class="line">		int count = 1;</div><div class="line"></div><div class="line">		while(tcut &lt; (vedio_time - 5))</div><div class="line">		&#123;</div><div class="line">			//cout&lt;&lt;&quot;tcut :&quot;&lt;&lt;tcut&lt;&lt;endl;</div><div class="line">			if(count &gt; num_frame)</div><div class="line">				break;</div><div class="line">			</div><div class="line">			capture.set(CV_CAP_PROP_POS_MSEC, tcut * 1000);</div><div class="line">			tcut = tcut + 1;</div><div class="line">			capture.read(frame);</div><div class="line"></div><div class="line">			//imshow(&quot;frame&quot;,frame);</div><div class="line">			cv::resize(frame, frame_resize, cv::Size(ImgWidth, ImgHeight), 0, 0, INTER_CUBIC);</div><div class="line">			frame_ROI = frame_resize(Rect(0, 0, logoWidth, logoHeight));</div><div class="line">			//imshow(&quot;frame_ROI&quot;,frame_ROI);</div><div class="line"></div><div class="line">			if(count == 1)</div><div class="line">				frame_ROI_last = frame_ROI.clone();</div><div class="line"></div><div class="line">			if((diff_hist(frame_ROI_last, frame_ROI) &gt; value_diff) &amp;&amp; (count &gt; 1))</div><div class="line">			&#123;</div><div class="line">				continue;</div><div class="line">				cout&lt;&lt;&quot;  continue ..&quot;&lt;&lt;endl;</div><div class="line">			&#125;	</div><div class="line">			else</div><div class="line">			&#123;</div><div class="line">				frame_ROI_last = frame_ROI.clone();</div><div class="line">				//cout&lt;&lt;cut_name(ts_path[i].c_str())&lt;&lt;endl;</div><div class="line"></div><div class="line">				stringstream ss;</div><div class="line">				ss&lt;&lt;(count);</div><div class="line">				count++;</div><div class="line">			</div><div class="line">				string str_ss = ss.str();</div><div class="line"></div><div class="line">				const string filepath = &quot;./&quot; + cut_name(ts_path[i].c_str()) + &quot;_&quot; + str_ss + &quot;.jpg&quot;;</div><div class="line">				//cout&lt;&lt;filepath&lt;&lt;endl;</div><div class="line">				imwrite(filepath, frame_ROI);</div><div class="line"></div><div class="line">				//记录最后一帧的时间(s)</div><div class="line">				if(count == num_frame)</div><div class="line">				&#123;</div><div class="line">					tcut_max = tcut;</div><div class="line">					cout&lt;&lt;&quot;  imwrite finished!  diff_hist_check &quot;&lt;&lt;ts_path[i].c_str()&lt;&lt;&quot;  最后的帧时间 = &quot;&lt;&lt;tcut_max&lt;&lt;endl;		</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		capture.release();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为没有学过 C++，所以起初在变量的类型转换上费了很多时间。最终找到了 stringstream 转换数值字符串类型的方法，在此记录以供后续回顾。<br>使用 stringstream 对象简化类型转换是常见的方法，C++ 标准库中的 <sstream> 提供了比 ANSI C 的 <stdio.h> 更高级的一些功能，即单纯性、类型安全和可扩展性。该转换方法的优点是转换结果保存在 stringstream 对象的内部缓冲中，你不必担心缓冲区溢出，因为这些对象会根据需要自动分配存储空间。举个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int n = 10000;</div><div class="line"></div><div class="line">char s[10];</div><div class="line"></div><div class="line">sprintf(s,&quot;%d&quot;,n);// s中的内容为“10000”</div></pre></td></tr></table></figure></stdio.h></sstream></p>
+<p>以上代码可以正常运行，但是如果将代码做小小的修改就会发现问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int n = 10000;</div><div class="line"></div><div class="line">char s[10];</div><div class="line"></div><div class="line">sprintf(s,&quot;%f&quot;,n); // 看！错误的格式化符</div></pre></td></tr></table></figure></p>
+<p>在这种情况下，程序员错误地使用了%f格式化符来替代了%d。因此，s在调用完sprintf()后包含了一个不确定的字符串。<br>而如果采用 stringstream 的转换方法，则可以写成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">string result = &quot;10000”;</div><div class="line">int n = 0;</div><div class="line">stream&lt;&lt;result;</div><div class="line">stream&gt;&gt;n; //n等于10000</div></pre></td></tr></table></figure></p>
+<p>在类型中使用模板则会更加的方便：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">template&lt;class out_type,class in_value&gt;</div><div class="line"></div><div class="line">out_type convert(const in_value &amp; t)</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line">stringstream stream;</div><div class="line"></div><div class="line">stream&lt;&lt;t;//向流中传值</div><div class="line"></div><div class="line">out_type result;//这里存储转换结果</div><div class="line"></div><div class="line">stream&gt;&gt;result;//向result中写入值</div><div class="line"></div><div class="line">return result;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样使用convert()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">double d;</div><div class="line"></div><div class="line">string salary;</div><div class="line"></div><div class="line">string s=”12.56”;</div><div class="line"></div><div class="line">d=convert&lt;double&gt;(s);//d等于12.56</div><div class="line"></div><div class="line">salary=convert&lt;string&gt;(9000.0);//salary等于”9000”</div></pre></td></tr></table></figure></p>
+<p>以上。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>CvArr, CvMat, IplImage, cv::Mat, cv::InputArray<br><a href="http://blog.csdn.net/bagboy_taobao_com/article/details/47048249" target="_blank" rel="external">http://blog.csdn.net/bagboy_taobao_com/article/details/47048249</a></li>
+<li>c++构造函数详解<br><a href="http://ticktick.blog.51cto.com/823160/194307" target="_blank" rel="external">http://ticktick.blog.51cto.com/823160/194307</a></li>
+<li>【C++ const的各种用法详解】【const用法深入浅出】<br><a href="http://www.cnblogs.com/wintergrass/archive/2011/04/15/2015020.html" target="_blank" rel="external">http://www.cnblogs.com/wintergrass/archive/2011/04/15/2015020.html</a></li>
+<li>使用”const cv::Mat &amp;”” cv::Mat &amp;”” cv::Mat” 或者”const cv::Mat” 作为函数参数的差异？<br><a href="http://www.developerq.com/article/1491661531" target="_blank" rel="external">http://www.developerq.com/article/1491661531</a></li>
+<li>直方图对比<br><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/histograms/histogram_comparison/histogram_comparison.html" target="_blank" rel="external">http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/histograms/histogram_comparison/histogram_comparison.html</a></li>
+<li>C++ stringstream介绍，使用方法与例子<br><a href="http://blog.csdn.net/joeblackzqq/article/details/7032703" target="_blank" rel="external">http://blog.csdn.net/joeblackzqq/article/details/7032703</a></li>
+<li>C++ 模板<br><a href="http://www.runoob.com/cplusplus/cpp-templates.html" target="_blank" rel="external">http://www.runoob.com/cplusplus/cpp-templates.html</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/视频/" rel="tag"># 视频</a>
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/2017-06-13-taibiaotiqu-md/" rel="next" title="OpenCV 实现视频静态台标的提取">
+                <i class="fa fa-chevron-left"></i> OpenCV 实现视频静态台标的提取
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/25/2017-06-25-video-stat-md/" rel="prev" title="vector 应用于视频信息的统计">
+                vector 应用于视频信息的统计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png"
+               alt="maixy" />
+          <p class="site-author-name" itemprop="name">maixy</p>
+           
+              <p class="site-description motion-element" itemprop="description">Keep doing. (不要停。)</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#台标提取方法与结果对比"><span class="nav-number">1.</span> <span class="nav-text">台标提取方法与结果对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逐像素取差量化法"><span class="nav-number">2.</span> <span class="nav-text">逐像素取差量化法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直方图相似度比较法"><span class="nav-number">3.</span> <span class="nav-text">直方图相似度比较法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以直方图相似度量化法为例提取样本"><span class="nav-number">4.</span> <span class="nav-text">以直方图相似度量化法为例提取样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maixy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
