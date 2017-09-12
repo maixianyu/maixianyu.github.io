@@ -1,0 +1,795 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="������,wxPython,twisted,matplotlib," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="ժҪstm32 ��ȡ MPU-9250 �����������ݣ�����͸���� ESP8266 WiFi ģ�飬���� WiFi ���͡����ݰ������� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȣ�3 ���ĴŸ�Ӧǿ�ȡ���ȡ����ͨ�� WiFi ���͵� PC �ˣ�����������ʽʵʱ��ʾ�ɼ����ݵı仯���Σ��� .txt �ĸ�ʽ�洢������">
+<meta name="keywords" content="������,wxPython,twisted,matplotlib">
+<meta property="og:type" content="article">
+<meta property="og:title" content=":2017-:09-:12-:wxpython_twisted_matplotlib.md">
+<meta property="og:url" content="http://yoursite.com/2017/09/12/2017-09-12-wxpython-twisted-matplotlib-md/index.html">
+<meta property="og:site_name" content="Maixy&#39;s Notes">
+<meta property="og:description" content="ժҪstm32 ��ȡ MPU-9250 �����������ݣ�����͸���� ESP8266 WiFi ģ�飬���� WiFi ���͡����ݰ������� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȣ�3 ���ĴŸ�Ӧǿ�ȡ���ȡ����ͨ�� WiFi ���͵� PC �ˣ�����������ʽʵʱ��ʾ�ɼ����ݵı仯���Σ��� .txt �ĸ�ʽ�洢������">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20170801a.PNG">
+<meta property="og:updated_time" content="2017-09-12T13:25:02.239Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=":2017-:09-:12-:wxpython_twisted_matplotlib.md">
+<meta name="twitter:description" content="ժҪstm32 ��ȡ MPU-9250 �����������ݣ�����͸���� ESP8266 WiFi ģ�飬���� WiFi ���͡����ݰ������� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȣ�3 ���ĴŸ�Ӧǿ�ȡ���ȡ����ͨ�� WiFi ���͵� PC �ˣ�����������ʽʵʱ��ʾ�ɼ����ݵı仯���Σ��� .txt �ĸ�ʽ�洢������">
+<meta name="twitter:image" content="http://opy1bzb13.bkt.clouddn.com/20170801a.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/12/2017-09-12-wxpython-twisted-matplotlib-md/"/>
+
+
+
+
+
+  <title>:2017-:09-:12-:wxpython_twisted_matplotlib.md | Maixy's Notes</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=62164824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Maixy's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/2017-09-12-wxpython-twisted-matplotlib-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maixy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maixy's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">:2017-:09-:12-:wxpython_twisted_matplotlib.md</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-12T21:18:03+08:00">
+                2017-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="ժҪ"><a href="#ժҪ" class="headerlink" title="ժҪ"></a>ժҪ</h3><p>stm32 ��ȡ MPU-9250 �����������ݣ�����͸���� ESP8266 WiFi ģ�飬���� WiFi ���͡����ݰ������� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȣ�3 ���ĴŸ�Ӧǿ�ȡ���ȡ����ͨ�� WiFi ���͵� PC �ˣ�����������ʽʵʱ��ʾ�ɼ����ݵı仯���Σ��� .txt �ĸ�ʽ�洢��<br>�����ܷ��棬ʵ��ÿ�� 300 �� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȺ� 3 ���ĴŸ�Ӧǿ�ȡ�ÿ�� 2000 �� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȡ�ÿ�� 2000 �� 3 ���ļ��ٶȡ�<br>�ڹ��ܷ��棬ʵ�������� 9250 ģ���Ķ���ģʽ�ɼ���������ͬ���������ͣ�Gyro + Acce + Mag������ͬ�ɼ�Ƶ�ʵ�ѡ����1000Hz��500Hz��100Hz��50Hz��10Hz������ͬ���ݷ�Χ�����ȣ���ѡ�񣨽��ٶ�250deg/s - 2000deg/s�����ٶ� 2g - 16g����<br>�� PC ���������棬�����ṩ�����Ͽ�ѡ���Ľ�����ʽ�����ṩ�˲��ε�ʵʱ��ʾ�����ݴ洢��<br>д��ƪ���²��������޾�ϸ�ؼ�¼��Ŀ��ʵ�ֹ��̣����Ǽ���ʵ�ֹ�������������֪ʶ�㣬ϣ���ٴ��õ�ʱ�ܸ��������Ⲣ��������������Ҫд���������ľ��顣</p>
+<h3 id="��������Ԥ��"><a href="#��������Ԥ��" class="headerlink" title="��������Ԥ��"></a>��������Ԥ��</h3><p><img src="http://opy1bzb13.bkt.clouddn.com/20170801a.PNG" title="��������.jpg"></p>
+<a id="more"></a>
+<h3 id="�漰��g��"><a href="#�漰��g��" class="headerlink" title="�漰��ģ��"></a>�漰��ģ��</h3><p>MPU-9250 ���ݵĶ�ȡ�� stm32 �� SPI �ӿ�֧�֡�stm32 ͨ�� ESP8266 ����͸������ WiFi ���ݡ�<br>PC �������ı�д���� wxPython(wxWidgets) ���������⣬�� Python ���Ա�д���������̲��� Twsited �⣬ʵʱ���λ��Ʋ��� matplotlib �⡣<br>������Ҫ��¼ PC �˵Ŀ�����</p>
+<h3 id="��Ʒ�����ܾ�������"><a href="#��Ʒ�����ܾ�������" class="headerlink" title="��Ʒ�����ܾ�������"></a>��Ʒ�����ܾ�������</h3><p>���������ݴӴ������� PC ���ı��洢��Ҫ������һ�¼������ڣ�</p>
+<ol>
+<li>stm32 �� SPI ���ݶ�ȡ��</li>
+<li>stm32 �� ESP8266 �Ĵ���͸����</li>
+<li>ESP8266 �� WiFi ���͡�</li>
+<li>PC ���������ݴ������洢��</li>
+</ol>
+<p>�� 1 ������ 3 ���������ݵĴ�����Ϊ�ɲٿ��Բ��󣬻�������Ӳ�����ܱ���������<br>�� 2 �����ڵĴ���͸���ٶ��� ESP8266 �Ĺ̼����أ���Ҫʹ��ר�����ڴ���͸���Ĺ̼���<br>�� 4 �������У������ȱ�����ȫ�ֱ��� file_data��������д�뵽�����ı��ļ�����ȫ�ֱ���������д�����������ٻ�����˵���������˱�������д���Ĵ���������ÿ��д�������������������������������ԣ����⿨�١� </p>
+<h3 id="PC-�������i�д��¼"><a href="#PC-�������i�д��¼" class="headerlink" title="PC �������ı�д��¼"></a>PC �������ı�д��¼</h3><h6 id="��������ѡ��-wxWidgets"><a href="#��������ѡ��-wxWidgets" class="headerlink" title="��������ѡ�� - wxWidgets"></a>��������ѡ�� - wxWidgets</h6><p>��Ʒ�Ļ��������У�</p>
+<ol>
+<li>����ͨ�� WiFi ���͵�����</li>
+<li>ʵʱ��ʾ���ݲ���</li>
+<li>�����ݴ洢Ϊ .txt ��ʽ</li>
+<li>�ܿ�ƽ̨���ã��������ļ���СûҪ����</li>
+</ol>
+<p>��һ����������ת�������������� socket �����⡣�ڶ������˽⣬Ҳ�������������еĻ�ͼ������Ҳ�������������Ļ�ͼ�⡣�������ǽ������п��Ե��õĴ������������ܣ�Ӧ���ǽ������ı��䡣���ˣ���������ѡ��Ӧ�ò��ؿ��ǵ�һ�ڶ�������ʵ��֮ǰ��Ӧ�����ó��ֵĵ��С� </p>
+<p><em>C++ wxWidgets �����������ؿ���</em><br>C++ �� MFC��WTL��wxWidgets��Qt��DirectUI��Windows Form��WPF �Ƚ����⣬���������������ϣ�ѡ���� wxWidgets��Windows �µĻ������Ҫ codeblocks + wxWidgets-3.0.2 + MinGW �İ�װ�������������������Ĳο�ҳ�档<br>CodeBlock wxSmith �������ǽ��������������̻���������һ�𣬱ȽϷ��������Ļ��������̵Ŀ�����wxWidgets ��ѧϰ�ĵ����Խ��٣�ֻ��ֱ������Ӣ�ĵ��ĵ����ࡢ���桢�¼������̡������ȸ��������������������⡣�� wxWidgets �У�ÿһ���������ؼ�����������ʽ�ṩ�����磬���ǿ��������ɵĽ����������п��������������ļ̳С�������ʵ������wxWidgets ����Ҳ���д�����Ĭ���¼������簴ť�ĵ���������֮���ᴥ����Ӧ���Զ������̣����¼������̵İ������� connect �� bind���������¼������̹��������������Ĵ󲿷֣��������ɵ�����Ҳ�ǻ����¼��ķ�ʽ���С�<br>�������̷��棬�������������ݵ�ʱ�������������ǲ�ȷ���ģ�����û�а취ֱ���ü򵥵� socket ����Ӧ��������Ѱ��֧�ֻ����¼����첽�������̷��������ɣ��� C++ ���������ܹ�ʹ�� wxWidgets �е� wxSocket �࣬�ӿ��˻����¼����첽 socket ���̡�<br>�ڲ��λ��Ʒ��棬wxWigdets ֻ���ҵ� wxPlotCtrl �⣬ʹ�������������㣬������Ϊ��û�и��£��ٳ�û�а�װ�ϡ�Ѱ�ҽ����취�Ĺ����У�֪���� Python �� matplotlib������Ҳ����������ʵ���˲��ε�ʵʱ���ƣ���������Ҳ������ C++ ʵ�ֵķ����������Ƶ����������� Python ʵ�֡�</p>
+<p><em>wxpython ʵ�ֽ�����</em><br>���� Python ֮�󣬵�һ���¾���Ѱ�ҽ������ƵĹ��ߣ�Ȼ�������������Ĺ�����ͨ��GUI ���ƹ���ѡ���� wxFormBuilder���򵥵Ĵ������ؼ����϶�����ʵ�֣�Ȼ�������� GUI ���صĴ��롣�¼������Ĺ�����Ҫ�Լ�������д����������ģʽ�ܺõؽ� GUI ��ҵ���߼��������룬��Ϥ֮��Ч��ͦ�ߡ�<br>�����Ĵ��������� pyinstaller�����ɵ� .exe ִ���ļ��ḽ�������Ŀ��ļ������� py2exe ǰ�߿�����ӷ�ף���Ҳ�Ϸ��ģ���Ϊ py2exe ���ɵ�ִ���ļ�����ȱ�� VC++ �����ؿ⡣���� C++��Python �����ļ̳���ʵ�������Լ����ĵ��ö�����̫���ˡ�<br>��ͷ�����Կ������ĵط�����ѡ��������ʱû�о������ֵĵ��У�����Ϊ�ѵ����ڽ�������ʵ�֣�ʵ�����첽����������ʵʱ���εĻ��ơ����ң����������Ĺ����У�Ҫ������Ŀ���뷽����������������ʱ�޷��԰Σ��ѷ�����Ŀ�ġ�</p>
+<h6 id="��������-Twisted"><a href="#��������-Twisted" class="headerlink" title="�������� - Twisted"></a>�������� - Twisted</h6><p>wxpython û�н�ԭ�� C++ �����µ� wxSocket��ֻ����Ѱ���ʵ��������̿⣬�����ҵ��� Twisted��</p>
+<blockquote>
+<p>Twisted is an event-driven networking engine written in Python and licensed under the open source.<br>Twisted ��ѧϰ���߷ǳ��Ķ��͡���ֱ�ӵ�ԭ�����������˺ܶ������ĸ����Щ��������ȥ�� socket ���̲�û��ֱ�ӵض�Ӧ�������������ؼ��ļ��������� Reactor��Transports��Protocol��Factory��deferred��<br>Transports ��һ�� TCP ���ӵĳ�����Protocols ��һ����������Э����ʵ�֡�Protocols ʵ��ʱ�õ��� Transports ������������Э��Ϊ�����Ӹ�����Protocol Factories �ǽ���Э���Ĺ�������Ϊ������ Twisted Ϊ���ǽ������ӣ����� Twisted ��Ҫһ�ַ���Ϊ�µ��������ö�Ӧ��Э�飬�� Protocol Factories ���� Twisted ����Э���ķ�������������д��������ʵ����Ȼû�й����İ�����</p>
+</blockquote>
+<p>Twisted ��Ȼ�������⣬����Ϣ���ڱ�Ӧ���ж��������̵�������û��̫�࣬��������������Ϊһ�¼�����</p>
+<ol>
+<li>�� Twisted ���� wxpython �С�</li>
+<li>PC �������н����ͻ��ˣ��������������� TCP ���ӡ�</li>
+<li>TCP ���ӳɹ��󣬿ͻ������첽�������Է����˷��ص����ݡ�</li>
+<li>TCP ���ӳɹ��󣬿ͻ������������������������ݡ�</li>
+<li>TCP ���ӳɹ��󣬿ͻ����������Ͽ� TCP ���ӡ�</li>
+<li>TCP ���ӳɹ��󣬿ͻ����յ�����ʱ�����¼��ķ�ʽ֪ͨ������ mainframe���������ݡ�</li>
+</ol>
+<p>ǰ 3 ������ͨ�������ҵ���Ӧ�����̣����ĵص��Ա�����ʵ�����󡣱Ƚ��ѵ��ǵ� 4 ���͵� 5 ����һ�������Ҳ�����Ӧ�����̴��룬��һ�����Ƕ��������̵�������ǳ�������� Twisted �е����ָ�����˵��ǣ���ЩҲ�ں������� API �����н����ˣ��������Ĳο�ҳ�档</p>
+<p>���ڵ� 6 ��������wxpython ��û�ж���Ĭ�ϵ��¼��꣬������Ҫ�Լ������¼����͡����Ƿǳ�����˼���£����ܸ��ܻ����¼��ı��̷�ʽ�����ط������ο�ҳ�档</p>
+<h6 id="ʵʱ���λ���-matplotlib"><a href="#ʵʱ���λ���-matplotlib" class="headerlink" title="ʵʱ���λ��� - matplotlib"></a>ʵʱ���λ��� - matplotlib</h6><p>ʵʱ��ʾ���ε��������Խ�һ��ϸ��Ϊ��</p>
+<ol>
+<li>���б�����ʽ�������ṩ�������ݡ�</li>
+<li>���¼������¶��������ݸ��£����ػ档</li>
+<li>ͬһ��ͼ���п�����ʾ�����߶Σ�������ɫ���֡�</li>
+<li>�������ķ�Χ�ܸ����������ݵĴ�С�Զ�������</li>
+<li>…</li>
+</ol>
+<p>�������ʣ�matplotlib ����������������������̫����ϲ���ˡ���ֱ�Ӹ��� matplotlib �ķ��������ۣ�ֱ�ӿ���������չʾ��������ͼƬ�����õġ�</p>
+<blockquote>
+<p><a href="http://matplotlib.org/gallery.html" target="_blank" rel="external">http://matplotlib.org/gallery.html</a></p>
+</blockquote>
+<p>ʹ�� matplotlib ��Ҫ�����ĵ�һ�������ǣ���ô�� matplotlib �� figure Ƕ�� wxpython �� GUI �С��ź����ǣ�wxFormBuilder ��û���ṩ���ӻ����������û������������ⲿ�ֵ� GUI ������Ҫ�ɴ��������ɣ�stackoverflow �������ؽ�����</p>
+<p>��ʵ�ֹ����У�����һЩ����Ϥ�ĵ㣬�ֱ��ǣ�</p>
+<ol>
+<li>matplotlib �������������ݱ����� numpy.array ��Ϊ���룬���漰�� list ת numpy.array �����⡣</li>
+<li>�ڲ�ɾ�������������£����������ݽ��и��£����ػ档</li>
+<li>�����᷶Χ���Զ�������</li>
+<li>��ĳ�������ó����ء�</li>
+<li>����������˵���� legend��</li>
+</ol>
+<p>���������Ľ��������������������Ĳο�ҳ���ϡ�</p>
+<h6 id="�����������Լ��ο���ҳ��"><a href="#�����������Լ��ο���ҳ��" class="headerlink" title="�����������Լ��ο���ҳ��"></a>�����������Լ��ο���ҳ��</h6><p>[1] ��������ѡ��<br><a href="http://yaocoder.blog.51cto.com/2668309/780787" target="_blank" rel="external">http://yaocoder.blog.51cto.com/2668309/780787</a><br><a href="http://blog.csdn.net/dj0379/article/details/7598921" target="_blank" rel="external">http://blog.csdn.net/dj0379/article/details/7598921</a><br><a href="http://www.cnblogs.com/kbasm/archive/2011/05/04/why-choose-wxwidgets-over-qt.html" target="_blank" rel="external">http://www.cnblogs.com/kbasm/archive/2011/05/04/why-choose-wxwidgets-over-qt.html</a><br>[2] Windows��CodeBlocks����wxWidgets��ϸ�̳�<br><a href="http://blog.csdn.net/lizhifa2011/article/details/59110976" target="_blank" rel="external">http://blog.csdn.net/lizhifa2011/article/details/59110976</a><br>[3] C++ �����¿���ֱ��ʹ�� wxWidgets �Դ��� wxSocket<br><a href="https://wizardforcel.gitbooks.io/wxwidgets-book/content/137.html" target="_blank" rel="external">https://wizardforcel.gitbooks.io/wxwidgets-book/content/137.html</a><br>[4] Pyinstaller ��������<br><a href="http://www.pyinstaller.org/downloads.html" target="_blank" rel="external">http://www.pyinstaller.org/downloads.html</a><br>[5] Twisted ���ص�ѧϰ����<br><a href="http://krondo.com/an-introduction-to-asynchronous-programming-and-twisted/" target="_blank" rel="external">http://krondo.com/an-introduction-to-asynchronous-programming-and-twisted/</a><br><a href="https://www.gitbook.com/book/likebeta/twisted-intro-cn/details" target="_blank" rel="external">https://www.gitbook.com/book/likebeta/twisted-intro-cn/details</a><br><a href="http://blog.csdn.net/dbanote/article/details/9006531" target="_blank" rel="external">http://blog.csdn.net/dbanote/article/details/9006531</a><br><a href="https://my.oschina.net/Yumikio/blog/798161" target="_blank" rel="external">https://my.oschina.net/Yumikio/blog/798161</a><br>[6] �� Twisted ���ɵ� wxpython �еķ���<br><a href="https://wiki.wxpython.org/wxPythonAndTwisted" target="_blank" rel="external">https://wiki.wxpython.org/wxPythonAndTwisted</a><br><a href="https://stackoverflow.com/questions/9296393/does-python-twisted-work-with-wxpython" target="_blank" rel="external">https://stackoverflow.com/questions/9296393/does-python-twisted-work-with-wxpython</a><br><a href="http://twistedmatrix.com/documents/current/core/howto/choosing-reactor.html" target="_blank" rel="external">http://twistedmatrix.com/documents/current/core/howto/choosing-reactor.html</a><br>[7] �ͻ����� Twisted �������Ͽ�����<br><a href="https://jml.io/pages/how-to-disconnect-in-twisted-really.html" target="_blank" rel="external">https://jml.io/pages/how-to-disconnect-in-twisted-really.html</a><br>[8] �ڲ���Ҫ�Ͽ� TCP �������£����������������ݡ�<br><a href="http://twistedmatrix.com/documents/9.0.0/api/twisted.internet.interfaces.ITCPTransport.html" target="_blank" rel="external">http://twistedmatrix.com/documents/9.0.0/api/twisted.internet.interfaces.ITCPTransport.html</a><br>[9] Ϊ wxWidgets �Զ����¼�<br><a href="https://www.gitbook.com/book/wizardforcel/wxpy-in-action/details" target="_blank" rel="external">https://www.gitbook.com/book/wizardforcel/wxpy-in-action/details</a><br>[10] list ת numpy.array<br><a href="https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html" target="_blank" rel="external">https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html</a><br>[11] �����ĸ���<br><a href="https://pythonspot.com/en/matplotlib-update-plot/" target="_blank" rel="external">https://pythonspot.com/en/matplotlib-update-plot/</a><br><a href="https://matplotlib.org/api/pyplot_api.html" target="_blank" rel="external">https://matplotlib.org/api/pyplot_api.html</a><br>[12] �����᷶Χ���Զ���Ӧ<br><a href="https://stackoverflow.com/questions/10984085/automatically-rescale-ylim-and-xlim-in-matplotlib" target="_blank" rel="external">https://stackoverflow.com/questions/10984085/automatically-rescale-ylim-and-xlim-in-matplotlib</a><br><a href="http://www.cnblogs.com/nju2014/p/5631033.html" target="_blank" rel="external">http://www.cnblogs.com/nju2014/p/5631033.html</a><br>[13] ����������Ϊ����<br><a href="http://nullege.com/codes/search/matplotlib.lines.Line2D.set_visible" target="_blank" rel="external">http://nullege.com/codes/search/matplotlib.lines.Line2D.set_visible</a><br>[14] Ϊ��������˵���� legend<br><a href="https://matplotlib.org/users/legend_guide.html" target="_blank" rel="external">https://matplotlib.org/users/legend_guide.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/������/" rel="tag"># ������</a>
+          
+            <a href="/tags/wxPython/" rel="tag"># wxPython</a>
+          
+            <a href="/tags/twisted/" rel="tag"># twisted</a>
+          
+            <a href="/tags/matplotlib/" rel="tag"># matplotlib</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/25/2017-06-25-video-stat-md/" rel="next" title="vector 应用于视频信息的统计">
+                <i class="fa fa-chevron-left"></i> vector 应用于视频信息的统计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png"
+               alt="maixy" />
+          <p class="site-author-name" itemprop="name">maixy</p>
+           
+              <p class="site-description motion-element" itemprop="description">Keep doing. (不要停。)</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ժҪ"><span class="nav-number">1.</span> <span class="nav-text">ժҪ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#��������Ԥ��"><span class="nav-number">2.</span> <span class="nav-text">��������Ԥ��</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#�漰��g��"><span class="nav-number">3.</span> <span class="nav-text">�漰��ģ��</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#��Ʒ�����ܾ�������"><span class="nav-number">4.</span> <span class="nav-text">��Ʒ�����ܾ�������</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PC-�������i�д��¼"><span class="nav-number">5.</span> <span class="nav-text">PC �������ı�д��¼</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#��������ѡ��-wxWidgets"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">��������ѡ�� - wxWidgets</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#��������-Twisted"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">�������� - Twisted</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ʵʱ���λ���-matplotlib"><span class="nav-number">5.0.0.3.</span> <span class="nav-text">ʵʱ���λ��� - matplotlib</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#�����������Լ��ο���ҳ��"><span class="nav-number">5.0.0.4.</span> <span class="nav-text">�����������Լ��ο���ҳ��</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">maixy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
