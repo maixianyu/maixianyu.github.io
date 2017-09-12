@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="������,wxPython,twisted,matplotlib," />
+  <meta name="keywords" content="wxPython,twisted,matplotlib,界面库," />
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="ժҪstm32 ��ȡ MPU-9250 �����������ݣ�����͸���� ESP8266 WiFi ģ�飬���� WiFi ���͡����ݰ������� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȣ�3 ���ĴŸ�Ӧǿ�ȡ���ȡ����ͨ�� WiFi ���͵� PC �ˣ�����������ʽʵʱ��ʾ�ɼ����ݵı仯���Σ��� .txt �ĸ�ʽ�洢������">
-<meta name="keywords" content="������,wxPython,twisted,matplotlib">
+<meta name="description" content="摘要stm32 读取 MPU-9250 传感器的数据，串口透传至 ESP8266 WiFi 模块，最后 WiFi 发送。数据包括包括 3 轴的加速度，3 轴的角速度，3 轴的磁感应强度。读取结果通过 WiFi 发送到 PC 端，以软件的形式实时显示采集数据的变化波形，并 .txt 的格式存储。在性能方面，实现每秒 300 组 3 轴的加速度，3 轴的角速度和 3 轴的磁感应强度。每秒 2000 组">
+<meta name="keywords" content="wxPython,twisted,matplotlib,界面库">
 <meta property="og:type" content="article">
 <meta property="og:title" content=":2017-:09-:12-:wxpython_twisted_matplotlib.md">
 <meta property="og:url" content="http://yoursite.com/2017/09/12/2017-09-12-wxpython-twisted-matplotlib-md/index.html">
 <meta property="og:site_name" content="Maixy&#39;s Notes">
-<meta property="og:description" content="ժҪstm32 ��ȡ MPU-9250 �����������ݣ�����͸���� ESP8266 WiFi ģ�飬���� WiFi ���͡����ݰ������� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȣ�3 ���ĴŸ�Ӧǿ�ȡ���ȡ����ͨ�� WiFi ���͵� PC �ˣ�����������ʽʵʱ��ʾ�ɼ����ݵı仯���Σ��� .txt �ĸ�ʽ�洢������">
+<meta property="og:description" content="摘要stm32 读取 MPU-9250 传感器的数据，串口透传至 ESP8266 WiFi 模块，最后 WiFi 发送。数据包括包括 3 轴的加速度，3 轴的角速度，3 轴的磁感应强度。读取结果通过 WiFi 发送到 PC 端，以软件的形式实时显示采集数据的变化波形，并 .txt 的格式存储。在性能方面，实现每秒 300 组 3 轴的加速度，3 轴的角速度和 3 轴的磁感应强度。每秒 2000 组">
 <meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20170801a.PNG">
-<meta property="og:updated_time" content="2017-09-12T13:25:02.239Z">
+<meta property="og:updated_time" content="2017-09-12T13:28:14.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=":2017-:09-:12-:wxpython_twisted_matplotlib.md">
-<meta name="twitter:description" content="ժҪstm32 ��ȡ MPU-9250 �����������ݣ�����͸���� ESP8266 WiFi ģ�飬���� WiFi ���͡����ݰ������� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȣ�3 ���ĴŸ�Ӧǿ�ȡ���ȡ����ͨ�� WiFi ���͵� PC �ˣ�����������ʽʵʱ��ʾ�ɼ����ݵı仯���Σ��� .txt �ĸ�ʽ�洢������">
+<meta name="twitter:description" content="摘要stm32 读取 MPU-9250 传感器的数据，串口透传至 ESP8266 WiFi 模块，最后 WiFi 发送。数据包括包括 3 轴的加速度，3 轴的角速度，3 轴的磁感应强度。读取结果通过 WiFi 发送到 PC 端，以软件的形式实时显示采集数据的变化波形，并 .txt 的格式存储。在性能方面，实现每秒 300 组 3 轴的加速度，3 轴的角速度和 3 轴的磁感应强度。每秒 2000 组">
 <meta name="twitter:image" content="http://opy1bzb13.bkt.clouddn.com/20170801a.PNG">
 
 
@@ -359,66 +359,66 @@
       
 
       
-        <h3 id="ժҪ"><a href="#ժҪ" class="headerlink" title="ժҪ"></a>ժҪ</h3><p>stm32 ��ȡ MPU-9250 �����������ݣ�����͸���� ESP8266 WiFi ģ�飬���� WiFi ���͡����ݰ������� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȣ�3 ���ĴŸ�Ӧǿ�ȡ���ȡ����ͨ�� WiFi ���͵� PC �ˣ�����������ʽʵʱ��ʾ�ɼ����ݵı仯���Σ��� .txt �ĸ�ʽ�洢��<br>�����ܷ��棬ʵ��ÿ�� 300 �� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȺ� 3 ���ĴŸ�Ӧǿ�ȡ�ÿ�� 2000 �� 3 ���ļ��ٶȣ�3 ���Ľ��ٶȡ�ÿ�� 2000 �� 3 ���ļ��ٶȡ�<br>�ڹ��ܷ��棬ʵ�������� 9250 ģ���Ķ���ģʽ�ɼ���������ͬ���������ͣ�Gyro + Acce + Mag������ͬ�ɼ�Ƶ�ʵ�ѡ����1000Hz��500Hz��100Hz��50Hz��10Hz������ͬ���ݷ�Χ�����ȣ���ѡ�񣨽��ٶ�250deg/s - 2000deg/s�����ٶ� 2g - 16g����<br>�� PC ���������棬�����ṩ�����Ͽ�ѡ���Ľ�����ʽ�����ṩ�˲��ε�ʵʱ��ʾ�����ݴ洢��<br>д��ƪ���²��������޾�ϸ�ؼ�¼��Ŀ��ʵ�ֹ��̣����Ǽ���ʵ�ֹ�������������֪ʶ�㣬ϣ���ٴ��õ�ʱ�ܸ��������Ⲣ��������������Ҫд���������ľ��顣</p>
-<h3 id="��������Ԥ��"><a href="#��������Ԥ��" class="headerlink" title="��������Ԥ��"></a>��������Ԥ��</h3><p><img src="http://opy1bzb13.bkt.clouddn.com/20170801a.PNG" title="��������.jpg"></p>
+        <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>stm32 读取 MPU-9250 传感器的数据，串口透传至 ESP8266 WiFi 模块，最后 WiFi 发送。数据包括包括 3 轴的加速度，3 轴的角速度，3 轴的磁感应强度。读取结果通过 WiFi 发送到 PC 端，以软件的形式实时显示采集数据的变化波形，并 .txt 的格式存储。<br>在性能方面，实现每秒 300 组 3 轴的加速度，3 轴的角速度和 3 轴的磁感应强度。每秒 2000 组 3 轴的加速度，3 轴的角速度。每秒 2000 组 3 轴的加速度。<br>在功能方面，实现了两个 9250 模块的多个模式采集，包括不同的数据类型（Gyro + Acce + Mag），不同采集频率的选择（1000Hz，500Hz，100Hz，50Hz，10Hz），不同数据范围（精度）的选择（角速度250deg/s - 2000deg/s，加速度 2g - 16g）。<br>在 PC 端软件方面，除了提供了以上可选项的交互方式，还提供了波形的实时显示与数据存储。<br>写这篇文章并不是事无巨细地记录项目的实现过程，而是记下实现过程中遇到的新知识点，希望再次用到时能更快地理解并用起来。并且主要写软件方面的经验。</p>
+<h3 id="软件界面预览"><a href="#软件界面预览" class="headerlink" title="软件界面预览"></a>软件界面预览</h3><p><img src="http://opy1bzb13.bkt.clouddn.com/20170801a.PNG" title="软件界面.jpg"></p>
 <a id="more"></a>
-<h3 id="�漰��g��"><a href="#�漰��g��" class="headerlink" title="�漰��ģ��"></a>�漰��ģ��</h3><p>MPU-9250 ���ݵĶ�ȡ�� stm32 �� SPI �ӿ�֧�֡�stm32 ͨ�� ESP8266 ����͸������ WiFi ���ݡ�<br>PC �������ı�д���� wxPython(wxWidgets) ���������⣬�� Python ���Ա�д���������̲��� Twsited �⣬ʵʱ���λ��Ʋ��� matplotlib �⡣<br>������Ҫ��¼ PC �˵Ŀ�����</p>
-<h3 id="��Ʒ�����ܾ�������"><a href="#��Ʒ�����ܾ�������" class="headerlink" title="��Ʒ�����ܾ�������"></a>��Ʒ�����ܾ�������</h3><p>���������ݴӴ������� PC ���ı��洢��Ҫ������һ�¼������ڣ�</p>
+<h3 id="涉及的模块"><a href="#涉及的模块" class="headerlink" title="涉及的模块"></a>涉及的模块</h3><p>MPU-9250 数据的读取由 stm32 的 SPI 接口支持。stm32 通过 ESP8266 串口透传发送 WiFi 数据。<br>PC 端软件的编写采用 wxPython(wxWidgets) 软件界面库，用 Python 语言编写，网络编程采用 Twsited 库，实时波形绘制采用 matplotlib 库。<br>本文主要记录 PC 端的开发。</p>
+<h3 id="产品的性能决定因素"><a href="#产品的性能决定因素" class="headerlink" title="产品的性能决定因素"></a>产品的性能决定因素</h3><p>传感器数据从传感器到 PC 的文本存储主要经过了一下几个环节：</p>
 <ol>
-<li>stm32 �� SPI ���ݶ�ȡ��</li>
-<li>stm32 �� ESP8266 �Ĵ���͸����</li>
-<li>ESP8266 �� WiFi ���͡�</li>
-<li>PC ���������ݴ������洢��</li>
+<li>stm32 的 SPI 数据读取。</li>
+<li>stm32 对 ESP8266 的串口透传。</li>
+<li>ESP8266 的 WiFi 发送。</li>
+<li>PC 软件的数据处理与存储。</li>
 </ol>
-<p>�� 1 ������ 3 ���������ݵĴ�����Ϊ�ɲٿ��Բ��󣬻�������Ӳ�����ܱ���������<br>�� 2 �����ڵĴ���͸���ٶ��� ESP8266 �Ĺ̼����أ���Ҫʹ��ר�����ڴ���͸���Ĺ̼���<br>�� 4 �������У������ȱ�����ȫ�ֱ��� file_data��������д�뵽�����ı��ļ�����ȫ�ֱ���������д�����������ٻ�����˵���������˱�������д���Ĵ���������ÿ��д�������������������������������ԣ����⿨�١� </p>
-<h3 id="PC-�������i�д��¼"><a href="#PC-�������i�д��¼" class="headerlink" title="PC �������ı�д��¼"></a>PC �������ı�д��¼</h3><h6 id="��������ѡ��-wxWidgets"><a href="#��������ѡ��-wxWidgets" class="headerlink" title="��������ѡ�� - wxWidgets"></a>��������ѡ�� - wxWidgets</h6><p>��Ʒ�Ļ��������У�</p>
+<p>第 1 个与第 3 个环节数据的传输人为可操控性不大，基本上由硬件性能本身决定。<br>第 2 个环节的串口透传速度与 ESP8266 的固件相关，需要使用专门用于串口透传的固件。<br>第 4 个环节中，数据先保存在全局变量 file_data，再最终写入到磁盘文本文件。而全局变量的数据写相对其他高速缓存来说较慢，因此必须减少写入的次数，增加每次写入的数据量，保持软件界面的流畅性，避免卡顿。 </p>
+<h3 id="PC-端软件的编写记录"><a href="#PC-端软件的编写记录" class="headerlink" title="PC 端软件的编写记录"></a>PC 端软件的编写记录</h3><h6 id="界面库的选择-wxWidgets"><a href="#界面库的选择-wxWidgets" class="headerlink" title="界面库的选择 - wxWidgets"></a>界面库的选择 - wxWidgets</h6><p>产品的基本需求有：</p>
 <ol>
-<li>����ͨ�� WiFi ���͵�����</li>
-<li>ʵʱ��ʾ���ݲ���</li>
-<li>�����ݴ洢Ϊ .txt ��ʽ</li>
-<li>�ܿ�ƽ̨���ã��������ļ���СûҪ����</li>
+<li>接收通过 WiFi 传送的数据</li>
+<li>实时显示数据波形</li>
+<li>将数据存储为 .txt 格式</li>
+<li>能跨平台最好，对软件文件大小没要求。</li>
 </ol>
-<p>��һ����������ת�������������� socket �����⡣�ڶ������˽⣬Ҳ�������������еĻ�ͼ������Ҳ�������������Ļ�ͼ�⡣�������ǽ������п��Ե��õĴ������������ܣ�Ӧ���ǽ������ı��䡣���ˣ���������ѡ��Ӧ�ò��ؿ��ǵ�һ�ڶ�������ʵ��֮ǰ��Ӧ�����ó��ֵĵ��С� </p>
-<p><em>C++ wxWidgets �����������ؿ���</em><br>C++ �� MFC��WTL��wxWidgets��Qt��DirectUI��Windows Form��WPF �Ƚ����⣬���������������ϣ�ѡ���� wxWidgets��Windows �µĻ������Ҫ codeblocks + wxWidgets-3.0.2 + MinGW �İ�װ�������������������Ĳο�ҳ�档<br>CodeBlock wxSmith �������ǽ��������������̻���������һ�𣬱ȽϷ��������Ļ��������̵Ŀ�����wxWidgets ��ѧϰ�ĵ����Խ��٣�ֻ��ֱ������Ӣ�ĵ��ĵ����ࡢ���桢�¼������̡������ȸ��������������������⡣�� wxWidgets �У�ÿһ���������ؼ�����������ʽ�ṩ�����磬���ǿ��������ɵĽ����������п��������������ļ̳С�������ʵ������wxWidgets ����Ҳ���д�����Ĭ���¼������簴ť�ĵ���������֮���ᴥ����Ӧ���Զ������̣����¼������̵İ������� connect �� bind���������¼������̹��������������Ĵ󲿷֣��������ɵ�����Ҳ�ǻ����¼��ķ�ʽ���С�<br>�������̷��棬�������������ݵ�ʱ�������������ǲ�ȷ���ģ�����û�а취ֱ���ü򵥵� socket ����Ӧ��������Ѱ��֧�ֻ����¼����첽�������̷��������ɣ��� C++ ���������ܹ�ʹ�� wxWidgets �е� wxSocket �࣬�ӿ��˻����¼����첽 socket ���̡�<br>�ڲ��λ��Ʒ��棬wxWigdets ֻ���ҵ� wxPlotCtrl �⣬ʹ�������������㣬������Ϊ��û�и��£��ٳ�û�а�װ�ϡ�Ѱ�ҽ����취�Ĺ����У�֪���� Python �� matplotlib������Ҳ����������ʵ���˲��ε�ʵʱ���ƣ���������Ҳ������ C++ ʵ�ֵķ����������Ƶ����������� Python ʵ�֡�</p>
-<p><em>wxpython ʵ�ֽ�����</em><br>���� Python ֮�󣬵�һ���¾���Ѱ�ҽ������ƵĹ��ߣ�Ȼ�������������Ĺ�����ͨ��GUI ���ƹ���ѡ���� wxFormBuilder���򵥵Ĵ������ؼ����϶�����ʵ�֣�Ȼ�������� GUI ���صĴ��롣�¼������Ĺ�����Ҫ�Լ�������д����������ģʽ�ܺõؽ� GUI ��ҵ���߼��������룬��Ϥ֮��Ч��ͦ�ߡ�<br>�����Ĵ��������� pyinstaller�����ɵ� .exe ִ���ļ��ḽ�������Ŀ��ļ������� py2exe ǰ�߿�����ӷ�ף���Ҳ�Ϸ��ģ���Ϊ py2exe ���ɵ�ִ���ļ�����ȱ�� VC++ �����ؿ⡣���� C++��Python �����ļ̳���ʵ�������Լ����ĵ��ö�����̫���ˡ�<br>��ͷ�����Կ������ĵط�����ѡ��������ʱû�о������ֵĵ��У�����Ϊ�ѵ����ڽ�������ʵ�֣�ʵ�����첽����������ʵʱ���εĻ��ơ����ң����������Ĺ����У�Ҫ������Ŀ���뷽����������������ʱ�޷��԰Σ��ѷ�����Ŀ�ġ�</p>
-<h6 id="��������-Twisted"><a href="#��������-Twisted" class="headerlink" title="�������� - Twisted"></a>�������� - Twisted</h6><p>wxpython û�н�ԭ�� C++ �����µ� wxSocket��ֻ����Ѱ���ʵ��������̿⣬�����ҵ��� Twisted��</p>
+<p>第一条需求可以转化成网络编程中 socket 的问题。第二条不了解，也许依赖界面库中的绘图组件，也许借助第三方的绘图库。第三条是界面库中可以调用的窗口与输出功能，应该是界面库的标配。因此，界面库的选择应该侧重考虑第一第二条，在实现之前就应该做好充分的调研。 </p>
+<p><em>C++ wxWidgets 界面库的相关开发</em><br>C++ 有 MFC，WTL，wxWidgets，Qt，DirectUI，Windows Form，WPF 等界面库，经过查阅相关资料，选择了 wxWidgets。Windows 下的环境搭建需要 codeblocks + wxWidgets-3.0.2 + MinGW 的安装，可以浏览下面给出的参考页面。<br>CodeBlock wxSmith 的优势是将界面设计与编程环境集成在一起，比较方便界面的绘制与过程的开发。wxWidgets 的学习文档相对较少，只好直接上手英文的文档，类、界面、事件、过程、交互等概念慢慢有了形象的理解。在 wxWidgets 中，每一个窗口与控件都以类的形式提供给外界，于是可以在生成的界面库代码中看见大量关于类的继承、对象的实例化。wxWidgets 本身也带有大量的默认事件，比如按钮的点击，点击之后会触发相应的自定义过程，而事件与过程的绑定依靠 connect 与 bind　函数。事件与过程构成了软件开发的大部分，最后生成的软件也是基于事件的方式运行。<br>网络编程方面，传感器传送数据的时间与数据量都是不确定的，因此没有办法直接用简单的 socket 编程应付，而是寻找支持基于事件的异步网络编程方法。很巧，在 C++ 的情况下能够使用 wxWidgets 中的 wxSocket 类，加快了基于事件的异步 socket 编程。<br>在波形绘制方面，wxWigdets 只能找到 wxPlotCtrl 库，使用起来并不方便，并且因为库没有更新，迟迟没有安装上。寻找解决办法的过程中，知道了 Python 下 matplotlib，并且也有网友用它实现了波形的实时绘制，于是最后也放弃了 C++ 实现的方案，整体推倒重来，改用 Python 实现。</p>
+<p><em>wxpython 实现界面库</em><br>改用 Python 之后，第一件事就是寻找界面设计的工具，然后把软件打包的过程跑通。GUI 设计工具选用了 wxFormBuilder，简单的窗口与控件能拖动鼠标实现，然后生成与 GUI 相关的代码。事件触发的过程需要自己另外编写，因此这种模式很好地将 GUI 与业务逻辑代码分离，熟悉之后效率挺高。<br>软件的打包采用了 pyinstaller，生成的 .exe 执行文件会附带大量的库文件。相比 py2exe 前者看起来臃肿，但也较放心，因为 py2exe 生成的执行文件容易缺少 VC++ 的相关库。相比 C++，Python 中类的继承与实例化，以及库的调用都舒服太多了。<br>回头看，吃亏最多的地方就是选择界面库时没有经过充分的调研，误认为难点在于界面库的实现，实则是异步网络编程与实时波形的绘制。并且，解决问题的过程中，要分清楚目的与方法，避免解决问题时无法自拔，把方法当目的。</p>
+<h6 id="网络编程-Twisted"><a href="#网络编程-Twisted" class="headerlink" title="网络编程 - Twisted"></a>网络编程 - Twisted</h6><p>wxpython 没有将原来 C++ 环境下的 wxSocket，只好另寻合适的网络编程库，于是找到了 Twisted。</p>
 <blockquote>
-<p>Twisted is an event-driven networking engine written in Python and licensed under the open source.<br>Twisted ��ѧϰ���߷ǳ��Ķ��͡���ֱ�ӵ�ԭ�����������˺ܶ������ĸ����Щ��������ȥ�� socket ���̲�û��ֱ�ӵض�Ӧ�������������ؼ��ļ��������� Reactor��Transports��Protocol��Factory��deferred��<br>Transports ��һ�� TCP ���ӵĳ�����Protocols ��һ����������Э����ʵ�֡�Protocols ʵ��ʱ�õ��� Transports ������������Э��Ϊ�����Ӹ�����Protocol Factories �ǽ���Э���Ĺ�������Ϊ������ Twisted Ϊ���ǽ������ӣ����� Twisted ��Ҫһ�ַ���Ϊ�µ��������ö�Ӧ��Э�飬�� Protocol Factories ���� Twisted ����Э���ķ�������������д��������ʵ����Ȼû�й����İ�����</p>
+<p>Twisted is an event-driven networking engine written in Python and licensed under the open source.<br>Twisted 的学习曲线非常的陡峭。最直接的原因是它引入了很多抽象的概念，这些概念与过去的 socket 编程并没有直接地对应起来。其中最关键的几个概念是 Reactor，Transports，Protocol，Factory，deferred。<br>Transports 是一条 TCP 连接的抽象。Protocols 是一个具体网络协议的实现。Protocols 实例时得到的 Transports 参数，表明该协议为该连接负责。Protocol Factories 是建立协议的工厂。因为我们让 Twisted 为我们建立连接，所以 Twisted 需要一种方法为新的连接配置对应的协议，而 Protocol Factories 就是 Twisted 配置协议的方法。即便这样写出来，对实践依然没有过多的帮助。</p>
 </blockquote>
-<p>Twisted ��Ȼ�������⣬����Ϣ���ڱ�Ӧ���ж��������̵�������û��̫�࣬��������������Ϊһ�¼�����</p>
+<p>Twisted 虽然难以理解，好消息是在本应用中对网络编程的需求并没有太多，梳理起来可以列为一下几条：</p>
 <ol>
-<li>�� Twisted ���� wxpython �С�</li>
-<li>PC �������н����ͻ��ˣ��������������� TCP ���ӡ�</li>
-<li>TCP ���ӳɹ��󣬿ͻ������첽�������Է����˷��ص����ݡ�</li>
-<li>TCP ���ӳɹ��󣬿ͻ������������������������ݡ�</li>
-<li>TCP ���ӳɹ��󣬿ͻ����������Ͽ� TCP ���ӡ�</li>
-<li>TCP ���ӳɹ��󣬿ͻ����յ�����ʱ�����¼��ķ�ʽ֪ͨ������ mainframe���������ݡ�</li>
+<li>将 Twisted 引入 wxpython 中。</li>
+<li>PC 端软件中建立客户端，能向服务器发起 TCP 连接。</li>
+<li>TCP 连接成功后，客户端能异步接收来自服务端返回的数据。</li>
+<li>TCP 连接成功后，客户端能向服务端主动发送数据。</li>
+<li>TCP 连接成功后，客户端能主动断开 TCP 连接。</li>
+<li>TCP 连接成功后，客户端收到数据时能以事件的方式通知主窗口 mainframe，传递数据。</li>
 </ol>
-<p>ǰ 3 ������ͨ�������ҵ���Ӧ�����̣����ĵص��Ա�����ʵ�����󡣱Ƚ��ѵ��ǵ� 4 ���͵� 5 ����һ�������Ҳ�����Ӧ�����̴��룬��һ�����Ƕ��������̵�������ǳ�������� Twisted �е����ָ�����˵��ǣ���ЩҲ�ں������� API �����н����ˣ��������Ĳο�ҳ�档</p>
-<p>���ڵ� 6 ��������wxpython ��û�ж���Ĭ�ϵ��¼��꣬������Ҫ�Լ������¼����͡����Ƿǳ�����˼���£����ܸ��ܻ����¼��ı��̷�ʽ�����ط������ο�ҳ�档</p>
-<h6 id="ʵʱ���λ���-matplotlib"><a href="#ʵʱ���λ���-matplotlib" class="headerlink" title="ʵʱ���λ��� - matplotlib"></a>ʵʱ���λ��� - matplotlib</h6><p>ʵʱ��ʾ���ε��������Խ�һ��ϸ��Ϊ��</p>
+<p>前 3 条都能通过搜索找到相应的历程，耐心地调试便可以实现需求。比较难的是第 4 条和第 5 条，一方面是找不到对应的例程代码，另一方面是对网络编程的理解较浅，更别提 Twisted 中的种种概念。幸运的是，这些也在后来查找 API 资料中解决了，见下面的参考页面。</p>
+<p>对于第 6 条需求，wxpython 并没有定制默认的事件宏，因此需要自己定义事件类型。这是非常有意思的事，更能感受基于事件的编程方式。相关方案见参考页面。</p>
+<h6 id="实时波形绘制-matplotlib"><a href="#实时波形绘制-matplotlib" class="headerlink" title="实时波形绘制 - matplotlib"></a>实时波形绘制 - matplotlib</h6><p>实时显示波形的需求可以进一步细分为：</p>
 <ol>
-<li>���б�����ʽ�������ṩ�������ݡ�</li>
-<li>���¼������¶��������ݸ��£����ػ档</li>
-<li>ͬһ��ͼ���п�����ʾ�����߶Σ�������ɫ���֡�</li>
-<li>�������ķ�Χ�ܸ����������ݵĴ�С�Զ�������</li>
+<li>以列表的形式向波形提供纵轴数据。</li>
+<li>在事件触发下对纵轴数据更新，并重绘。</li>
+<li>同一个图表中可以显示多条线段，并以颜色区分。</li>
+<li>坐标轴的范围能根据纵轴数据的大小自动调整。</li>
 <li>…</li>
 </ol>
-<p>�������ʣ�matplotlib ����������������������̫����ϲ���ˡ���ֱ�Ӹ��� matplotlib �ķ��������ۣ�ֱ�ӿ���������չʾ��������ͼƬ�����õġ�</p>
+<p>毫无疑问，matplotlib 能满足上面的所有需求，太让人喜欢了。最直接感受 matplotlib 的方便与美观，直接看它官网所展示的例子与图片是最好的。</p>
 <blockquote>
 <p><a href="http://matplotlib.org/gallery.html" target="_blank" rel="external">http://matplotlib.org/gallery.html</a></p>
 </blockquote>
-<p>ʹ�� matplotlib ��Ҫ�����ĵ�һ�������ǣ���ô�� matplotlib �� figure Ƕ�� wxpython �� GUI �С��ź����ǣ�wxFormBuilder ��û���ṩ���ӻ����������û������������ⲿ�ֵ� GUI ������Ҫ�ɴ��������ɣ�stackoverflow �������ؽ�����</p>
-<p>��ʵ�ֹ����У�����һЩ����Ϥ�ĵ㣬�ֱ��ǣ�</p>
+<p>使用 matplotlib 需要解决的第一个问题是，怎么把 matplotlib 的 figure 嵌入 wxpython 的 GUI 中。遗憾的是，wxFormBuilder 并没有提供可视化的组件供用户操作，所以这部分的 GUI 绘制需要由代码来完成，stackoverflow 上有相关解答。</p>
+<p>在实现过程中，遇到一些不熟悉的点，分别是：</p>
 <ol>
-<li>matplotlib �������������ݱ����� numpy.array ��Ϊ���룬���漰�� list ת numpy.array �����⡣</li>
-<li>�ڲ�ɾ�������������£����������ݽ��и��£����ػ档</li>
-<li>�����᷶Χ���Զ�������</li>
-<li>��ĳ�������ó����ء�</li>
-<li>����������˵���� legend��</li>
+<li>matplotlib 的线条纵轴数据必须以 numpy.array 作为输入，这涉及了 list 转 numpy.array 的问题。</li>
+<li>在不删除线条的情况下，对纵轴数据进行更新，并重绘。</li>
+<li>坐标轴范围的自动调整。</li>
+<li>将某条线设置成隐藏。</li>
+<li>添加线条的说明框 legend。</li>
 </ol>
-<p>���������Ľ��������������������Ĳο�ҳ���ϡ�</p>
-<h6 id="�����������Լ��ο���ҳ��"><a href="#�����������Լ��ο���ҳ��" class="headerlink" title="�����������Լ��ο���ҳ��"></a>�����������Լ��ο���ҳ��</h6><p>[1] ��������ѡ��<br><a href="http://yaocoder.blog.51cto.com/2668309/780787" target="_blank" rel="external">http://yaocoder.blog.51cto.com/2668309/780787</a><br><a href="http://blog.csdn.net/dj0379/article/details/7598921" target="_blank" rel="external">http://blog.csdn.net/dj0379/article/details/7598921</a><br><a href="http://www.cnblogs.com/kbasm/archive/2011/05/04/why-choose-wxwidgets-over-qt.html" target="_blank" rel="external">http://www.cnblogs.com/kbasm/archive/2011/05/04/why-choose-wxwidgets-over-qt.html</a><br>[2] Windows��CodeBlocks����wxWidgets��ϸ�̳�<br><a href="http://blog.csdn.net/lizhifa2011/article/details/59110976" target="_blank" rel="external">http://blog.csdn.net/lizhifa2011/article/details/59110976</a><br>[3] C++ �����¿���ֱ��ʹ�� wxWidgets �Դ��� wxSocket<br><a href="https://wizardforcel.gitbooks.io/wxwidgets-book/content/137.html" target="_blank" rel="external">https://wizardforcel.gitbooks.io/wxwidgets-book/content/137.html</a><br>[4] Pyinstaller ��������<br><a href="http://www.pyinstaller.org/downloads.html" target="_blank" rel="external">http://www.pyinstaller.org/downloads.html</a><br>[5] Twisted ���ص�ѧϰ����<br><a href="http://krondo.com/an-introduction-to-asynchronous-programming-and-twisted/" target="_blank" rel="external">http://krondo.com/an-introduction-to-asynchronous-programming-and-twisted/</a><br><a href="https://www.gitbook.com/book/likebeta/twisted-intro-cn/details" target="_blank" rel="external">https://www.gitbook.com/book/likebeta/twisted-intro-cn/details</a><br><a href="http://blog.csdn.net/dbanote/article/details/9006531" target="_blank" rel="external">http://blog.csdn.net/dbanote/article/details/9006531</a><br><a href="https://my.oschina.net/Yumikio/blog/798161" target="_blank" rel="external">https://my.oschina.net/Yumikio/blog/798161</a><br>[6] �� Twisted ���ɵ� wxpython �еķ���<br><a href="https://wiki.wxpython.org/wxPythonAndTwisted" target="_blank" rel="external">https://wiki.wxpython.org/wxPythonAndTwisted</a><br><a href="https://stackoverflow.com/questions/9296393/does-python-twisted-work-with-wxpython" target="_blank" rel="external">https://stackoverflow.com/questions/9296393/does-python-twisted-work-with-wxpython</a><br><a href="http://twistedmatrix.com/documents/current/core/howto/choosing-reactor.html" target="_blank" rel="external">http://twistedmatrix.com/documents/current/core/howto/choosing-reactor.html</a><br>[7] �ͻ����� Twisted �������Ͽ�����<br><a href="https://jml.io/pages/how-to-disconnect-in-twisted-really.html" target="_blank" rel="external">https://jml.io/pages/how-to-disconnect-in-twisted-really.html</a><br>[8] �ڲ���Ҫ�Ͽ� TCP �������£����������������ݡ�<br><a href="http://twistedmatrix.com/documents/9.0.0/api/twisted.internet.interfaces.ITCPTransport.html" target="_blank" rel="external">http://twistedmatrix.com/documents/9.0.0/api/twisted.internet.interfaces.ITCPTransport.html</a><br>[9] Ϊ wxWidgets �Զ����¼�<br><a href="https://www.gitbook.com/book/wizardforcel/wxpy-in-action/details" target="_blank" rel="external">https://www.gitbook.com/book/wizardforcel/wxpy-in-action/details</a><br>[10] list ת numpy.array<br><a href="https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html" target="_blank" rel="external">https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html</a><br>[11] �����ĸ���<br><a href="https://pythonspot.com/en/matplotlib-update-plot/" target="_blank" rel="external">https://pythonspot.com/en/matplotlib-update-plot/</a><br><a href="https://matplotlib.org/api/pyplot_api.html" target="_blank" rel="external">https://matplotlib.org/api/pyplot_api.html</a><br>[12] �����᷶Χ���Զ���Ӧ<br><a href="https://stackoverflow.com/questions/10984085/automatically-rescale-ylim-and-xlim-in-matplotlib" target="_blank" rel="external">https://stackoverflow.com/questions/10984085/automatically-rescale-ylim-and-xlim-in-matplotlib</a><br><a href="http://www.cnblogs.com/nju2014/p/5631033.html" target="_blank" rel="external">http://www.cnblogs.com/nju2014/p/5631033.html</a><br>[13] ����������Ϊ����<br><a href="http://nullege.com/codes/search/matplotlib.lines.Line2D.set_visible" target="_blank" rel="external">http://nullege.com/codes/search/matplotlib.lines.Line2D.set_visible</a><br>[14] Ϊ��������˵���� legend<br><a href="https://matplotlib.org/users/legend_guide.html" target="_blank" rel="external">https://matplotlib.org/users/legend_guide.html</a></p>
+<p>以上问题的解决方案都附在了下面的参考页面上。</p>
+<h6 id="解决的问题以及参考的页面"><a href="#解决的问题以及参考的页面" class="headerlink" title="解决的问题以及参考的页面"></a>解决的问题以及参考的页面</h6><p>[1] 界面库的选择<br><a href="http://yaocoder.blog.51cto.com/2668309/780787" target="_blank" rel="external">http://yaocoder.blog.51cto.com/2668309/780787</a><br><a href="http://blog.csdn.net/dj0379/article/details/7598921" target="_blank" rel="external">http://blog.csdn.net/dj0379/article/details/7598921</a><br><a href="http://www.cnblogs.com/kbasm/archive/2011/05/04/why-choose-wxwidgets-over-qt.html" target="_blank" rel="external">http://www.cnblogs.com/kbasm/archive/2011/05/04/why-choose-wxwidgets-over-qt.html</a><br>[2] Windows下CodeBlocks配置wxWidgets详细教程<br><a href="http://blog.csdn.net/lizhifa2011/article/details/59110976" target="_blank" rel="external">http://blog.csdn.net/lizhifa2011/article/details/59110976</a><br>[3] C++ 编程下可以直接使用 wxWidgets 自带的 wxSocket<br><a href="https://wizardforcel.gitbooks.io/wxwidgets-book/content/137.html" target="_blank" rel="external">https://wizardforcel.gitbooks.io/wxwidgets-book/content/137.html</a><br>[4] Pyinstaller 打包工具<br><a href="http://www.pyinstaller.org/downloads.html" target="_blank" rel="external">http://www.pyinstaller.org/downloads.html</a><br>[5] Twisted 相关的学习资料<br><a href="http://krondo.com/an-introduction-to-asynchronous-programming-and-twisted/" target="_blank" rel="external">http://krondo.com/an-introduction-to-asynchronous-programming-and-twisted/</a><br><a href="https://www.gitbook.com/book/likebeta/twisted-intro-cn/details" target="_blank" rel="external">https://www.gitbook.com/book/likebeta/twisted-intro-cn/details</a><br><a href="http://blog.csdn.net/dbanote/article/details/9006531" target="_blank" rel="external">http://blog.csdn.net/dbanote/article/details/9006531</a><br><a href="https://my.oschina.net/Yumikio/blog/798161" target="_blank" rel="external">https://my.oschina.net/Yumikio/blog/798161</a><br>[6] 将 Twisted 集成到 wxpython 中的方法<br><a href="https://wiki.wxpython.org/wxPythonAndTwisted" target="_blank" rel="external">https://wiki.wxpython.org/wxPythonAndTwisted</a><br><a href="https://stackoverflow.com/questions/9296393/does-python-twisted-work-with-wxpython" target="_blank" rel="external">https://stackoverflow.com/questions/9296393/does-python-twisted-work-with-wxpython</a><br><a href="http://twistedmatrix.com/documents/current/core/howto/choosing-reactor.html" target="_blank" rel="external">http://twistedmatrix.com/documents/current/core/howto/choosing-reactor.html</a><br>[7] 客户端在 Twisted 中主动断开连接<br><a href="https://jml.io/pages/how-to-disconnect-in-twisted-really.html" target="_blank" rel="external">https://jml.io/pages/how-to-disconnect-in-twisted-really.html</a><br>[8] 在不需要断开 TCP 的情况下，向服务器发送数据。<br><a href="http://twistedmatrix.com/documents/9.0.0/api/twisted.internet.interfaces.ITCPTransport.html" target="_blank" rel="external">http://twistedmatrix.com/documents/9.0.0/api/twisted.internet.interfaces.ITCPTransport.html</a><br>[9] 为 wxWidgets 自定义事件<br><a href="https://www.gitbook.com/book/wizardforcel/wxpy-in-action/details" target="_blank" rel="external">https://www.gitbook.com/book/wizardforcel/wxpy-in-action/details</a><br>[10] list 转 numpy.array<br><a href="https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html" target="_blank" rel="external">https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html</a><br>[11] 线条的更新<br><a href="https://pythonspot.com/en/matplotlib-update-plot/" target="_blank" rel="external">https://pythonspot.com/en/matplotlib-update-plot/</a><br><a href="https://matplotlib.org/api/pyplot_api.html" target="_blank" rel="external">https://matplotlib.org/api/pyplot_api.html</a><br>[12] 坐标轴范围的自动适应<br><a href="https://stackoverflow.com/questions/10984085/automatically-rescale-ylim-and-xlim-in-matplotlib" target="_blank" rel="external">https://stackoverflow.com/questions/10984085/automatically-rescale-ylim-and-xlim-in-matplotlib</a><br><a href="http://www.cnblogs.com/nju2014/p/5631033.html" target="_blank" rel="external">http://www.cnblogs.com/nju2014/p/5631033.html</a><br>[13] 将线条设置为隐藏<br><a href="http://nullege.com/codes/search/matplotlib.lines.Line2D.set_visible" target="_blank" rel="external">http://nullege.com/codes/search/matplotlib.lines.Line2D.set_visible</a><br>[14] 为线条添加说明框 legend<br><a href="https://matplotlib.org/users/legend_guide.html" target="_blank" rel="external">https://matplotlib.org/users/legend_guide.html</a></p>
 
       
     </div>
@@ -448,13 +448,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/������/" rel="tag"># ������</a>
-          
             <a href="/tags/wxPython/" rel="tag"># wxPython</a>
           
             <a href="/tags/twisted/" rel="tag"># twisted</a>
           
             <a href="/tags/matplotlib/" rel="tag"># matplotlib</a>
+          
+            <a href="/tags/界面库/" rel="tag"># 界面库</a>
           
         </div>
       
@@ -604,7 +604,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ժҪ"><span class="nav-number">1.</span> <span class="nav-text">ժҪ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#��������Ԥ��"><span class="nav-number">2.</span> <span class="nav-text">��������Ԥ��</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#�漰��g��"><span class="nav-number">3.</span> <span class="nav-text">�漰��ģ��</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#��Ʒ�����ܾ�������"><span class="nav-number">4.</span> <span class="nav-text">��Ʒ�����ܾ�������</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PC-�������i�д��¼"><span class="nav-number">5.</span> <span class="nav-text">PC �������ı�д��¼</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#��������ѡ��-wxWidgets"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">��������ѡ�� - wxWidgets</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#��������-Twisted"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">�������� - Twisted</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ʵʱ���λ���-matplotlib"><span class="nav-number">5.0.0.3.</span> <span class="nav-text">ʵʱ���λ��� - matplotlib</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#�����������Լ��ο���ҳ��"><span class="nav-number">5.0.0.4.</span> <span class="nav-text">�����������Լ��ο���ҳ��</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件界面预览"><span class="nav-number">2.</span> <span class="nav-text">软件界面预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#涉及的模块"><span class="nav-number">3.</span> <span class="nav-text">涉及的模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产品的性能决定因素"><span class="nav-number">4.</span> <span class="nav-text">产品的性能决定因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PC-端软件的编写记录"><span class="nav-number">5.</span> <span class="nav-text">PC 端软件的编写记录</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#界面库的选择-wxWidgets"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">界面库的选择 - wxWidgets</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#网络编程-Twisted"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">网络编程 - Twisted</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#实时波形绘制-matplotlib"><span class="nav-number">5.0.0.3.</span> <span class="nav-text">实时波形绘制 - matplotlib</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#解决的问题以及参考的页面"><span class="nav-number">5.0.0.4.</span> <span class="nav-text">解决的问题以及参考的页面</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
