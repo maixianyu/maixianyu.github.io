@@ -271,6 +271,177 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/29/2017-09-29-python-wifi-timer-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maixy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maixy's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/29/2017-09-29-python-wifi-timer-md/" itemprop="url">Python WiFi数据采集性能优化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-29T09:53:14+08:00">
+                2017-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>wxPython 利用 Twisted 网络模块接收采集模块通过 WiFi 传送的数据。接收之后按照协议解析、显示、存储。采集端因为没有精确的时钟，因此难以保证稳定的采集频率，例如 900 Hz 的采集设置并不能保证采集端每秒传送 900 组数据到 PC，并且由于网络环境的变化，PC 接收到的数据有时候每秒 1000 组，有时候每秒 700 组，因此，精确稳定的采集需求没有办法保证。<br>在这个背景下，我们提出由 PC 端保证采集频率的方法。同时，通过添加多个线程来保证数据的存储与显示流畅进行。</p>
+<h3 id="模型设想"><a href="#模型设想" class="headerlink" title="模型设想"></a>模型设想</h3><h4 id="精确采集的模型"><a href="#精确采集的模型" class="headerlink" title="精确采集的模型"></a>精确采集的模型</h4><p>为了完成精确采集，发送端与接收端共同建立如下模型：</p>
+<ol>
+<li>发送端数据传送速率可以有波动，但是最低值须高于采集设置值，避免信息丢失。</li>
+<li>接收端维持一个临时的队列，存放已接受但尚未处理的数据。</li>
+<li>接收端通过定时器从队列中处理 1 秒钟的数据量，实现精确采集。</li>
+</ol>
+<p>第 2 条引发的子问题是，这个队列的长度如何维持，如果对待传送过快而出现的冗余数据？笔者的方法是：</p>
+<ol>
+<li>队列的长度为 2 秒钟的数据量长度。多出的 1 秒能够在传送速度偏慢时提供稳定的数据流，产生持续精确的“错觉”。</li>
+<li>当传送数据过慢，队列长度小于 1 秒数据量时，暂停定时器与数据解析存储过程。</li>
+<li>当传送数据过快，队列长度大于 2 秒数据量时，不是删除队列头部的整块冗余数据，而是抽样地、等间隔地删除队列中的多个数据，避免有效信息因为传输过快而丢失。</li>
+</ol>
+<p>第 3 条引发的问题是，定时器的时间间隔为多长合适？从队列中取数是否需要额外的线程？是否需要加锁？笔者的考虑是：</p>
+<ol>
+<li>Python 的 Timer 定时器是多线程的操作，创建线程需要开销，因此定时精度有限，100ms 已看出明显的误差。1s 是比较精确的，减少存数的频次也有利于软件的流畅性，因此使用 1s 的 Timer。</li>
+<li>WiFi 数据传送的频次较低，每秒 10-20 条数据包，如果定时器的数据存储操作时间花销较小，可以不考虑锁。并且队列维持了比 1 秒多的数据列，因此存储过程不会出现 index 溢出的现象。所以最后没有使用锁。</li>
+</ol>
+<h4 id="流畅显示的线程"><a href="#流畅显示的线程" class="headerlink" title="流畅显示的线程"></a>流畅显示的线程</h4><p>波形界面的显示由 matplotlib 负责，图表重绘的花销比数据存储要多得多，因此如果和队列取数共用同一个定时器，会更加影响定时器的精度（精度相关的定时器结构后面说明）。因此我们选择为图表重绘另外提供一个定时器（定时器本身是一个线程）。<br>需要考虑的问题是，定时器时长多少合适？显示队列头部（早）还是尾部（晚）的数据？1 秒钟绘制多少个点？队列的数据量不够 1 秒怎么办？超过 1 秒怎么办？绘制的时间花销较大，会和网络接口更新队列冲突吗？冲突的话怎么办？</p>
+<ol>
+<li>定时器定时时长选用 1 秒，每秒在图表更新最新 1 秒的数据。因为重绘需要几十毫秒，因此定时越短，精度越低。</li>
+<li>取队列尾部最新的数据显示，保证实时性显示的要求。而实际的数据存储会慢 1 拍。</li>
+<li>队列的数据量少于 1 秒，则从剩余数据中等间隔取 10 个点显示。如果数据量多于 1 秒，则取最近的 1 秒数据量，等间隔抽取 10 个点显示。</li>
+<li>绘制的时间花销较大，会和网络接口更新队列冲突，表现为数组操作中出现偶尔 index 溢出的情况。对应的冲突是，原本队列有超过 1 秒的数据量，但是由于另一个线程更新队列，删除了 1 秒的数据，于是队列变短，index 溢出。解决方案是，在绘图线程启动时，及时一次性从队列中取出需要的数据，实现隔离操作。</li>
+</ol>
+<h3 id="容易出错的问题"><a href="#容易出错的问题" class="headerlink" title="容易出错的问题"></a>容易出错的问题</h3><h4 id="Python-字符串拼接的效率"><a href="#Python-字符串拼接的效率" class="headerlink" title="Python 字符串拼接的效率"></a>Python 字符串拼接的效率</h4><p>本项目中，数据包经解析后最终需要以字符串的形式存储在 .txt 文档里。由于数据写入硬盘是在最后进行，写入之前数据存储在内存中。在最初笔者以字符串变量存储这部分数据，最后变量的大小可能会达到上百兆。但真正的问题是，Python 对字符串的“更新”比想象的要慢很多。</p>
+<blockquote>
+<p>在 Python 中，字符串(string)对象是不可变的(每次关联一个新的字符串变量都会在内存中创建一个新的对象)(译注:类同于 Java,.NET 等现代语言，他们都会在其VM中保留一个字符串池，里面保存所有产生的目标字符串值或临时字符串值)。这方面它与perl、VB等语言中的字符串变量可以任意修改有所不同。如果使用一些比较显而易见的方法(比如：每次都是在新产生的字符串末尾添加一个新短字符串片段)从一些短字符串片段构造长字符串在 Python 中可能会不是很有效率。每次你的在字符串末尾添加内容，Python 解释器都会创建一个新的对象并且复制新产生的对象和原来的对象到解释器中(译注:应该是复制到 Python 解释器的字符串常量池中)。随着处理的字符串的增多，这样的处理过程将会越来越慢。</p>
+</blockquote>
+<p>典型的操作是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for i in range(0, 10000):</div><div class="line">    str = str + &quot;0123456789&quot;</div></pre></td></tr></table></figure></p>
+<p>当 str 变得越来越大，Python 解释器就会花很多的时间去创建一个新的对象，并且复制新产生的对象和原来的对象到解释器中，时间花销是巨大的。为了解决这个问题，笔者采用了[1]中列表存储连接的方法。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">str = []</div><div class="line">for num in range(0, 10000):</div><div class="line">    str.append(&quot;0123456789&quot;)</div><div class="line">return &quot;&quot;.join(str)</div></pre></td></tr></table></figure></p>
+<p>首先构造一个包含所有需要合并的字符串列表，然后使用一个字符串的join操作构造包含所有列表元素的字符串。随着循环次数的越来越多，两个程序花费的市场能够相差 100 倍。</p>
+<h4 id="定时器线程迭代生成定时器"><a href="#定时器线程迭代生成定时器" class="headerlink" title="定时器线程迭代生成定时器"></a>定时器线程迭代生成定时器</h4><p>本项目采用了 threading 模块中的 Timer 作为定时器。从模块名字可知，Timer 是线程的重新包装，启动一个 Timer 相当于新建了一个线程，然后 Sleep 计时等待，最后执行 Sleep 后面的程序语句。Timer 本身不会循环执行，因此需要手动在 Timer 中新建一个 Timer，达到持续定时执行的效果。于是新 Timer 的建立有两个位置可以选择，一个是头部，一个是尾部。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 头部</div><div class="line"># 定时器的初启动</div><div class="line">newt = Timer(delta_t, fetch_data_with_timer)</div><div class="line">newt.start()</div><div class="line">def fetch_data_with_timer():</div><div class="line">    t = Timer(delta_t, fetch_data_with_timer)</div><div class="line">    t.start() # 定时器的循环启动</div><div class="line">    do something</div><div class="line">    ...</div></pre></td></tr></table></figure></p>
+<p>以下是尾部：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 尾部</div><div class="line"># 定时器的初启动</div><div class="line">newt = Timer(delta_t, fetch_data_with_timer)</div><div class="line">newt.start()</div><div class="line">def fetch_data_with_timer():</div><div class="line">    do something</div><div class="line">    ...</div><div class="line">    t = Timer(delta_t, fetch_data_with_timer)</div><div class="line">    t.start() # 定时器的循环启动</div></pre></td></tr></table></figure></p>
+<p>如果只看前两次循环，新定时器放在头部会使第二个定时器更准时地启动，因为延时不需要考虑 do something 的执行时间。但是如果考虑 3 次以上的循环，会发现放在头部的方法会短时间内创建 1 个又 1 个的线程，没等父线程正式执行代码就生成了子线程。最后导致计算资源被争抢，计时混乱。<br>相比之下，放在尾部的方式使得父线程将近结束时才创建新的线程，能更稳定地维持总线程数目。</p>
+<h3 id="参考页面"><a href="#参考页面" class="headerlink" title="参考页面"></a>参考页面</h3><ol>
+<li>[译]Python中有效的字符串合并方法<br><a href="http://www.cnblogs.com/heshizhu/archive/2012/01/11/2319892.html" target="_blank" rel="external">http://www.cnblogs.com/heshizhu/archive/2012/01/11/2319892.html</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/2017-09-12-wxpython-twisted-matplotlib-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -290,7 +461,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/12/2017-09-12-wxpython-twisted-matplotlib-md/" itemprop="url">:2017-:09-:12-:wxpython_twisted_matplotlib.md</a></h1>
+                <a class="post-title-link" href="/2017/09/12/2017-09-12-wxpython-twisted-matplotlib-md/" itemprop="url">实践：wxpython + twisted + matplotlib</a></h1>
         
 
         <div class="post-meta">
@@ -1181,7 +1352,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1203,7 +1374,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
