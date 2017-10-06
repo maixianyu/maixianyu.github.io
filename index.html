@@ -271,6 +271,149 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/2017-10-06-top500-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="maixy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://opy1bzb13.bkt.clouddn.com/image/Dr.-Zoidberg-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maixy's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/06/2017-10-06-top500-md/" itemprop="url">TOP500超级计算机的变化趋势</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T19:22:50+08:00">
+                2017-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>TOP500项目是针对全球已知最强大的电脑系统做出排名与详细介绍。此项目始于1993年并且一年出版两次最新的超级计算机排名列表。每年的第一次排名公布总是在六月份的国际超级计算机会议上，而第二次排名公布则是在十一月份的超级计算会议上。此项目主旨在提供一个可靠的基础去追踪与侦测高性能计算的趋势[1]。</p>
+<p>TOP500的排名只由一个计算机性能指标决定，即每秒进行浮点运算的次数，一般用 GFLOPS 表示。具体的计算方法为[2]：</p>
+<p>GFLOPS = #chassis <em> #nodes/chassis </em> #sockets/node <em> #cores/socket </em> GHz/core * FLOPs/cycle</p>
+<p>说到推动计算机技术快速发展的因素，就不能不提摩尔定律。摩尔定律最初的意思是积体电路上可容纳的电晶体（晶体管）数目，约每隔两年便会增加一倍[3]。有人从中引申出“预计18个月会将芯片的性能提高一倍”。在2017年的今天，摩尔定律也走到了10nm这一步，但是计算机性能的提升有多大程度上依然依赖摩尔定律，也许不是一句引申能定夺的。因此，笔者从TOP500[1]简单整理了过去10来年的数据，总结过去超算发展的规律，以及预测未来超算的变化趋势。</p>
+<p><img src="http://opy1bzb13.bkt.clouddn.com/20170801a.PNG" title="图1. TOP500排名第一的计算机在2005年到2017年的性能测试变化"></p>
+<p>单从性能指标上看，超算领域在过去十年的计算性能维持着指数型的增长。中国的神威·太湖之光以93,014.6 TFLOPS/s的性能从2016年6月开始就一直稳居TOP500榜首，研发团队是国家并行计算机工程技术研究中心。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/06/2017-10-06-top500-md/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/29/2017-09-29-python-wifi-timer-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -360,8 +503,7 @@
 
       
         
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>wxPython 利用 Twisted 网络模块接收采集模块通过 WiFi 传送的数据。接收之后按照协议解析、显示、存储。采集端因为没有精确的时钟，因此难以保证稳定的采集频率，例如 900 Hz 的采集设置并不能保证采集端每秒传送 900 组数据到 PC，并且由于网络环境的变化，PC 接收到的数据有时候每秒 1000 组，有时候每秒 700 组，因此，精确稳定的采集需求没有办法保证。<br>在这个背景下，我们提出由 PC 端保证采集频率的方法。同时，通过添加多个线程来保证数据的存储与显示流畅进行。</p>
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>wxPython 利用 Twisted 网络模块接收采集模块通过 WiFi 传送的数据。接收之后按照协议解析、显示、存储。采集端因为没有精确的时钟，因此难以保证稳定的采集频率，例如 900 Hz 的采集设置并不能保证采集端每秒传送 900 组数据到 PC，并且由于网络环境的变化，PC 接收到的数据有时候每秒 1000 组，有时候每秒 700 组，因此，精确稳定的采集需求没有办法保证。<br>在这个背景下，我们提出由 PC 端保证采集频率的方法。同时，通过添加多个线程来保证数据的存储与显示流畅进行。</p>
 <h3 id="模型设想"><a href="#模型设想" class="headerlink" title="模型设想"></a>模型设想</h3><h4 id="精确采集的模型"><a href="#精确采集的模型" class="headerlink" title="精确采集的模型"></a>精确采集的模型</h4><p>为了完成精确采集，发送端与接收端共同建立如下模型：</p>
 <ol>
 <li>发送端数据传送速率可以有波动，但是最低值须高于采集设置值，避免信息丢失。</li>
@@ -393,14 +535,13 @@
 <p>典型的操作是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for i in range(0, 10000):</div><div class="line">    str = str + &quot;0123456789&quot;</div></pre></td></tr></table></figure></p>
 <p>当 str 变得越来越大，Python 解释器就会花很多的时间去创建一个新的对象，并且复制新产生的对象和原来的对象到解释器中，时间花销是巨大的。为了解决这个问题，笔者采用了[1]中列表存储连接的方法。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">str = []</div><div class="line">for num in range(0, 10000):</div><div class="line">    str.append(&quot;0123456789&quot;)</div><div class="line">return &quot;&quot;.join(str)</div></pre></td></tr></table></figure></p>
 <p>首先构造一个包含所有需要合并的字符串列表，然后使用一个字符串的join操作构造包含所有列表元素的字符串。随着循环次数的越来越多，两个程序花费的市场能够相差 100 倍。</p>
-<h4 id="定时器线程迭代生成定时器"><a href="#定时器线程迭代生成定时器" class="headerlink" title="定时器线程迭代生成定时器"></a>定时器线程迭代生成定时器</h4><p>本项目采用了 threading 模块中的 Timer 作为定时器。从模块名字可知，Timer 是线程的重新包装，启动一个 Timer 相当于新建了一个线程，然后 Sleep 计时等待，最后执行 Sleep 后面的程序语句。Timer 本身不会循环执行，因此需要手动在 Timer 中新建一个 Timer，达到持续定时执行的效果。于是新 Timer 的建立有两个位置可以选择，一个是头部，一个是尾部。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 头部</div><div class="line"># 定时器的初启动</div><div class="line">newt = Timer(delta_t, fetch_data_with_timer)</div><div class="line">newt.start()</div><div class="line">def fetch_data_with_timer():</div><div class="line">    t = Timer(delta_t, fetch_data_with_timer)</div><div class="line">    t.start() # 定时器的循环启动</div><div class="line">    do something</div><div class="line">    ...</div></pre></td></tr></table></figure></p>
-<p>以下是尾部：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 尾部</div><div class="line"># 定时器的初启动</div><div class="line">newt = Timer(delta_t, fetch_data_with_timer)</div><div class="line">newt.start()</div><div class="line">def fetch_data_with_timer():</div><div class="line">    do something</div><div class="line">    ...</div><div class="line">    t = Timer(delta_t, fetch_data_with_timer)</div><div class="line">    t.start() # 定时器的循环启动</div></pre></td></tr></table></figure></p>
-<p>如果只看前两次循环，新定时器放在头部会使第二个定时器更准时地启动，因为延时不需要考虑 do something 的执行时间。但是如果考虑 3 次以上的循环，会发现放在头部的方法会短时间内创建 1 个又 1 个的线程，没等父线程正式执行代码就生成了子线程。最后导致计算资源被争抢，计时混乱。<br>相比之下，放在尾部的方式使得父线程将近结束时才创建新的线程，能更稳定地维持总线程数目。</p>
-<h3 id="参考页面"><a href="#参考页面" class="headerlink" title="参考页面"></a>参考页面</h3><ol>
-<li>[译]Python中有效的字符串合并方法<br><a href="http://www.cnblogs.com/heshizhu/archive/2012/01/11/2319892.html" target="_blank" rel="external">http://www.cnblogs.com/heshizhu/archive/2012/01/11/2319892.html</a></li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/29/2017-09-29-python-wifi-timer-md/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1352,7 +1493,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1363,7 +1504,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1374,7 +1515,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

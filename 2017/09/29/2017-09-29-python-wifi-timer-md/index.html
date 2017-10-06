@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/29/2017-09-29-python-wifi-timer-md/index.html">
 <meta property="og:site_name" content="Maixy&#39;s Notes">
 <meta property="og:description" content="背景wxPython 利用 Twisted 网络模块接收采集模块通过 WiFi 传送的数据。接收之后按照协议解析、显示、存储。采集端因为没有精确的时钟，因此难以保证稳定的采集频率，例如 900 Hz 的采集设置并不能保证采集端每秒传送 900 组数据到 PC，并且由于网络环境的变化，PC 接收到的数据有时候每秒 1000 组，有时候每秒 700 组，因此，精确稳定的采集需求没有办法保证。在这个背景">
-<meta property="og:updated_time" content="2017-09-29T01:56:20.888Z">
+<meta property="og:updated_time" content="2017-10-06T07:48:37.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python WiFi数据采集性能优化">
 <meta name="twitter:description" content="背景wxPython 利用 Twisted 网络模块接收采集模块通过 WiFi 传送的数据。接收之后按照协议解析、显示、存储。采集端因为没有精确的时钟，因此难以保证稳定的采集频率，例如 900 Hz 的采集设置并不能保证采集端每秒传送 900 组数据到 PC，并且由于网络环境的变化，PC 接收到的数据有时候每秒 1000 组，有时候每秒 700 组，因此，精确稳定的采集需求没有办法保证。在这个背景">
@@ -389,9 +389,12 @@
 <p>典型的操作是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for i in range(0, 10000):</div><div class="line">    str = str + &quot;0123456789&quot;</div></pre></td></tr></table></figure></p>
 <p>当 str 变得越来越大，Python 解释器就会花很多的时间去创建一个新的对象，并且复制新产生的对象和原来的对象到解释器中，时间花销是巨大的。为了解决这个问题，笔者采用了[1]中列表存储连接的方法。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">str = []</div><div class="line">for num in range(0, 10000):</div><div class="line">    str.append(&quot;0123456789&quot;)</div><div class="line">return &quot;&quot;.join(str)</div></pre></td></tr></table></figure></p>
 <p>首先构造一个包含所有需要合并的字符串列表，然后使用一个字符串的join操作构造包含所有列表元素的字符串。随着循环次数的越来越多，两个程序花费的市场能够相差 100 倍。</p>
+<a id="more"></a>
 <h4 id="定时器线程迭代生成定时器"><a href="#定时器线程迭代生成定时器" class="headerlink" title="定时器线程迭代生成定时器"></a>定时器线程迭代生成定时器</h4><p>本项目采用了 threading 模块中的 Timer 作为定时器。从模块名字可知，Timer 是线程的重新包装，启动一个 Timer 相当于新建了一个线程，然后 Sleep 计时等待，最后执行 Sleep 后面的程序语句。Timer 本身不会循环执行，因此需要手动在 Timer 中新建一个 Timer，达到持续定时执行的效果。于是新 Timer 的建立有两个位置可以选择，一个是头部，一个是尾部。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 头部</div><div class="line"># 定时器的初启动</div><div class="line">newt = Timer(delta_t, fetch_data_with_timer)</div><div class="line">newt.start()</div><div class="line">def fetch_data_with_timer():</div><div class="line">    t = Timer(delta_t, fetch_data_with_timer)</div><div class="line">    t.start() # 定时器的循环启动</div><div class="line">    do something</div><div class="line">    ...</div></pre></td></tr></table></figure></p>
 <p>以下是尾部：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 尾部</div><div class="line"># 定时器的初启动</div><div class="line">newt = Timer(delta_t, fetch_data_with_timer)</div><div class="line">newt.start()</div><div class="line">def fetch_data_with_timer():</div><div class="line">    do something</div><div class="line">    ...</div><div class="line">    t = Timer(delta_t, fetch_data_with_timer)</div><div class="line">    t.start() # 定时器的循环启动</div></pre></td></tr></table></figure></p>
-<p>如果只看前两次循环，新定时器放在头部会使第二个定时器更准时地启动，因为延时不需要考虑 do something 的执行时间。但是如果考虑 3 次以上的循环，会发现放在头部的方法会短时间内创建 1 个又 1 个的线程，没等父线程正式执行代码就生成了子线程。最后导致计算资源被争抢，计时混乱。<br>相比之下，放在尾部的方式使得父线程将近结束时才创建新的线程，能更稳定地维持总线程数目。</p>
+<p>如果只看前两次循环，新定时器放在头部会使第二个定时器更准时地启动，因为延时不需要考虑 do something 的执行时间。但是如果考虑 3 次以上的循环，会发现放在头部的方法会短时间内创建 1 个又 1 个的线程，没等父线程正式执行代码就生成了子线程。最后导致计算资源被争抢，计时混乱。</p>
+<p><strong>更正：</strong><br><em>头部写法在简单的线程执行代码下并不会短时间内连续创建多个线程</em></p>
+<p>相比之下，放在尾部的方式使得父线程将近结束时才创建新的线程，能更稳定地维持总线程数目。</p>
 <h3 id="参考页面"><a href="#参考页面" class="headerlink" title="参考页面"></a>参考页面</h3><ol>
 <li>[译]Python中有效的字符串合并方法<br><a href="http://www.cnblogs.com/heshizhu/archive/2012/01/11/2319892.html" target="_blank" rel="external">http://www.cnblogs.com/heshizhu/archive/2012/01/11/2319892.html</a></li>
 </ol>
@@ -452,6 +455,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/06/2017-10-06-top500-md/" rel="prev" title="TOP500超级计算机的变化趋势">
+                TOP500超级计算机的变化趋势 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -523,7 +530,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -534,7 +541,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -545,7 +552,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
