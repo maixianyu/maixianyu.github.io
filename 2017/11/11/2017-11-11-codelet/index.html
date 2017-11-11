@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="TOP500,超级计算机,超算," />
+  <meta name="keywords" content="Codelet,many-core,dataflow," />
 
 
 
@@ -88,24 +88,20 @@
 
 
 
-<meta name="description" content="TOP500项目是针对全球已知最强大的电脑系统做出排名与详细介绍。此项目始于1993年并且一年出版两次最新的超级计算机排名列表。每年的第一次排名公布总是在六月份的国际超级计算机会议上，而第二次排名公布则是在十一月份的超级计算会议上。此项目主旨在提供一个可靠的基础去追踪与侦测高性能计算的趋势[1]。 TOP500的排名只由一个计算机性能指标决定，即每秒进行浮点运算的次数，一般用 GFLOPS 表示。">
-<meta name="keywords" content="TOP500,超级计算机,超算">
+<meta name="description" content="无论是服务器还是用户手持终端，处理器的核数呈持续增加的趋势。新闻的用语也从CPU，到单核双核，多核，众核。而对于一段程序与操作系统而言，在单核处理器的程序执行模型（PXM，Program Execution Model）并不适用于众核，最明显的原因莫过于数据的共享方式与计算资源的利用方式会发生巨大的变化。为了解决在众核时代计算机的程序执行模型问题，高光荣教授团队提出了基于数据流的Codelet模型">
+<meta name="keywords" content="Codelet,many-core,dataflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TOP500超级计算机的变化趋势">
-<meta property="og:url" content="http://yoursite.com/2017/10/06/2017-10-06-top500-md/index.html">
+<meta property="og:title" content="数据流与Codelet模型[1]">
+<meta property="og:url" content="http://yoursite.com/2017/11/11/2017-11-11-codelet/index.html">
 <meta property="og:site_name" content="Maixy&#39;s Notes">
-<meta property="og:description" content="TOP500项目是针对全球已知最强大的电脑系统做出排名与详细介绍。此项目始于1993年并且一年出版两次最新的超级计算机排名列表。每年的第一次排名公布总是在六月份的国际超级计算机会议上，而第二次排名公布则是在十一月份的超级计算会议上。此项目主旨在提供一个可靠的基础去追踪与侦测高性能计算的趋势[1]。 TOP500的排名只由一个计算机性能指标决定，即每秒进行浮点运算的次数，一般用 GFLOPS 表示。">
-<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171006b.PNG">
-<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171006a.PNG">
-<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171006d.PNG">
-<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171006c.PNG">
-<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171006d.PNG">
-<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171006f.PNG">
-<meta property="og:updated_time" content="2017-10-06T11:31:20.064Z">
+<meta property="og:description" content="无论是服务器还是用户手持终端，处理器的核数呈持续增加的趋势。新闻的用语也从CPU，到单核双核，多核，众核。而对于一段程序与操作系统而言，在单核处理器的程序执行模型（PXM，Program Execution Model）并不适用于众核，最明显的原因莫过于数据的共享方式与计算资源的利用方式会发生巨大的变化。为了解决在众核时代计算机的程序执行模型问题，高光荣教授团队提出了基于数据流的Codelet模型">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171111a.PNG">
+<meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171111b.PNG">
+<meta property="og:updated_time" content="2017-11-11T13:28:35.343Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TOP500超级计算机的变化趋势">
-<meta name="twitter:description" content="TOP500项目是针对全球已知最强大的电脑系统做出排名与详细介绍。此项目始于1993年并且一年出版两次最新的超级计算机排名列表。每年的第一次排名公布总是在六月份的国际超级计算机会议上，而第二次排名公布则是在十一月份的超级计算会议上。此项目主旨在提供一个可靠的基础去追踪与侦测高性能计算的趋势[1]。 TOP500的排名只由一个计算机性能指标决定，即每秒进行浮点运算的次数，一般用 GFLOPS 表示。">
-<meta name="twitter:image" content="http://opy1bzb13.bkt.clouddn.com/20171006b.PNG">
+<meta name="twitter:title" content="数据流与Codelet模型[1]">
+<meta name="twitter:description" content="无论是服务器还是用户手持终端，处理器的核数呈持续增加的趋势。新闻的用语也从CPU，到单核双核，多核，众核。而对于一段程序与操作系统而言，在单核处理器的程序执行模型（PXM，Program Execution Model）并不适用于众核，最明显的原因莫过于数据的共享方式与计算资源的利用方式会发生巨大的变化。为了解决在众核时代计算机的程序执行模型问题，高光荣教授团队提出了基于数据流的Codelet模型">
+<meta name="twitter:image" content="http://opy1bzb13.bkt.clouddn.com/20171111a.PNG">
 
 
 
@@ -133,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/06/2017-10-06-top500-md/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/11/2017-11-11-codelet/"/>
 
 
 
 
 
-  <title>TOP500超级计算机的变化趋势 | Maixy's Notes</title>
+  <title>数据流与Codelet模型[1] | Maixy's Notes</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -278,7 +274,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/2017-10-06-top500-md/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/11/2017-11-11-codelet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="maixy">
@@ -295,7 +291,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">TOP500超级计算机的变化趋势</h1>
+          <h1 class="post-title" itemprop="name headline">数据流与Codelet模型[1]</h1>
         
 
         <div class="post-meta">
@@ -307,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T19:22:50+08:00">
-                2017-10-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-11T21:26:46+08:00">
+                2017-11-11
               </time>
             
 
@@ -330,8 +326,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机</span>
+                  <a href="/categories/众核/" itemprop="url" rel="index">
+                    <span itemprop="name">众核</span>
                   </a>
                 </span>
 
@@ -364,25 +360,8 @@
       
 
       
-        <p>TOP500项目是针对全球已知最强大的电脑系统做出排名与详细介绍。此项目始于1993年并且一年出版两次最新的超级计算机排名列表。每年的第一次排名公布总是在六月份的国际超级计算机会议上，而第二次排名公布则是在十一月份的超级计算会议上。此项目主旨在提供一个可靠的基础去追踪与侦测高性能计算的趋势[1]。</p>
-<p>TOP500的排名只由一个计算机性能指标决定，即每秒进行浮点运算的次数，一般用 GFLOPS 表示。具体的计算方法为[2]：</p>
-<p>GFLOPS = #chassis <em> #nodes/chassis </em> #sockets/node <em> #cores/socket </em> GHz/core * FLOPs/cycle</p>
-<p>说到推动计算机技术快速发展的因素，就不能不提摩尔定律。摩尔定律最初的意思是积体电路上可容纳的电晶体（晶体管）数目，约每隔两年便会增加一倍[3]。有人从中引申出“预计18个月会将芯片的性能提高一倍”。在2017年的今天，摩尔定律也走到了10nm这一步，但是计算机性能的提升有多大程度上依然依赖摩尔定律，也许不是一句引申能定夺的。因此，笔者从TOP500[1]简单整理了过去10来年的数据，总结过去超算发展的规律，以及预测未来超算的变化趋势。</p>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/20171006b.PNG" title="图1. TOP500排名第一的计算机在2005年到2017年的性能测试变化"></p>
-<p>单从性能指标上看，超算领域在过去十年的计算性能维持着指数型的增长。中国的神威·太湖之光以93,014.6 TFLOPS/s的性能从2016年6月开始就一直稳居TOP500榜首，研发团队是国家并行计算机工程技术研究中心。</p>
-<a id="more"></a>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/20171006a.PNG" title="图2. TOP500排名第一的计算机在2005年到2017年的处理器核数变化"></p>
-<p>超级计算机的处理器核数变化趋势与性能趋势几乎一致，保持指数型增长。在2017年，排名第一的太湖之光已经用了10,649,600个核，即1千万个核。</p>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/20171006d.PNG" title="图3. TOP500排名第一的计算机在2005年到2017年处理器频率变化趋势"></p>
-<p>有意思的是，虽然超级计算机整体计算性能保持指数型增长，但是单个计算机核的运转频率在2008年就停止了增长。更反直觉的是，2008年的处理器（PowerXCell 8i 9C）达到 3.2GHz 主频后，往后采用的处理器频率下降了，2017年的太湖之光所使用的处理器（Sunway SW26010 260C）主频仅为 1.46GHz，为2008年的一半。</p>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/20171006c.PNG" title="图4. TOP500排名第一的计算机在2005年到2017年单核性能变化趋势"></p>
-<p>处理器频率本身并不能说明性能的高低，因为运算部件的并行度提升也能提高性能。因此，图4将性能除以核数，展示过去12年处理器单核性能的变化。统计结果依然出乎意料，2008年以后处理器的单核性能没有出现突破性的提高，超级计算机的性能提升几乎与处理器单核性能没有关系。取而代之的是，研发人员通过增加处理器的核数来维持算力的增长。</p>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/20171006d.PNG" title="图5. TOP500排名第一的计算机在2005年到2017年计算效率变化"></p>
-<p>超级计算机的运转离不开高耗电与冷却装备，因此研发人员开始注意计算机的能效比。2013年出现了GREEN500绿色超级计算机排名，能效比作为排名指标。如果将能效比指标作用于TOP500，从图5可知，在性能提高的同时，计算机的能效比也再提高，而不是简单地做数量上的堆叠。相比性能，能效比的提升并没有指数型的变化。</p>
-<p><img src="http://opy1bzb13.bkt.clouddn.com/20171006f.PNG" title="图6. TOP500排名第一的计算机在2005年到2017年计算功率变化"></p>
-<p>理论上只要不考虑能源的消耗，超级计算机的算力竞赛可以获得更高性能。而图6显示，2010年后超级计算机的功耗基本维持在1000kW级，因此可以推测1000kW也许是长期的成本与收益平衡点。</p>
-<p>总体来看，超级计算机的发展非常依赖于处理器核数的增加，也就是电路的并行。与之相比，处理器单核性能的进步几乎停滞，这个角度上看摩尔定律在2008年就终止了。另外，高强度的运转也意味着高能耗，能效比成为了越来越重要的设计指标。</p>
-<p>[1] TOP500<br><a href="https://zh.wikipedia.org/wiki/TOP500" target="_blank" rel="external">https://zh.wikipedia.org/wiki/TOP500</a><br>[2] Nodes, Sockets, Cores and FLOPS<br><a href="http://en.community.dell.com/techcenter/high-performance-computing/w/wiki/2329" target="_blank" rel="external">http://en.community.dell.com/techcenter/high-performance-computing/w/wiki/2329</a><br>[3] 摩尔定律<br><a href="https://zh.wikipedia.org/wiki/%E6%91%A9%E5%B0%94%E5%AE%9A%E5%BE%8B" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%91%A9%E5%B0%94%E5%AE%9A%E5%BE%8B</a></p>
+        <p>无论是服务器还是用户手持终端，处理器的核数呈持续增加的趋势。新闻的用语也从CPU，到单核双核，多核，众核。而对于一段程序与操作系统而言，在单核处理器的程序执行模型（PXM，Program Execution Model）并不适用于众核，最明显的原因莫过于数据的共享方式与计算资源的利用方式会发生巨大的变化。为了解决在众核时代计算机的程序执行模型问题，高光荣教授团队提出了基于数据流的Codelet模型，而数据流思想由J.B.Dennis教授在20世纪70年代提出。<br>Codelet模型的基本特征是细粒度（fine-grain），事件触发执行（event-driven）。细粒度是相对传统线程调度模型的粗粒度而言。粗粒度情况下，只有线程需要花较长时间等待如存储器数据读写时间，才会对线程进行调度，调度的单元是大段的程序，所以称为粗粒度。粗粒度的不足是需要切换上下文，移动许多代码与数据。另外，类似MPI、OpenMP的并行程序是由人为发出并行指令执行（a control-flow version of parallel programs），所以很难充分发挥异步的潜力。<br><img src="http://opy1bzb13.bkt.clouddn.com/20171111a.PNG" title="Figure 1: Abstract machine"><br>为了发挥Codelet模型的潜力，高光荣团队设想了一个抽象的众核计算机群结构，如图1所示。通过互联构成多节点计算机群，每个节点由多个处理器与内存芯片组成，每个处理器芯片上由多个cluster互联组成，而每个cluster内部由多个处理单元CU、一个同步单元SU和一个本地内存组成。这个机器结构是对未来并行计算机结构的抽象。<br>在Codelet模型中，供系统调度的最小粒度成为codelet。一个codelet由一小段机器指令组成，是对于调度系统不能再细分的计算单元，也就是具有运算的“原子性”。一个codelet的代码往往比传统粗粒度包含的一大块代码要小得多，体现了模型的细粒度。因此，当一个codelet运行在计算单元时，计算过程是不容许被中断的，意味着codelet的运行包含了“非抢占”性质。模型的设计者认为，虽然粒度变小意味着上下文开销更大，但是相信配合底层的硬件设计，并行的优势能打过上下文开销。同时也认为，长延时的等待也比频繁多任务的切换具有更低成本（it may be more power efficient to clock-gate a processing element while waiting for long latency operations than to multitask）。<br><img src="http://opy1bzb13.bkt.clouddn.com/20171111b.PNG" title="Figure 2: An examples of three threaded procedures"><br>多个codelet之间既有平行又有顺序关系。如图2所示为Codelet Graph Model，每个圆圈代表一个codelet，箭头代表了codelet之间数据的依赖与传递关系。依赖关系包含了多种事件，如内存的读取，中断的信号等等。数据或信号没到来时，codelet处于dormant状态；事件信号齐全时，处于enabled状态；开始执行时，称为fired。而如果多个codelet是在同一个方框里，说明它们共享了本地的数据，而每一个方框称为Threaded Procedure。Codelet和TP是模型的基本单元。执行模型里的Codelet和TP分别对应了抽象机器的CU和cluster。<br>模型设计者还强调，现有的并行编程语言Concurrent Collection,X10,Chapel都能使用Codelet执行模型，因为Codelet可以作为高级编程语言与机器语言的中间层，只要存在codelet-aware complier，就能翻译成Codelet模型运行。</p>
+<p>参考文献：<br>[1] Zuckerman S, Suetterlein J, Knauerhase R, et al. Position paper: Using a codelet program execution model for exascale machines[C]//EXADAPT Workshop. 2011.</p>
 
       
     </div>
@@ -412,11 +391,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/TOP500/" rel="tag"># TOP500</a>
+            <a href="/tags/Codelet/" rel="tag"># Codelet</a>
           
-            <a href="/tags/超级计算机/" rel="tag"># 超级计算机</a>
+            <a href="/tags/many-core/" rel="tag"># many-core</a>
           
-            <a href="/tags/超算/" rel="tag"># 超算</a>
+            <a href="/tags/dataflow/" rel="tag"># dataflow</a>
           
         </div>
       
@@ -429,8 +408,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/29/2017-09-29-python-wifi-timer-md/" rel="next" title="Python WiFi数据采集性能优化">
-                <i class="fa fa-chevron-left"></i> Python WiFi数据采集性能优化
+              <a href="/2017/10/06/2017-10-06-top500-md/" rel="next" title="TOP500超级计算机的变化趋势">
+                <i class="fa fa-chevron-left"></i> TOP500超级计算机的变化趋势
               </a>
             
           </div>
@@ -438,10 +417,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/11/2017-11-11-codelet/" rel="prev" title="数据流与Codelet模型[1]">
-                数据流与Codelet模型[1] <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
