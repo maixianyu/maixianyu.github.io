@@ -97,7 +97,7 @@
 <meta property="og:description" content="无论是服务器还是用户手持终端，处理器的核数呈持续增加的趋势。新闻的用语也从CPU，到单核双核，多核，众核。而对于一段程序与操作系统而言，在单核处理器的程序执行模型（PXM，Program Execution Model）并不适用于众核，最明显的原因莫过于数据的共享方式与计算资源的利用方式会发生巨大的变化。为了解决在众核时代计算机的程序执行模型问题，高光荣教授团队提出了基于数据流的Codelet模型">
 <meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171111a.PNG">
 <meta property="og:image" content="http://opy1bzb13.bkt.clouddn.com/20171111b.PNG">
-<meta property="og:updated_time" content="2017-11-11T13:28:35.343Z">
+<meta property="og:updated_time" content="2017-11-11T13:30:37.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据流与Codelet模型[1]">
 <meta name="twitter:description" content="无论是服务器还是用户手持终端，处理器的核数呈持续增加的趋势。新闻的用语也从CPU，到单核双核，多核，众核。而对于一段程序与操作系统而言，在单核处理器的程序执行模型（PXM，Program Execution Model）并不适用于众核，最明显的原因莫过于数据的共享方式与计算资源的利用方式会发生巨大的变化。为了解决在众核时代计算机的程序执行模型问题，高光荣教授团队提出了基于数据流的Codelet模型">
@@ -360,7 +360,14 @@
       
 
       
-        <p>无论是服务器还是用户手持终端，处理器的核数呈持续增加的趋势。新闻的用语也从CPU，到单核双核，多核，众核。而对于一段程序与操作系统而言，在单核处理器的程序执行模型（PXM，Program Execution Model）并不适用于众核，最明显的原因莫过于数据的共享方式与计算资源的利用方式会发生巨大的变化。为了解决在众核时代计算机的程序执行模型问题，高光荣教授团队提出了基于数据流的Codelet模型，而数据流思想由J.B.Dennis教授在20世纪70年代提出。<br>Codelet模型的基本特征是细粒度（fine-grain），事件触发执行（event-driven）。细粒度是相对传统线程调度模型的粗粒度而言。粗粒度情况下，只有线程需要花较长时间等待如存储器数据读写时间，才会对线程进行调度，调度的单元是大段的程序，所以称为粗粒度。粗粒度的不足是需要切换上下文，移动许多代码与数据。另外，类似MPI、OpenMP的并行程序是由人为发出并行指令执行（a control-flow version of parallel programs），所以很难充分发挥异步的潜力。<br><img src="http://opy1bzb13.bkt.clouddn.com/20171111a.PNG" title="Figure 1: Abstract machine"><br>为了发挥Codelet模型的潜力，高光荣团队设想了一个抽象的众核计算机群结构，如图1所示。通过互联构成多节点计算机群，每个节点由多个处理器与内存芯片组成，每个处理器芯片上由多个cluster互联组成，而每个cluster内部由多个处理单元CU、一个同步单元SU和一个本地内存组成。这个机器结构是对未来并行计算机结构的抽象。<br>在Codelet模型中，供系统调度的最小粒度成为codelet。一个codelet由一小段机器指令组成，是对于调度系统不能再细分的计算单元，也就是具有运算的“原子性”。一个codelet的代码往往比传统粗粒度包含的一大块代码要小得多，体现了模型的细粒度。因此，当一个codelet运行在计算单元时，计算过程是不容许被中断的，意味着codelet的运行包含了“非抢占”性质。模型的设计者认为，虽然粒度变小意味着上下文开销更大，但是相信配合底层的硬件设计，并行的优势能打过上下文开销。同时也认为，长延时的等待也比频繁多任务的切换具有更低成本（it may be more power efficient to clock-gate a processing element while waiting for long latency operations than to multitask）。<br><img src="http://opy1bzb13.bkt.clouddn.com/20171111b.PNG" title="Figure 2: An examples of three threaded procedures"><br>多个codelet之间既有平行又有顺序关系。如图2所示为Codelet Graph Model，每个圆圈代表一个codelet，箭头代表了codelet之间数据的依赖与传递关系。依赖关系包含了多种事件，如内存的读取，中断的信号等等。数据或信号没到来时，codelet处于dormant状态；事件信号齐全时，处于enabled状态；开始执行时，称为fired。而如果多个codelet是在同一个方框里，说明它们共享了本地的数据，而每一个方框称为Threaded Procedure。Codelet和TP是模型的基本单元。执行模型里的Codelet和TP分别对应了抽象机器的CU和cluster。<br>模型设计者还强调，现有的并行编程语言Concurrent Collection,X10,Chapel都能使用Codelet执行模型，因为Codelet可以作为高级编程语言与机器语言的中间层，只要存在codelet-aware complier，就能翻译成Codelet模型运行。</p>
+        <p>无论是服务器还是用户手持终端，处理器的核数呈持续增加的趋势。新闻的用语也从CPU，到单核双核，多核，众核。而对于一段程序与操作系统而言，在单核处理器的程序执行模型（PXM，Program Execution Model）并不适用于众核，最明显的原因莫过于数据的共享方式与计算资源的利用方式会发生巨大的变化。为了解决在众核时代计算机的程序执行模型问题，高光荣教授团队提出了基于数据流的Codelet模型，而数据流思想由J.B.Dennis教授在20世纪70年代提出。</p>
+<p>Codelet模型的基本特征是细粒度（fine-grain），事件触发执行（event-driven）。细粒度是相对传统线程调度模型的粗粒度而言。粗粒度情况下，只有线程需要花较长时间等待如存储器数据读写时间，才会对线程进行调度，调度的单元是大段的程序，所以称为粗粒度。粗粒度的不足是需要切换上下文，移动许多代码与数据。另外，类似MPI、OpenMP的并行程序是由人为发出并行指令执行（a control-flow version of parallel programs），所以很难充分发挥异步的潜力。</p>
+<p><img src="http://opy1bzb13.bkt.clouddn.com/20171111a.PNG" title="Figure 1: Abstract machine"></p>
+<p>为了发挥Codelet模型的潜力，高光荣团队设想了一个抽象的众核计算机群结构，如图1所示。通过互联构成多节点计算机群，每个节点由多个处理器与内存芯片组成，每个处理器芯片上由多个cluster互联组成，而每个cluster内部由多个处理单元CU、一个同步单元SU和一个本地内存组成。这个机器结构是对未来并行计算机结构的抽象。</p>
+<p>在Codelet模型中，供系统调度的最小粒度成为codelet。一个codelet由一小段机器指令组成，是对于调度系统不能再细分的计算单元，也就是具有运算的“原子性”。一个codelet的代码往往比传统粗粒度包含的一大块代码要小得多，体现了模型的细粒度。因此，当一个codelet运行在计算单元时，计算过程是不容许被中断的，意味着codelet的运行包含了“非抢占”性质。模型的设计者认为，虽然粒度变小意味着上下文开销更大，但是相信配合底层的硬件设计，并行的优势能打过上下文开销。同时也认为，长延时的等待也比频繁多任务的切换具有更低成本（it may be more power efficient to clock-gate a processing element while waiting for long latency operations than to multitask）。</p>
+<p><img src="http://opy1bzb13.bkt.clouddn.com/20171111b.PNG" title="Figure 2: An examples of three threaded procedures"></p>
+<p>多个codelet之间既有平行又有顺序关系。如图2所示为Codelet Graph Model，每个圆圈代表一个codelet，箭头代表了codelet之间数据的依赖与传递关系。依赖关系包含了多种事件，如内存的读取，中断的信号等等。数据或信号没到来时，codelet处于dormant状态；事件信号齐全时，处于enabled状态；开始执行时，称为fired。而如果多个codelet是在同一个方框里，说明它们共享了本地的数据，而每一个方框称为Threaded Procedure。Codelet和TP是模型的基本单元。执行模型里的Codelet和TP分别对应了抽象机器的CU和cluster。</p>
+<p>模型设计者还强调，现有的并行编程语言Concurrent Collection,X10,Chapel都能使用Codelet执行模型，因为Codelet可以作为高级编程语言与机器语言的中间层，只要存在codelet-aware complier，就能翻译成Codelet模型运行。</p>
 <p>参考文献：<br>[1] Zuckerman S, Suetterlein J, Knauerhase R, et al. Position paper: Using a codelet program execution model for exascale machines[C]//EXADAPT Workshop. 2011.</p>
 
       
